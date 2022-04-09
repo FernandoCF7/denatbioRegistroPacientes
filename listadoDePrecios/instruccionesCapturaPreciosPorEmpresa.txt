@@ -1,0 +1,24 @@
+Instrucciones para dar de alta los precios de examen por empresa.
+
+-->Abrir el archivo "llenadoPreciosPorEmpresa_Estandar.xlsx", o "llenadoPreciosPorEmpresa_Urgente.xlsx", (en función del precio a dar de alta; estandar o urgente). 
+-->En la columna "E", sustituir el valor "EMPRESA" por el nombre de la empresa a dar de alta. Dicho nombre debe coincidir con el nombre asignado a la empresa en el archivo: "clavesNombresEmpresa.csv" (consultar dicho archivo).
+-->Renombrar el archivo ("Guardar como") con el nombre de la empresa; ejemplo: para dar de alta precios de la empresa ALDAMA, nombrar al archivo como: ALDAMA.xlsx
+-->Asignar el precio sin IVA del examen (con número) en la celda de la fila correspondiente a dicho examen y la columna "E"; por ejemplo si desea asignar el precio al examen "C_viral VHB" debe elegir la fila 6 (COD INT=11).
+-->No es necesario (pero puede hacerlo si lo desea) asignar el precio a todos los exámenes.
+-->Puede asignar precios "por-default" (previamente definidos por DENATBIo). Se tienen dos precios por default para cada examen: 1) "MAQUILA" y 2) "GENERAL". Si desea asignar "MAQUILA" poner el número 1 en el precio. Si desea asignar "GENERAL" poner el numero 2.
+
+Ejemplo para dar de alta los precios estandares de los exámenes: carga VIH, C_viral VHB y PCR SARS CoV-2 de la empresa "ALDAMA"
+ *supongamos que queremos asignar los siguientes precios:
+ confirmatoria VIH I y II--> $1150
+ C_viral VHB             --> $861  (precio de maquila)
+ PCR SARS CoV-2          --> $2310 (precio general)  
+
+Procedimiento:
+ 1) Abrir el archivo llenadoPreciosPorEmpresa_Estandar.xlsx 
+ 2) Guardar el archivo como: ALDAMA.xlsx
+ 3) Para asignar el precio al examen: "confirmatoria VIH I y II" establecer el valor 1150 en la celda de la fila 4 (COD INT=5) y la columna "E"
+ 4) El precio del examen "C_viral VHB" se asigna en la fila 6 (COD INT=11) y la columna "E". Sin embargo, como este precio es del tipo "MAQUILA" puede establecerse al poner el número 1 en dicha celda (en lugar de inrtoducir el valor 861).
+ 5) El precio del examen "PCR SARS CoV-2" se asigna en la fila 94 (COD INT=2) y la columna "E". Sin embargo, como este precio es del tipo "GENERAL" puede establecerse al poner el número 2 en dicha celda (en lugar de inrtoducir el valor 2310).
+
+
+

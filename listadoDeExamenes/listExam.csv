@@ -1,0 +1,739 @@
+﻿COD INT,EXAMEN,Nombre del examen
+1,deteccion de HIV-1,deteccion de HIV-1
+2,PCR SARS CoV-2 ,Detección de SARS CoV-2 
+3,carga VIH,Carga viral de VIH
+4,Detección de HIV-II,Detección de HIV-II
+5,confirmatoria VIH I y II ,Prueba confirmatoria del Virus de Inmunodeficiencia Humana I y II 
+6,Detección de Hepatitis A,Detección de Hepatitis A
+7,fenotipi/genotipi VIH (resis. fármacos),Fenotipo y genotipificación del Virus de Inmunodeficiencia Humana (Resistencia a fármacos)
+8,"Detección de Bordetella (B. pertussis, B. parapertussis, B. bronchiseptica)","Detección de Bordetella (B. pertussis, B. parapertussis, B. bronchiseptica)"
+9,"Antidoping 5 (Cocaína, Canabinoides, Anfetaminas, Meyanfetaminas y Opiaceos)","Antidoping 5 (Cocaína, Canabinoides, Anfetaminas, Meyanfetaminas y Opiaceos)"
+10,Prueba de embarazo ,Prueba de embarazo 
+11,C_viral VHB,Carga Viral de Hepatitis B
+12,"SARS Plus (Detección de SARS-CoV-2, Influenza A y B, Virus Sincicial respiratorio B)","SARS Plus (Detección de SARS-CoV-2, Influenza A y B, Virus Sincicial respiratorio B)"
+13,detec. VHB,Detección del virus de Hepatitis B 
+14,Detección de Leptospira,Detección de Leptospira
+15,QS-3,"Quimica sanguinea de 3 elementos (colesterol, trigliceridos y glucosa )"
+16,QS-6,"Quimica sanguinea de 6 elementos (colesterol, trigliceridos, glucosa, acido urico, creatinina y urea )"
+17,C_viral VHC,Carga Viral de Hepatitis C
+18,QS-12,Quimica sanguinea de 12 elementos
+19,detec. VHC,Detección del virus de Hepatitis C 
+20,QS-24,Quimica sanguinea de 24 elementos
+21,QS-32,Quimica sanguinea de 32 elementos 
+22,QS-48,Quimica sanguinea de 48 elementos 
+23,genotipi. VHC,Genotipificación del virus de Hepatitis C
+24,Glucosa,Glucosa
+25,Hemoglubina,Hemoglubina glucosilada
+26,Biometria ,Biometria hematica 
+27,Perfil hormonal ,Perfil hormonal 
+28,Perfil ginecologico ,Perfil ginecologico 
+29,C_viral citomegalovirus,Carga viral de citomegalovirus
+30,Perfil tiroideo,Perfil tiroideo
+31,detec. citomegalovirus ,Detección de citomegalovirus 
+32,Exemen general de orina ,Examen general de orina 
+33,Urocultivo,Urocultivo
+34,Coprocultivo,Coprocultivo
+35,Bacteriologia: cultivo,Bacteriologia: cultivo
+36,VDRL,VDRL
+37,C_viral virus BK,Carga viral del virus BK
+38,Curva de glucosa ,Curva de tolerancia a la glucosa  
+39,Culva de insulina,Curva de tolerancia a la insulina 
+40,Factor reumatoide ,Factor reumatoide 
+41,detec. virus BK,Detección del virus BK
+42,Electrolitos,Electrolitos sericos
+43,C_viral virus JC,Carga viral del virus JC
+44,Coprologico,Coprologico
+45,Coproparacitoscopico 1,Coproparacitoscopico 1
+46,Coproparacitoscopico 2,Coproparacitoscopico 2 
+47,detec. virus JC,Detección del virus JC
+48,Coproparacitoscopico 3,Coproparacitoscopico 
+49,Grupo sanguineo,Grupo sanguineo y RH
+50,Reacciones febriles ,Reacciones febriles 
+51,Histopatologia,Histopatologia
+52,Perfil lipidico,Perfil lipidico
+53,C_viral virus BK Y JC,Carga viral del virus BK Y JC
+54,Determinacion de micronutrientes ,Determinacion de micronutrientes 
+55,Hormona estimulante de tiroides,Hormona estimulante de tiroides
+56,Cultivo viral,Cultivo viral
+57,Perfil de antinucleares ,Perfil de antinucleares 
+58,Anti herpes I igg virus,Anti herpes I igg virus
+59,detec. virus BK Y JC,Detección del virus BK Y JC
+60,Inmunoglobulina,Inmunoglobulina
+61,C_viral epstein barr ,Carga viral de Epstein Barr 
+62,A.c HIV,A.c HIV
+63,Niveles sericos de levetiracetam y topiramato,Niveles sericos de levetiracetam y topiramato
+64,Anti herpes II igg virus,Anti herpes II igg virus
+65,Anticuerpos cardiolipina ,Anticuerpos cardiolipina 
+66,Prolactina especial,Prolactina especial
+67,detec. virus epstein barr,Detección del Virus Epstein Barr 
+68,Anticoagulante lupico,Anticoagulante lupico
+69,Insulina basal,Insulina basal
+70,Anticuerpos glucoproteina I,Anticuerpos glucoproteina I
+71,C_viral parvovirus humano B19,Carga viral de Parvovirus humano B19
+72,IL-6,IL-6
+73,detec. parvovirus humano B19,Detección de Parvovirus humano B19
+74,Lipasa,Lipasa
+75,Thropheryma whippellii,Thropheryma whippellii
+76,Amilasa,Amilasa
+77,DHEA sulfatada,DHEA sulfatada
+78,Perfil tiroideo  II (Hormona Estimulante de Tiroides ,"Perfil tiroideo  II (Hormona Estimulante de Tiroides (TSH), T3 Captación,
+Triyodotironina (T3)total, Tiroxina (T4) Libre, Tiroxina (T4)total,
+Ac. Antimicrosomales totales, Ac. Antitiroglobulinas totales,
+Indice de tiroxina libre, Yodo butanólico, Yodo Proteíco,
+T4 yodo.)"
+79,detec. mycobacterium tuberculosis/noTuberculosas,Detección de Mycobacterium tuberculosis y micobacterias no tuberculosas. 
+80,Perfil Hormona Femenino II,"Perfil Hormona Femenino II (Estradiol, Hormona folículo Estimulante (HFE), Hormona luteinizante (HL),
+Progesterona, Prolactina, Testosterona, Hormona Estimulante de Tiroides
+(TSH), T3 Captación, Triyodotironina (T3) total, Tiroxina Libre (T4),
+Tiroxina Total, Anticuerpos antimicrosomales totales, Ac. Antitiroglobulinas
+totales, Indice de Tiroxina Libre, Yodo butanólico, Yodo Proteico, T4 yodo.
+Cortisol.)"
+81,Factor reumatoide (cuantitativo),Factor reumatoide (cuantitativo)
+82,anion gap,anion gap
+83,detec. Herpes (HSV) 1 y 2,Detección de Herpes Virus (HSV) 1 y 2
+,,
+,,
+,,
+,,
+,,
+89,detec. leptospira,Detección de Leptospira
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+97,detec. virus influenza A H1N1 y H3N2,Detección del virus de la influenza A H1N1 y H3N2
+,,
+,,
+,,
+101,detec. Malaria,Detección de Malaria 
+,,
+103,detec. borrelia burgdorferi,Detección de  Borrelia Burgdorferi
+,,
+,,
+,,
+107,detec. enterovirus,Detección de Enterovirus
+,,
+109,C_viral varicella zoster,Carga viral de Varicella zoster
+,,
+,,
+,,
+113,detec. varicella zoster,Detección de Varicella zoster
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+127,"genotipi. virus Dengue (1,2,3, 4)","Genotipificación del virus del Dengue (1,2,3, 4) "
+,,
+,,
+,,
+131,P. viral enfer. Resp. 1,"Panel viral de enfermedades respiratorias 1 (Virus de la Influenza A, Virus de la influenza B, Virus Sincicial Respiratorio A, Virus Sincicial respiratorio B, Influenza A-H1, Influenza A-H1 pdm09, Influenza A-H3)"
+,,
+,,
+,,
+,,
+,,
+137,P. viral enfer. Resp. 2,"Panel viral de enfermedades respiratorias 2 (Adenovirus humano, Enterovirus, Virus Parainfluenza 1, Virus
+Parainfluenza 2, Virus Parainfluenza 3, Virus Parainfluenza 4, Metapneumovirus)"
+,,
+139,P. viral enfer. Resp. 3,"Panel viral de enfermedades respiratorias 3 (Bocavirus, Rhinovirus, Coronavirus NL63, Coronavirus 229E, Coronavirus OC43)"
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+149,P. viral enfer. resp. PLUS,"Panel viral de enfermedades respiratorias PLUS (Virus de la Influenza A, Virus de la influenza B, Virus Sincicial
+Respiratorio A, Virus Sincicial respiratorio B, Influenza A-H1, Influenza A-H1 pdm09, Influenza A-H3, Adenovirus
+humano, Enterovirus, Virus Parainfluenza 1, Virus Parainfluenza 2, Virus Parainfluenza 3, Virus Parainfluenza 4,
+Metapneumovirus,"
+,,
+151,P. bact. enfer. Resp.,"Panel bacteriano de enfermedades respiratorias (Chlamydophila pneumoniae, mycoplasma pneumoniae, legionella pneumophila, Haemophilus influenzae, Streptococcus pneumoniae, bordetella pertussis y Bordetella parapertussis)"
+,,
+,,
+,,
+,,
+,,
+157,detec. chlamydophila y mycoplasma (pneumoniae),Detección de Chlamydophila pneumoniae y Mycoplasma pneumoniae
+,,
+,,
+,,
+,,
+,,
+163,P. gastrointest diarrea 1,Panel gastrointestinal de diarrea 1 ( [toxina shiga (stx1/stx2); E. Coli Enteropatogenica (EPEC); E.coli Enterotoxigenica (ETEC); E. coli Enteroagregativa (EAEC); E. coli O157; Clostridium difficile Hipervirulenta])
+,,
+,,
+,,
+167,P. gastrointest diarrea 2,"Panel gastrointestinal de diarrea 2 ([Shigella spp./E. Coli enteroinvasiva (EIEI), Campylobacter spp; Yersinia enterocolitica, Vibrio spp; toxina B de Clostridium difficile, Aeromonas spp.; Salmonella spp.])"
+,,
+,,
+,,
+,,
+,,
+173,P. gastrointest diarrea PLUS,"Panel gastrointestinal de diarrea PLUS [toxina shiga (stx1/stx2); E. Coli Enteropatogenica (EPEC); E.coli Enterotoxigenica (ETEC); E. coli Enteroagregativa (EAEC); E. coli O157; Clostridium difficile Hipervirulenta]/ [Shigella spp./E. Coli enteroinvasiva (EIEI), Campylobacter spp; Yersinia enterocolitica, Vibrio spp; toxina B de Clostridium difficile, Aeromonas spp.; Salmonella spp.]"
+,,
+,,
+,,
+,,
+,,
+179,Detec. y diferenci. Clostridium difficile toxina A y B,Detección y diferenciación de Clostridium difficile toxina A y B
+,,
+181,"P. viral meningitis/encefalitis (HSV-1, . . .)","Panel viral de Meningitis/encefalitis (HSV-1, HSV-2, EBV, VZV, Toscana Virus, Enterovirus, Parechovrus)"
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+191,"P. bact. meningitis/encefalitis (Neisseria, . . .)","Panel bacteriano Meningitis/encefalitis (Neisseria meningitidis, Haemophilus influenzae, Streptococcus pneumoniae, Streptococcus agalactiae, Listeria monocytogenes, Cryptococcus neooformas, Treponema pallidum, Mycobacterium tuberculosis complex, Coxiela burnetti, Borrelia burgdorferi)"
+,,
+193,"Perfil ITS (C. Trachomatis, . . .)","Perfil de Infecciones de Transmisión Sexual (C. Trachomatis, Neisseria gonrrhoeae, Mycoplasma genitallium, Mycoplasma hominis, Ureaplasma urealitycum, Ureaplasma parvum y Trichomonas vaginalis)"
+,,
+,,
+,,
+197,Detec. chlamydia trachomatis ,Detección de Chlamydia trachomatis 
+,,
+199,Detec. chlamydia trachomatis y Neisseria gonorrhoeae,Detección de Chlamydia trachomatis y Neisseria gonorrhoeae
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+211,Tipifi. VPH 28,Tipificación del Virus de Papiloma Humano (28 genotipos) 
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+223,Tipifi. VPH 36,Tipificación del Virus de Papiloma Humano (36 genotipos) 
+,,
+,,
+,,
+227,Tipifi. VPH 40,Tipificación del Virus de Papiloma Humano (40 genotipos) 
+,,
+229,Detec. mutación factor V Leiden,Detección de la mutación del factor V de Leiden
+,,
+,,
+,,
+233,Detec. mutación gen protrombina G20210A,Detección de la mutación del gen de la protrombina G20210A
+,,
+,,
+,,
+,,
+,,
+239,Detec. mutación gen MTHFR,Detección de la mutación del gen MTHFR
+,,
+241,Detec mutación gen JAK2,Detección de la mutación del gen JAK2
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+251,Cuanti. mutación gen JAK2,Cuantificación de la mutación del gen JAK2
+,,
+,,
+,,
+,,
+,,
+257,Determi. Antígeno Leucocitario Humano B27,Determinación del Antígeno Leucocitario Humano B27
+,,
+,,
+,,
+,,
+,,
+263,Determi. Antígeno Leucocitario Humano  B51,Determinación del Antígeno Leucocitario Humano  B51
+,,
+,,
+,,
+,,
+,,
+269,"Tipifi. sistema HLA I (A,B,C ) / II (DR,DQ) ","Tipificación del sistema HLA I (A,B,C ) / II (DR,DQ) "
+,,
+271,"Tipifi. sistema HLA I (A,B,C) ","Tipificación del sistema HLA I (A,B,C) "
+,,
+,,
+,,
+,,
+,,
+277,"Tipifi. sistema HLA II (DR,DQ) ","Tipificación del sistema HLA II (DR,DQ) "
+,,
+,,
+,,
+281,Tipifi. Antígeno Leucocitario Humano A alta resolución ,Tipificación del Antígeno Leucocitario Humano Clase A de alta resolución 
+,,
+283,Tipifi. Antígeno Leucocitario Humano B alta resolución ,Tipificación del Antígeno Leucocitario Humano Clase B de alta resolución 
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+293,Tipifi. Antígeno Leucocitario Humano C alta resolución,Tipificación del Antígeno Leucocitario Humano ClaseIC de alta resolución 
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+307,Tipifi. Antígeno Leucocitario Humano DRB1 alta resolución ,Tipificación del Antígeno Leucocitario Humano Clase DRB1 de alta resolución 
+,,
+,,
+,,
+311,Tipifi. Antígeno Leucocitario Humano DQB1 alta resolución ,Tipificación del Antígeno Leucocitario Humano Clase DQB1 de alta resolución 
+,,
+313,P. reactivo anticuerpos  (Anti-HLA),Panel Reactivo de anticuerpos  (anticuerpo Anti-HLA)
+,,
+,,
+,,
+317,AC ANTI HLA (PRA),AC ANTI HLA (PRA)
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+331,Anticuerpos anti-donador específi.,Anticuerpos anti-donador específico (se requiere HLA del donador) 
+,,
+,,
+,,
+,,
+,,
+337,Pruebas cruzadas linfoci. (vivo),Pruebas cruzadas linfocitarias (donador vivo)
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+347,Pruebas cruzadas linfoci. (cadavérico),Pruebas cruzadas linfocitarias (donador cadavérico)
+,,
+349,"Deter. Subpobla. Linfoci., SUB L1 (CD45/CD3/CD4/CD8)","Determinación de subpoblaciones linfocitarias, SUB L1 (CD45/CD3/CD4/CD8)"
+,,
+,,
+,,
+353,"Deter. Subpobla. linfoci., SUB L2 (CD3/CD16+CD56/CD45/CD19/CD8)","Determinación de subpoblaciones linfocitarias, SUB L2 (CD3/CD16+CD56/CD45/CD19/CD8)"
+,,
+,,
+,,
+,,
+,,
+359,"Determi. Subpobla. Linfoci. B, SUB L3 (CD19/CD20)","Determinación de subpoblaciones linfocitarias B, SUB L3 (CD19/CD20)"
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+367,Determi. marcadores (CD) individuales,Determinación de marcadores (CD) individuales
+,,
+,,
+,,
+,,
+,,
+373,Inmunofenotipo (2),Inmunofenotipo (2)
+,,
+,,
+,,
+,,
+,,
+379,Fenotipo HPN,Prueba de Hemoglobinuria Paroxística Nocturna (Fenotipo HPN)
+,,
+,,
+,,
+383,Detec. mutación gen EGFR,Detección de la mutación del gen EGFR
+,,
+,,
+,,
+,,
+,,
+389,Detec. mutación gen K-RAS,Detección de la mutación del gen K-RAS
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+397,Detec. mutación gen N-RAS,Detección de la mutación del gen N-RAS
+,,
+,,
+,,
+401,Detec. mutación gen BRAF,Detección de la mutación del gen BRAF
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+409,Detec. mutación gen Her2,Detección de la mutación del gen Her2
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+419,Detec. reordenamiento cromosomal gen ROS1 IHQ (6q22),Detección del reordenamiento cromosomal del gen ROS1 IHQ (6q22)
+,,
+421,Detec. reordenamiento cromosomal gen ALK FISH (2p23),Detección del reordenamiento cromosomal del gen ALK FISH (2p23)
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+431,Detección de la proteína PD-L1 22c3,Detección de la proteína PD-L1 22c3
+,,
+433,Detección de la proteína PD-L1 288,Detección de la proteína PD-L1 288
+,,
+,,
+,,
+,,
+,,
+439,Cariotipo Sangre total ,Cariotipo en Sangre total 
+,,
+,,
+,,
+443,Cariotipo Médula Ósea ,Cariotipo en Médula Ósea 
+,,
+,,
+,,
+,,
+,,
+449,"Síndrome de Down, Edwards y Pateu","Perfil Trisomía 21 (Síndrome de Down), Trisomía 18 (Síndrome de Edwards), y Trisomía 13 (Síndrome de Pateu)*"
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+457,FUSION PML/RARA (T(15;17) (Q22;Q21)),FUSION PML/RARA (T(15;17) (Q22;Q21))
+,,
+,,
+,,
+461,Quimerismo microsatélites,Quimerismo para microsatélites
+,,
+463,"FUSION BCR/ABL1 (P190 Y P210, CROMOSOMA FILADELFIA, T(9;22)(Q34.1;Q11.2))","FUSION BCR/ABL1 (P190 Y P210, CROMOSOMA FILADELFIA, T(9;22)(Q34.1;Q11.2))"
+,,
+,,
+,,
+467,Deteción de Varicela zoster,Deteción de Varicela zoster
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+479,Paternidad  (Padre o Madre e hijo),Estudio de paternidad  (2 individuos: Presunto Padre o Madre e hijo)
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+487,Antígeno SARS CoV-2,Detección de antígeno de SARS CoV-2
+,,
+,,
+,,
+491,IgG IgM SARS CoV-2,Detección de Anticuerpos IgG e IgM de SARS CoV-2
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+499,Genoti. VIH (Resistencia fármacos),Genotipificación del virus de Inmunodeficiencia Humana (Resistencia a fármacos) 
+,,
+,,
+,,
+503,QuantiFERON,"QuantiFERON (Ensayo de respuesta a péptidos antigénicos  ESAT-6, CFP-10 y TB7.7 (p4) asociados a M. tuberculosis) "
+,,
+,,
+,,
+,,
+,,
+509,Mycobacte. tuberculosis (cepas Drogorresistentes) ,Mycobacterium tuberculosis (cepas Drogorresistentes) 
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+521,"Detec. virus Zika, Dengue y Chikungunya ","Detección del virus Zika, Dengue y Chikungunya "
+,,
+523,Detec Pneumocystis Jiroveccii (P. Carinii),Detección de Pneumocystis Jiroveccii (P. Carinii)
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+541,Detec Toxoplasma Gondii,Detección de Toxoplasma Gondii
+,,
+,,
+,,
+,,
+,,
+547,Detec. Galactomanano,Detección de Galactomanano
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+557,Detección de Stapylococcus aureus,Detección de Stapylococcus aureus
+,,
+,,
+,,
+,,
+,,
+563,Biopsia de colon y recto ,Biopsia de colon y recto 
+,,
+,,
+,,
+,,
+,,
+569,Cuantificación IgG IgM de SARS CoV-2,Cuantificación IgG IgM de SARS CoV-2
+,,
+571,"Especial, prueba patológica",
+,,
+,,
+,,
+,,
+,,
+577,C_viral VHA,Carga Viral de Hepatitis A
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+587,detec. VHA,Detección del virus de Hepatitis A
+,,
+,,
+,,
+,,
+,,
+593,Papanicolao,Papanicolao
+,,
+,,
+,,
+,,
+,,
+599,Detec. reordenamiento cromosomal gen ROS1 FISH (6q22),Detección del reordenamiento cromosomal del gen ROS1 FISH (6q22)
+,,
+601,Detec. reordenamiento cromosomal gen ALK IHQ (2p23),Detección del reordenamiento cromosomal del gen ALK IHQ (D4D6)
+,,
+,,
+,,
+,,
+,,
+607,VDRL,VDRL
+,,
+,,
+,,
+,,
+,,
+613,Cuantificacion Fusion BCR/ABL 1,BRCA 1 y 2
+,,
+,,
+,,
+617,Inestabilidad microsatelital,Inestabilidad microsatelital
+,,
+619,Antidoping de 5 elementos,Antidoping de 5 elementos
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+631,Cultivo de secreciones,Cultivo de secreciones
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+641,Cultivo,Cultivo
+643,,
+647,,
+653,,
+659,,
+661,,
+673,,
+677,,
+683,,
+691,,
+701,,
+709,,
+719,,
+727,,
+733,,
+739,,
+743,,
+751,,
+757,,
+761,,
+769,,
+773,,
+787,,
+797,,
+809,,
+811,,
+821,,
+823,,
+827,,
+829,,
+839,,
+853,,
+857,,
+859,,
+863,,
+877,,
+881,,
+883,,
+887,,
+907,,
+911,,
+919,,
+929,,
+937,,
+941,,
+947,,
+953,,
+967,,
+971,,
+977,,
+983,,
+991,,
+997,,
+1009,SARS CoV-2 PLUS ,"Detección de SARS CoV-2, Virus de la Influenza A, Virus de la Influenza B y Virus sincitial respiratorio"
+1013,,
+1019,,
+1021,,
+1031,,
+1033,,
+1039,,
+1049,,
+1051,,
+1061,,
+1063,,
+1069,,
+1087,,
+1091,,
+1093,,
+1097,,
+1103,,
+1109,,
+1117,,
+1123,,
+1129,,
+1151,,
+1153,,
+1163,,
+1171,,
+1181,,
+1187,,
+1193,,
+1201,,
+1213,,
+1217,,
+1223,,
