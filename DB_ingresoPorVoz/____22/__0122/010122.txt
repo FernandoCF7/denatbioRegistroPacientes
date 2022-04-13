@@ -1,0 +1,5 @@
+firstName * secondName * thirthName
+empresa /aj lab/ matutino * 1234 *
+pacienteNombre1 * pacienteApellido1 * 002
+pacienteNombre2 * pacienteApellido2 * 002
+

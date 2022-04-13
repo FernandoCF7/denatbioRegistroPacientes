@@ -37,10 +37,9 @@ subsidiary = '01'#hermita
 
 #-----------------------------------------------------------------------------#
 #inline excell files
-inlineEF=False
-orig_url='https://dbautomaticregistersoftware.sfo3.digitaloceanspaces.com/'
+inlineEF=True
+orig_url = 'https://github.com/FernandoCF7/denatbioRegistroPacientes/blob/main/'#empresas/#?raw=true
 #-----------------------------------------------------------------------------#
-
 
 #-----------------------------------------------------------------------------#
 #set path
@@ -88,7 +87,7 @@ for idx, val in enumerate(csvFile["firstName"]):
 #-----------------------------------------------------------------------------#
 #read codeEnterprise file
 if inlineEF:
-    filePath_codeEnterprise=("{0}"+"codeEnterprise.csv").format(orig_url)
+    filePath_codeEnterprise=("{0}"+"empresas/codeEnterprise.csv?raw=true").format(orig_url)
 else:
     filePath_codeEnterprise=os.path.join("{0}","..","empresas",
                                      "codeEnterprise.csv").format(currentPath)
@@ -108,8 +107,7 @@ codeEnterpriseFile["empresa"]=codeEnterpriseFile[
 #-----------------------------------------------------------------------------#
 #read pd_listExam file
 if inlineEF:
-    filePath_listExam=("{0}"+"listExam.csv").format(orig_url)
-    
+    filePath_listExam=("{0}"+"listadoDeExamenes/listExam.csv?raw=true").format(orig_url)
 else:
     filePath_listExam=os.path.join("{0}","..","listadoDeExamenes",
                                    "listExam.csv").format(currentPath)
@@ -123,7 +121,7 @@ pd_listExam.set_index("COD INT", inplace=True)
 #-----------------------------------------------------------------------------#
 #read clavesNombresEmpresa file
 if inlineEF:
-    filePath_pd_listExam=("{0}"+"clavesNombresEmpresa.csv").format(orig_url)
+    filePath_pd_listExam=("{0}"+"empresas/clavesNombresEmpresa.csv?raw=true").format(orig_url)
     
 else:
     filePath_pd_listExam=os.path.join("{0}","..","empresas",
@@ -139,9 +137,9 @@ df_enterpriseNames.set_index("clave", inplace=True)
 #read enterprice price files
 if inlineEF:
     #Standar
-    filePath_listPriceStandar=("{0}"+"listadoPreciosEstandar.csv").format(orig_url)
+    filePath_listPriceStandar=("{0}"+"listadoDePrecios/listadoPreciosEstandar.csv?raw=true").format(orig_url)
     #Urgent
-    filePath_listPriceUrgent=("{0}"+"listadoPreciosUrgentes.csv").format(orig_url)
+    filePath_listPriceUrgent=("{0}"+"listadoDePrecios/listadoPreciosUrgentes.csv?raw=true").format(orig_url)
     
 else:
     #Standar
@@ -163,7 +161,7 @@ df_listPriceUrgent.set_index("COD INT", inplace=True)
 #read spetial costs permissions by enterprise file
 if inlineEF:
     filePath_persmisosCostosEspeciales=("{0}"+
-                "listadoPermisosCostosEspecialesEmpresas.csv").format(orig_url)
+                "listadoDePrecios/listadoPermisosCostosEspecialesEmpresas.csv?raw=true").format(orig_url)
         
 else:
     filePath_persmisosCostosEspeciales=os.path.join("{0}","..",
