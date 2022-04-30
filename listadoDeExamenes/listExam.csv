@@ -1,106 +1,106 @@
 ﻿COD INT,EXAMEN,Nombre del examen
-1,deteccion de HIV-1,deteccion de HIV-1
-2,PCR SARS CoV-2 ,Detección de SARS CoV-2 
-3,carga VIH,Carga viral de VIH
+1,Detección de HIV-I,deteccion de HIV-1
+2,Detección de SARS CoV-2 ,Detección de SARS CoV-2 
+3,Carga viral de VIH,Carga viral de VIH
 4,Detección de HIV-II,Detección de HIV-II
-5,confirmatoria VIH I y II ,Prueba confirmatoria del Virus de Inmunodeficiencia Humana I y II 
+5,Prueba confirmatoria del Virus de Inmunodeficiencia Humana I y II ,Prueba confirmatoria del Virus de Inmunodeficiencia Humana I y II 
 6,Detección de Hepatitis A,Detección de Hepatitis A
-7,fenotipi/genotipi VIH (resis. fármacos),Fenotipo y genotipificación del Virus de Inmunodeficiencia Humana (Resistencia a fármacos)
-8,"Detección de Bordetella (B. pertussis, B. parapertussis, B. bronchiseptica)","Detección de Bordetella (B. pertussis, B. parapertussis, B. bronchiseptica)"
-9,"Antidoping 5 (Cocaína, Canabinoides, Anfetaminas, Meyanfetaminas y Opiaceos)","Antidoping 5 (Cocaína, Canabinoides, Anfetaminas, Meyanfetaminas y Opiaceos)"
+7,Fenotipi/genotipi VIH (resis farmacos),Fenotipo y genotipificación del Virus de Inmunodeficiencia Humana (Resistencia a fármacos)
+8,Detección de Bordetella,"Detección de Bordetella (B. pertussis, B. parapertussis, B. bronchiseptica)"
+9,"Antidoping 5 (Cocaína, Canabinoides, Anfetaminas, Metanfetaminas y Opiaceos)","Antidoping 5 (Cocaína, Canabinoides, Anfetaminas, Meyanfetaminas y Opiaceos)"
 10,Prueba de embarazo ,Prueba de embarazo 
-11,C_viral VHB,Carga Viral de Hepatitis B
-12,"SARS Plus (Detección de SARS-CoV-2, Influenza A y B, Virus Sincicial respiratorio B)","SARS Plus (Detección de SARS-CoV-2, Influenza A y B, Virus Sincicial respiratorio B)"
-13,detec. VHB,Detección del virus de Hepatitis B 
-14,Detección de Leptospira,Detección de Leptospira
-15,QS-3,"Quimica sanguinea de 3 elementos (colesterol, trigliceridos y glucosa )"
-16,QS-6,"Quimica sanguinea de 6 elementos (colesterol, trigliceridos, glucosa, acido urico, creatinina y urea )"
-17,C_viral VHC,Carga Viral de Hepatitis C
-18,QS-12,Quimica sanguinea de 12 elementos
-19,detec. VHC,Detección del virus de Hepatitis C 
-20,QS-24,Quimica sanguinea de 24 elementos
-21,QS-32,Quimica sanguinea de 32 elementos 
-22,QS-48,Quimica sanguinea de 48 elementos 
-23,genotipi. VHC,Genotipificación del virus de Hepatitis C
+11,Carga Viral de Hepatitis B,Carga Viral de Hepatitis B
+12,Química Sanguínea 12 elementos,
+13,Detección del virus de Hepatitis B ,Detección del virus de Hepatitis B 
+14,Química Sanguínea 36 elementos,
+15,Química Sanguínea 3 elementos,"Quimica sanguinea de 3 elementos (colesterol, trigliceridos y glucosa )"
+16,Química  Sanguínea 6 elementos,"Quimica sanguinea de 6 elementos (colesterol, trigliceridos, glucosa, acido urico, creatinina y urea )"
+17,Carga Viral de Hepatitis C,Carga Viral de Hepatitis C
+18,Química Sanguínea 14 elementos,Quimica sanguinea de 14 elementos
+19,Detección del virus de Hepatitis C ,Detección del virus de Hepatitis C 
+20,Química Sanguínea 24 elementos,Quimica sanguinea de 24 elementos
+21,Química Sanguínea 33 elementos,Quimica sanguinea de 32 elementos 
+22,Química Sanguínea 48 elementos ,Quimica sanguinea de 48 elementos 
+23,Genotipificacion del virus de Hepatitis C,Genotipificación del virus de Hepatitis C
 24,Glucosa,Glucosa
-25,Hemoglubina,Hemoglubina glucosilada
-26,Biometria ,Biometria hematica 
-27,Perfil hormonal ,Perfil hormonal 
-28,Perfil ginecologico ,Perfil ginecologico 
-29,C_viral citomegalovirus,Carga viral de citomegalovirus
-30,Perfil tiroideo,Perfil tiroideo
-31,detec. citomegalovirus ,Detección de citomegalovirus 
-32,Exemen general de orina ,Examen general de orina 
+25,Hemoglobina Glicosilada,Hemoglubina glucosilada
+26,Biometria Hematica,Biometria hematica 
+27,Perfil Hormonal Femenino I ,Perfil hormonal 
+28,Perfil Ginecologico  ,Perfil ginecologico 
+29,Carga viral de citomegalovirus,Carga viral de citomegalovirus
+30,Perfil Tiroideo I ,Perfil tiroideo
+31,Detección de citomegalovirus ,Detección de citomegalovirus 
+32,Exemen General de Orina ,Examen general de orina 
 33,Urocultivo,Urocultivo
 34,Coprocultivo,Coprocultivo
 35,Bacteriologia: cultivo,Bacteriologia: cultivo
 36,VDRL,VDRL
-37,C_viral virus BK,Carga viral del virus BK
-38,Curva de glucosa ,Curva de tolerancia a la glucosa  
-39,Culva de insulina,Curva de tolerancia a la insulina 
-40,Factor reumatoide ,Factor reumatoide 
-41,detec. virus BK,Detección del virus BK
+37,Carga de virus BK,Carga viral del virus BK
+38,Curva de tolerancia a la Glucosa 3h,Curva de tolerancia a la glucosa  
+39,Curva de insulina de 3 h,Curva de tolerancia a la insulina 
+40,Factor reumatoide (cualitativo),Factor reumatoide 
+41,Detección de virus BK,Detección del virus BK
 42,Electrolitos,Electrolitos sericos
-43,C_viral virus JC,Carga viral del virus JC
-44,Coprologico,Coprologico
-45,Coproparacitoscopico 1,Coproparacitoscopico 1
-46,Coproparacitoscopico 2,Coproparacitoscopico 2 
-47,detec. virus JC,Detección del virus JC
-48,Coproparacitoscopico 3,Coproparacitoscopico 
-49,Grupo sanguineo,Grupo sanguineo y RH
+43,Carga de virus JC,Carga viral del virus JC
+44,Coprológico,Coprologico
+45,Coproparasitoscopico 1,Coproparacitoscopico 1
+46,Coproparasitoscopico 2,Coproparacitoscopico 2 
+47,Detección de virus JC,Detección del virus JC
+48,Coproparasitoscopico 3,Coproparacitoscopico 
+49,Grupo sanguíneo y  Factor Rh,Grupo sanguineo y RH
 50,Reacciones febriles ,Reacciones febriles 
-51,Histopatologia,Histopatologia
+51,Histopatología,Histopatologia
 52,Perfil lipidico,Perfil lipidico
-53,C_viral virus BK Y JC,Carga viral del virus BK Y JC
-54,Determinacion de micronutrientes ,Determinacion de micronutrientes 
-55,Hormona estimulante de tiroides,Hormona estimulante de tiroides
-56,Cultivo viral,Cultivo viral
-57,Perfil de antinucleares ,Perfil de antinucleares 
-58,Anti herpes I igg virus,Anti herpes I igg virus
-59,detec. virus BK Y JC,Detección del virus BK Y JC
-60,Inmunoglobulina,Inmunoglobulina
-61,C_viral epstein barr ,Carga viral de Epstein Barr 
-62,A.c HIV,A.c HIV
-63,Niveles sericos de levetiracetam y topiramato,Niveles sericos de levetiracetam y topiramato
-64,Anti herpes II igg virus,Anti herpes II igg virus
-65,Anticuerpos cardiolipina ,Anticuerpos cardiolipina 
-66,Prolactina especial,Prolactina especial
-67,detec. virus epstein barr,Detección del Virus Epstein Barr 
-68,Anticoagulante lupico,Anticoagulante lupico
+53,Carga de virus BK y virus JC,Carga viral del virus BK Y JC
+54,Determinación de micronutrientes,
+55,Hormona estimulante de la tiroides (TSH),Hormona estimulante de tiroides
+56,Cultivo viral,
+57,Perfil de Anticuerpos ntinucleares,
+58,Anticuerpos Anti Herpes I IgG virus,Anti herpes I igg virus
+59,Detección de virus BK y virus JC ,Detección del virus BK Y JC
+60,Inmunoglobulinas,Inmunoglobulina
+61,Carga viral de Epstein Barr ,Carga viral de Epstein Barr 
+62,Estradiol,
+63,Niveles séricos de leveriracetam y topiramato,
+64,Anticuerpos Anti herpes II IgG,Anti herpes II igg virus
+65,Anticuerpos Anticardiolipinas igG e igM,Anticuerpos cardiolipina 
+66,Prolactina sérica,Prolactina especial
+67,Detección del Virus Epstein Barr ,Detección del Virus Epstein Barr 
+68,Anticoagulante lúpico,Anticoagulante lupico
 69,Insulina basal,Insulina basal
-70,Anticuerpos glucoproteina I,Anticuerpos glucoproteina I
-71,C_viral parvovirus humano B19,Carga viral de Parvovirus humano B19
-72,IL-6,IL-6
-73,detec. parvovirus humano B19,Detección de Parvovirus humano B19
+70,"Anticuerpos igG,igM E igA BETA-2 Glicoproteina-I",Anticuerpos glucoproteina I
+71,Carga viral de Parvovirus humano B19,Carga viral de Parvovirus humano B19
+72,interleucina 6 ,IL-6
+73,Detección de Parvovirus humano B19,Detección de Parvovirus humano B19
 74,Lipasa,Lipasa
-75,Thropheryma whippellii,Thropheryma whippellii
+75,Thropheryma whippellii,
 76,Amilasa,Amilasa
-77,DHEA sulfatada,DHEA sulfatada
-78,Perfil tiroideo  II (Hormona Estimulante de Tiroides ,"Perfil tiroideo  II (Hormona Estimulante de Tiroides (TSH), T3 Captación,
+77,Dehidroepiandosterona sulfatada (DHEA-S),DHEA sulfatada
+78,Perfil tiroideo II ,"Perfil tiroideo  II (Hormona Estimulante de Tiroides (TSH), T3 Captación,
 Triyodotironina (T3)total, Tiroxina (T4) Libre, Tiroxina (T4)total,
 Ac. Antimicrosomales totales, Ac. Antitiroglobulinas totales,
 Indice de tiroxina libre, Yodo butanólico, Yodo Proteíco,
 T4 yodo.)"
-79,detec. mycobacterium tuberculosis/noTuberculosas,Detección de Mycobacterium tuberculosis y micobacterias no tuberculosas. 
-80,Perfil Hormona Femenino II,"Perfil Hormona Femenino II (Estradiol, Hormona folículo Estimulante (HFE), Hormona luteinizante (HL),
+79,Detección de Mycobacterium tuberculosis y micobacterias no tuberculosas. ,Detección de Mycobacterium tuberculosis y micobacterias no tuberculosas. 
+80,Peril hormonal femenino II,"Perfil Hormona Femenino II (Estradiol, Hormona folículo Estimulante (HFE), Hormona luteinizante (HL),
 Progesterona, Prolactina, Testosterona, Hormona Estimulante de Tiroides
 (TSH), T3 Captación, Triyodotironina (T3) total, Tiroxina Libre (T4),
 Tiroxina Total, Anticuerpos antimicrosomales totales, Ac. Antitiroglobulinas
 totales, Indice de Tiroxina Libre, Yodo butanólico, Yodo Proteico, T4 yodo.
 Cortisol.)"
-81,Factor reumatoide (cuantitativo),Factor reumatoide (cuantitativo)
-82,anion gap,anion gap
-83,detec. Herpes (HSV) 1 y 2,Detección de Herpes Virus (HSV) 1 y 2
-,,
-,,
-,,
-,,
-,,
+81,Factor Reumatoide cuantitativo,Factor reumatoide (cuantitativo)
+82,Anion GAP,anion gap
+83,Detección de Herpes Virus (HSV) 1 y 2,Detección de Herpes Virus (HSV) 1 y 2
+84,Tiempos de Coagulacion,
+85,Química Sanguínea 27 elementos ,
+86,Urea Sérica,
+87,Dimero D,
+88,Enfermedad por atropodos ,
 89,detec. leptospira,Detección de Leptospira
-,,
-,,
-,,
-,,
+90,Anticuerpos IgM anti-treponema pallidum,
+91,Detección de treponema pallidum,
+92,Antigeno para Histoplasma,
+93,Hormona Antimulleriana ,
 ,,
 ,,
 ,,
@@ -324,11 +324,11 @@ Metapneumovirus,"
 ,,
 311,Tipifi. Antígeno Leucocitario Humano DQB1 alta resolución ,Tipificación del Antígeno Leucocitario Humano Clase DQB1 de alta resolución 
 ,,
-313,P. reactivo anticuerpos  (Anti-HLA),Panel Reactivo de anticuerpos  (anticuerpo Anti-HLA)
+313,Presencia de anticuerpos HLA por prueba cruzada y luminimetría (PRA),Panel Reactivo de anticuerpos  (anticuerpo Anti-HLA)
 ,,
 ,,
 ,,
-317,AC ANTI HLA (PRA),AC ANTI HLA (PRA)
+317,Anticuerpos Anti HLA-PRA,AC ANTI HLA (PRA)
 ,,
 ,,
 ,,
@@ -378,7 +378,7 @@ Metapneumovirus,"
 ,,
 ,,
 ,,
-367,Determi. marcadores (CD) individuales,Determinación de marcadores (CD) individuales
+367,Inmunofenotipo 1,Determinación de marcadores (CD) individuales
 ,,
 ,,
 ,,
@@ -450,7 +450,7 @@ Metapneumovirus,"
 ,,
 ,,
 ,,
-439,Cariotipo Sangre total ,Cariotipo en Sangre total 
+439,Cariotipo en Sangre total con fotografia ,Cariotipo en Sangre total 
 ,,
 ,,
 ,,
@@ -468,17 +468,17 @@ Metapneumovirus,"
 ,,
 ,,
 ,,
-457,FUSION PML/RARA (T(15;17) (Q22;Q21)),FUSION PML/RARA (T(15;17) (Q22;Q21))
+457,FUSION PML/RAR (T(15;17) (Q22;Q21)),FUSION PML/RARA (T(15;17) (Q22;Q21))
 ,,
 ,,
 ,,
-461,Quimerismo microsatélites,Quimerismo para microsatélites
+461,Quimerismo para microsatélites,Quimerismo para microsatélites
 ,,
 463,"FUSION BCR/ABL1 (P190 Y P210, CROMOSOMA FILADELFIA, T(9;22)(Q34.1;Q11.2))","FUSION BCR/ABL1 (P190 Y P210, CROMOSOMA FILADELFIA, T(9;22)(Q34.1;Q11.2))"
 ,,
 ,,
 ,,
-467,Deteción de Varicela zoster,Deteción de Varicela zoster
+467,,Deteción de Varicela zoster
 ,,
 ,,
 ,,
@@ -490,7 +490,7 @@ Metapneumovirus,"
 ,,
 ,,
 ,,
-479,Paternidad  (Padre o Madre e hijo),Estudio de paternidad  (2 individuos: Presunto Padre o Madre e hijo)
+479,Examen de paternidad 2 individuos,Estudio de paternidad  (2 individuos: Presunto Padre o Madre e hijo)
 ,,
 ,,
 ,,
@@ -503,7 +503,7 @@ Metapneumovirus,"
 ,,
 ,,
 491,IgG IgM SARS CoV-2,Detección de Anticuerpos IgG e IgM de SARS CoV-2
-,,
+492,Cuantificación de Anticuerpos IgG e IgM de SARS CoV-2,
 ,,
 ,,
 ,,
@@ -558,7 +558,7 @@ Metapneumovirus,"
 ,,
 ,,
 ,,
-547,Detec. Galactomanano,Detección de Galactomanano
+547,Detec. de Galactomanano,Detección de Galactomanano
 ,,
 ,,
 ,,
@@ -574,23 +574,21 @@ Metapneumovirus,"
 ,,
 ,,
 ,,
-563,Biopsia de colon y recto ,Biopsia de colon y recto 
+563,,Biopsia de colon y recto 
 ,,
 ,,
 ,,
 ,,
 ,,
-569,Cuantificación IgG IgM de SARS CoV-2,Cuantificación IgG IgM de SARS CoV-2
+569,,Cuantificación IgG IgM de SARS CoV-2
 ,,
-571,"Especial, prueba patológica",
-,,
-,,
+571,,
 ,,
 ,,
 ,,
-577,C_viral VHA,Carga Viral de Hepatitis A
 ,,
 ,,
+577,C_ viral Hepatitis A,Carga Viral de Hepatitis A
 ,,
 ,,
 ,,
@@ -598,13 +596,15 @@ Metapneumovirus,"
 ,,
 ,,
 ,,
-587,detec. VHA,Detección del virus de Hepatitis A
+,,
+,,
+587,,Detección del virus de Hepatitis A
 ,,
 ,,
 ,,
 ,,
 ,,
-593,Papanicolao,Papanicolao
+593,Papanicolaou,Papanicolao
 ,,
 ,,
 ,,
@@ -612,13 +612,13 @@ Metapneumovirus,"
 ,,
 599,Detec. reordenamiento cromosomal gen ROS1 FISH (6q22),Detección del reordenamiento cromosomal del gen ROS1 FISH (6q22)
 ,,
-601,Detec. reordenamiento cromosomal gen ALK IHQ (2p23),Detección del reordenamiento cromosomal del gen ALK IHQ (D4D6)
+601,Detec. reordenamiento cromosomal gen ALK IHQ (26q23),Detección del reordenamiento cromosomal del gen ALK IHQ (D4D6)
 ,,
 ,,
 ,,
 ,,
 ,,
-607,VDRL,VDRL
+607,,VDRL
 ,,
 ,,
 ,,
@@ -630,7 +630,7 @@ Metapneumovirus,"
 ,,
 617,Inestabilidad microsatelital,Inestabilidad microsatelital
 ,,
-619,Antidoping de 5 elementos,Antidoping de 5 elementos
+619,,Antidoping de 5 elementos
 ,,
 ,,
 ,,
@@ -642,7 +642,7 @@ Metapneumovirus,"
 ,,
 ,,
 ,,
-631,Cultivo de secreciones,Cultivo de secreciones
+631,,Cultivo de secreciones
 ,,
 ,,
 ,,
@@ -652,7 +652,7 @@ Metapneumovirus,"
 ,,
 ,,
 ,,
-641,Cultivo,Cultivo
+641,,Cultivo
 643,,
 647,,
 653,,
