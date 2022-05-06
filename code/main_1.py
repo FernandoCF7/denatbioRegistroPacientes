@@ -37,7 +37,7 @@ subsidiary = '01'#hermita
 
 #-----------------------------------------------------------------------------#
 #inline excell files
-inlineEF=True
+inlineEF=False
 orig_url = 'https://github.com/FernandoCF7/denatbioRegistroPacientes/blob/main/'
 #-----------------------------------------------------------------------------#
 
@@ -193,7 +193,7 @@ ofertar precios especiales; retire el precio especial del archivo de ingreso\
 de pacientes (.txt), o modifique el permiso asignado a dicha empresa en el \ 
 archivo listadoPermisosCostosEspecialesEmpresas.csv"""
 
-#Code of exam nor defined
+#Code of exam not defined
 CEND='''OPERACION FALLIDA:\nCódigo de examen no definido; paciente: {0} {1}'''
 
 #Not assigned shift
@@ -726,7 +726,10 @@ df_toExcel=pd.DataFrame({'OSR':np.NaN,
                          'EXAMEN':examNameList,
                          'COD':ECBP_str,
                          'ESTATUS':np.NaN,
-                         'RESULTADO':np.NaN
+                         'RESULTADO':np.NaN,
+                         'ENVIO':np.NaN,
+                         'REVISO':np.NaN,
+                         'HORA ENVIO':np.NaN
                          })
 #----------------------------------------------------------------------------#
 
@@ -828,10 +831,10 @@ with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
     #Add border
     numRows=len(df_toExcel)
     
-    worksheet.conditional_format('A1:H'+str(numRows+1),{'type':'no_blanks',
+    worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'no_blanks',
                                           'format':border_format})
     
-    worksheet.conditional_format('A1:H'+str(numRows+1),{'type':'blanks',
+    worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'blanks',
                                           'format':border_format})
     #-----------------------------------------------------------------------------#
     
@@ -842,7 +845,7 @@ with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
                                         'bg_color': 'black'})
     
     for idx, val, in enumerate(idx_enterprise):
-        worksheet.merge_range('B'+str(val+2)+':H'+str(val+2),enterpriseNames[idx],
+        worksheet.merge_range('B'+str(val+2)+':K'+str(val+2),enterpriseNames[idx],
                               merge_format)
     #-----------------------------------------------------------------------------#
     
