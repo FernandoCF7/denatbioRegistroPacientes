@@ -22,12 +22,11 @@ import time
 import xlsxwriter
 import sys
 from datetime import datetime
-#sys.exit("ahi se ven prrs")
 import pdb#debug
 
 
 #-----------------------------------------------------------------------------#
-day='180422'
+day='130522'
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -37,7 +36,7 @@ subsidiary = '01'#hermita
 
 #-----------------------------------------------------------------------------#
 #inline excell files
-inlineEF=False
+inlineEF=True
 orig_url = 'https://github.com/FernandoCF7/denatbioRegistroPacientes/blob/main/'
 #-----------------------------------------------------------------------------#
 
@@ -134,44 +133,44 @@ df_enterpriseNames.set_index("clave", inplace=True)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-#read enterprice price files
-if inlineEF:
-    #Standar
-    filePath_listPriceStandar=("{0}"+"listadoDePrecios/listadoPreciosEstandar.csv?raw=true").format(orig_url)
-    #Urgent
-    filePath_listPriceUrgent=("{0}"+"listadoDePrecios/listadoPreciosUrgentes.csv?raw=true").format(orig_url)
+# #read enterprice price files
+# if inlineEF:
+#     #Standar
+#     filePath_listPriceStandar=("{0}"+"listadoDePrecios/listadoPreciosEstandar.csv?raw=true").format(orig_url)
+#     #Urgent
+#     filePath_listPriceUrgent=("{0}"+"listadoDePrecios/listadoPreciosUrgentes.csv?raw=true").format(orig_url)
     
-else:
-    #Standar
-    filePath_listPriceStandar=os.path.join("{0}","..","listadoDePrecios",
-                              "listadoPreciosEstandar.csv").format(currentPath)
-    #Urgent
-    filePath_listPriceUrgent=os.path.join("{0}","..","listadoDePrecios",
-                              "listadoPreciosUrgentes.csv").format(currentPath)
+# else:
+#     #Standar
+#     filePath_listPriceStandar=os.path.join("{0}","..","listadoDePrecios",
+#                               "listadoPreciosEstandar.csv").format(currentPath)
+#     #Urgent
+#     filePath_listPriceUrgent=os.path.join("{0}","..","listadoDePrecios",
+#                               "listadoPreciosUrgentes.csv").format(currentPath)
         
-df_listPriceStandar=(pd.read_csv(filePath_listPriceStandar))
-df_listPriceUrgent=(pd.read_csv(filePath_listPriceUrgent))
+# df_listPriceStandar=(pd.read_csv(filePath_listPriceStandar))
+# df_listPriceUrgent=(pd.read_csv(filePath_listPriceUrgent))
 
-#set index of COD INT as clave column
-df_listPriceStandar.set_index("COD INT", inplace=True)
-df_listPriceUrgent.set_index("COD INT", inplace=True)
+# #set index of COD INT as clave column
+# df_listPriceStandar.set_index("COD INT", inplace=True)
+# df_listPriceUrgent.set_index("COD INT", inplace=True)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-#read spetial costs permissions by enterprise file
-if inlineEF:
-    filePath_persmisosCostosEspeciales=("{0}"+
-                "listadoDePrecios/listadoPermisosCostosEspecialesEmpresas.csv?raw=true").format(orig_url)
+# #read spetial costs permissions by enterprise file
+# if inlineEF:
+#     filePath_persmisosCostosEspeciales=("{0}"+
+#                 "listadoDePrecios/listadoPermisosCostosEspecialesEmpresas.csv?raw=true").format(orig_url)
         
-else:
-    filePath_persmisosCostosEspeciales=os.path.join("{0}","..",
-                                                    "listadoDePrecios",
-             "listadoPermisosCostosEspecialesEmpresas.csv").format(currentPath)
+# else:
+#     filePath_persmisosCostosEspeciales=os.path.join("{0}","..",
+#                                                     "listadoDePrecios",
+#              "listadoPermisosCostosEspecialesEmpresas.csv").format(currentPath)
 
-df_permisosCostosEspeciales=(pd.read_csv(filePath_persmisosCostosEspeciales))
+# df_permisosCostosEspeciales=(pd.read_csv(filePath_persmisosCostosEspeciales))
 
-#set index of EMPRESA INT as clave column
-df_permisosCostosEspeciales.set_index("EMPRESA", inplace=True)
+# #set index of EMPRESA INT as clave column
+# df_permisosCostosEspeciales.set_index("EMPRESA", inplace=True)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -389,70 +388,70 @@ for val in idx_vuelo:
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-#search for especial prices
-idx_spetialPrice=[]
-patern=re.compile(r'([\d\.-]+)-([\d\.-]+)')
-for val in idx_patients:
+# #search for especial prices
+# idx_spetialPrice=[]
+# patern=re.compile(r'([\d\.-]+)-([\d\.-]+)')
+# for val in idx_patients:
     
-    priceValue=csvFile.thirdName[val]
-    if priceValue.find("-")!=-1:
-        idx_spetialPrice.append(val)
+#     priceValue=csvFile.thirdName[val]
+#     if priceValue.find("-")!=-1:
+#         idx_spetialPrice.append(val)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-#validate if enterprises can apply special prices
-for val in idx_spetialPrice:
+# #validate if enterprises can apply special prices
+# for val in idx_spetialPrice:
     
-    enterprise=listEnterpriseNameByPatient[val]
+#     enterprise=listEnterpriseNameByPatient[val]
     
-    if df_permisosCostosEspeciales.COSTO_ESPECIAL[enterprise]==0:
-        print(NAFASP.format(enterprise)) 
-        sys.exit()
+#     if df_permisosCostosEspeciales.COSTO_ESPECIAL[enterprise]==0:
+#         print(NAFASP.format(enterprise)) 
+#         sys.exit()
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-#get the idx in the exams by patient of the spetial prices
-idx_IEBPSP=dict()#idx_IEBPSP-->idx InExamsByPatientSpetialPrice
-for val in idx_spetialPrice:#for each patien with spetial prices
-    exams=csvFile.thirdName[val]#get the string examCodecs and spetialPrices
-    exams=exams.split()#Split the string and put it in a list
+# #get the idx in the exams by patient of the spetial prices
+# idx_IEBPSP=dict()#idx_IEBPSP-->idx InExamsByPatientSpetialPrice
+# for val in idx_spetialPrice:#for each patien with spetial prices
+#     exams=csvFile.thirdName[val]#get the string examCodecs and spetialPrices
+#     exams=exams.split()#Split the string and put it in a list
     
-    tmp=[]#positions of spetial prices
-    for idx0, val0 in enumerate(exams):
-        if val0.find("-")!=-1:
-            tmp.append(idx0)
-    idx_IEBPSP[val]=tmp
+#     tmp=[]#positions of spetial prices
+#     for idx0, val0 in enumerate(exams):
+#         if val0.find("-")!=-1:
+#             tmp.append(idx0)
+#     idx_IEBPSP[val]=tmp
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-#get the spetial prices
-SPBPBE=dict()#IEBPSP-->SpetialPriceByPatienByExam
-for val in idx_spetialPrice:#for each patien with spetial prices
+# #get the spetial prices
+# SPBPBE=dict()#IEBPSP-->SpetialPriceByPatienByExam
+# for val in idx_spetialPrice:#for each patien with spetial prices
     
-    exams=csvFile.thirdName[val]#get the string examCodecs and spetialPrices
-    exams=exams.split()#Split the string and put it in a list
+#     exams=csvFile.thirdName[val]#get the string examCodecs and spetialPrices
+#     exams=exams.split()#Split the string and put it in a list
     
-    tmp=[]#spetial prices
-    for val0 in idx_IEBPSP[val]:#for each exam with spetial price
-        price=patern.search(exams[val0]).group(2)
-        tmp.append(price)
-    SPBPBE[val]=tmp
+#     tmp=[]#spetial prices
+#     for val0 in idx_IEBPSP[val]:#for each exam with spetial price
+#         price=patern.search(exams[val0]).group(2)
+#         tmp.append(price)
+#     SPBPBE[val]=tmp
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-#remove the special price of csvFile
-for val in idx_spetialPrice:#for each patien with spetial prices
+# #remove the special price of csvFile
+# for val in idx_spetialPrice:#for each patien with spetial prices
     
-    exams=csvFile.thirdName[val]#get the string examCodecs and spetialPrices
-    exams=exams.split()#Split the string and put it in a list
+#     exams=csvFile.thirdName[val]#get the string examCodecs and spetialPrices
+#     exams=exams.split()#Split the string and put it in a list
     
-    for val0 in idx_IEBPSP[val]:#for each exam with spetial price
-        examCode=patern.search(exams[val0]).group(1)
-        exams[val0]=examCode
+#     for val0 in idx_IEBPSP[val]:#for each exam with spetial price
+#         examCode=patern.search(exams[val0]).group(1)
+#         exams[val0]=examCode
     
-    #Set the exams as string
-    tmp=" "
-    csvFile.thirdName[val]=tmp.join(exams)
+#     #Set the exams as string
+#     tmp=" "
+#     csvFile.thirdName[val]=tmp.join(exams)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -516,112 +515,118 @@ for idx, val in ECBP.items():
 examNameList=dict()
 for val in idx_patients:#for each patien with spetial prices
     
-    #ensure exams are recored
+    #ensure exams code are recored
     try: 
         examsName=pd_listExam.EXAMEN[ECBP[val]].tolist()
     except KeyError:
         print(CEND.format(csvFile.firstName[val],csvFile.secondName.iloc[val]))        
         sys.exit()
     
+    #ensure exams name are recored
+    for tmp in examsName:
+        if type(tmp) == float:#(nan is float)el nombre del examen est'a vac'io en el archivo excel
+            print(CEND.format(csvFile.firstName[val],csvFile.secondName.iloc[val]))        
+            sys.exit()
+
     tmp="\n"
     examNameList[val]=tmp.join(examsName)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-#check enterprice existence in listadoPreciosUrgent.csv/listadoPreciosStandar.csv
-for val in idx_patients:#for each patien
+# #check enterprice existence in listadoPreciosUrgent.csv/listadoPreciosStandar.csv
+# for val in idx_patients:#for each patien
     
-    #urgent/standar
-    urgent=False
-    if val in idx_urgentes:
-        urgent=True
+#     #urgent/standar
+#     urgent=False
+#     if val in idx_urgentes:
+#         urgent=True
     
-    #enterprise name
-    enterprise=listEnterpriseNameByPatient[val]
+#     #enterprise name
+#     enterprise=listEnterpriseNameByPatient[val]
     
-    if urgent:
-        try:
-            df_listPriceUrgent[enterprise]
-        except KeyError:#enterprise NOT defined at  listadoPreciosUrgent.csv
-            print("""OPERACION FALLIDA:\nEmpresa \"{0}\" no \
-definida en archivo: listadoPreciosUrgent.csv""".format(enterprise))        
-            sys.exit()
-    else:#Standar
-        try:
-            df_listPriceStandar[enterprise]
-        except KeyError:#enterprise NOT defined at  listadoPreciosStandar.csv
-            print("""OPERACION FALLIDA:\nEmpresa \"{0}\" no \
-definida en archivo: listadoPreciosEstandar.csv""".format(enterprise))        
-            sys.exit()
+#     if urgent:
+#         try:
+#             df_listPriceUrgent[enterprise]
+#         except KeyError:#enterprise NOT defined at  listadoPreciosUrgent.csv
+#             print("""OPERACION FALLIDA:\nEmpresa \"{0}\" no \
+# definida en archivo: listadoPreciosUrgent.csv""".format(enterprise))        
+#             sys.exit()
+#     else:#Standar
+#         try:
+#             df_listPriceStandar[enterprise]
+#         except KeyError:#enterprise NOT defined at  listadoPreciosStandar.csv
+#             print("""OPERACION FALLIDA:\nEmpresa \"{0}\" no \
+# definida en archivo: listadoPreciosEstandar.csv""".format(enterprise))        
+#             sys.exit()
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-#Asign price
-pricesList=dict()
-for idx, val in enumerate(idx_patients):#for each patien
+# #Asign price
+# pricesList=dict()
+# for idx, val in enumerate(idx_patients):#for each patien
     
-    enterprise=listEnterpriseNameByPatient[val]
+#     enterprise=listEnterpriseNameByPatient[val]
     
-    #urgent/standar
-    urgent=False
-    if val in idx_urgentes:
-        urgent=True
+#     #urgent/standar
+#     urgent=False
+#     if val in idx_urgentes:
+#         urgent=True
     
-    prices=[]
-    for val0 in ECBP[val]:#for each exam
+#     prices=[]
+#     for val0 in ECBP[val]:#for each exam
         
-        if urgent:
-            price=df_listPriceUrgent[enterprise][val0]
+#         if urgent:
+#             price=df_listPriceUrgent[enterprise][val0]
             
-        else:#Standar
-            price=df_listPriceStandar[enterprise][val0]
+#         else:#Standar
+#             price=df_listPriceStandar[enterprise][val0]
         
-        #if not(isinstance(price, str)):
-        try:
+#         #if not(isinstance(price, str)):
+#         try:
             
-            #check existence of price (not NaN)
-            if np.isnan(np.float64(price)):#not exist
-                if urgent:
-                    print(PNDAU.format(enterprise,val0,
-                                       csvFile.secondName[val],idx+1))
-                else:
-                    print(PNDAS.format(enterprise,val0,
-                                       csvFile.secondName[val],idx+1))
-                    sys.exit()
+#             #check existence of price (not NaN)
+#             if np.isnan(np.float64(price)):#not exist
+#                 if urgent:
+#                     print(PNDAU.format(enterprise,val0,
+#                                        csvFile.secondName[val],idx+1))
+#                 else:
+#                     print(PNDAS.format(enterprise,val0,
+#                                        csvFile.secondName[val],idx+1))
+#                     sys.exit()
             
-            #check maquila or general
-            if np.float64(price)==1:#maquila
-                if urgent: price=float(df_listPriceUrgent["MAQUILA"][val0])
-                else: price=float(df_listPriceStandar["MAQUILA"][val0])
-            elif np.float64(price)==2:#general
-                if urgent: price=float(df_listPriceUrgent["GENERAL"][val0])
-                else: price=float(df_listPriceStandar["GENERAL"][val0])
+#             #check maquila or general
+#             if np.float64(price)==1:#maquila
+#                 if urgent: price=float(df_listPriceUrgent["MAQUILA"][val0])
+#                 else: price=float(df_listPriceStandar["MAQUILA"][val0])
+#             elif np.float64(price)==2:#general
+#                 if urgent: price=float(df_listPriceUrgent["GENERAL"][val0])
+#                 else: price=float(df_listPriceStandar["GENERAL"][val0])
             
-        except ValueError:
-            pass
+#         except ValueError:
+#             pass
         
         
-        #append price in prices
-        prices.append(price)
+#         #append price in prices
+#         prices.append(price)
     
-    #change spetial prices
-    if val in idx_spetialPrice:
+#     #change spetial prices
+#     if val in idx_spetialPrice:
          
-        for idx0, val0 in enumerate(idx_IEBPSP[val]):
-            prices[val0]=float(SPBPBE[val][idx0])
+#         for idx0, val0 in enumerate(idx_IEBPSP[val]):
+#             prices[val0]=float(SPBPBE[val][idx0])
     
-    #append prices at dictionary
-    pricesList[val]=prices
+#     #append prices at dictionary
+#     pricesList[val]=prices
 #-----------------------------------------------------------------------------#
          
          
 #-----------------------------------------------------------------------------#
-#set pricesList as list of str´s
-pricesList_str=dict()
-for val in pricesList.items():
+# #set pricesList as list of str´s
+# pricesList_str=dict()
+# for val in pricesList.items():
     
-    tmp=list(map(str,val[1]))
-    pricesList_str[val[0]]="\n".join(tmp)  
+#     tmp=list(map(str,val[1]))
+#     pricesList_str[val[0]]="\n".join(tmp)  
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -655,7 +660,7 @@ df_toExcel=pd.DataFrame({'COD INT':codeIntCob,
                          +' '+csvFile['secondName'][idx_patients].str.strip(),
                          'EXAMEN':examNameList,
                          'COD':ECBP_str,
-                         'PRECIO':pricesList_str,
+                         # 'PRECIO':pricesList_str,
                          'ESTATUS':np.NaN,
                          ' ':np.NaN,
                          'EMPRESA':listEnterpriseNameByPatient})
@@ -689,7 +694,7 @@ with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
     widthColumn = workbook.add_format({'text_wrap': True})
     worksheet.set_column('D:D', 40, widthColumn)
     worksheet.set_column('E:E', 6, widthColumn)
-    worksheet.set_column('F:F', 7, widthColumn)
+    # worksheet.set_column('F:F', 7, widthColumn)
     
     border_format=workbook.add_format({'border': 1})
     #-----------------------------------------------------------------------------#
@@ -702,7 +707,7 @@ with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
     
     for tmp in urgent_index:
         
-        worksheet.merge_range('G'+str(tmp+2)+':H'+str(tmp+2),"URGENTE",
+        worksheet.merge_range('F'+str(tmp+2)+':G'+str(tmp+2),"URGENTE",
                               merge_urgentFormat)
     #-----------------------------------------------------------------------------#
     

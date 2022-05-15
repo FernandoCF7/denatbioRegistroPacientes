@@ -1,0 +1,141 @@
+firstName*SecondName*thirdName
+EMPRESA/en tu casa salud/matutino *32293*
+paul william *maples* 002 487
+EMPRESA/en tu casa salud/matutino *32294*
+carlos giovanni *gutierrez galicia* 487
+EMPRESA/particular/matutino *32295*
+vuelo roberto arturo *heredia ortega* 002
+EMPRESA/madrazo studio sc/matutino *32296*
+jose luis *calixto valverde cerillo* 487
+jose carlos *ruiz carreto* 487
+luis enrique *hernandez alavez* 487
+yazmin *carrillo mora* 487
+christopher *garnica jaimes* 487
+EMPRESA/en tu casa salud/matutino *32297*
+gabriel *ferrer* 487
+javier *rivera* 487
+pablo jacinto *jimenenz mercado* 487
+EMPRESA/en tu casa salud/matutino *32298*
+hugo *cabrera baños* 487
+EMPRESA/particular/matutino *32299*
+vuelo tania lizeth *ramirez zapata* 002
+EMPRESA/gerardo rangel/matutino *32300*
+vuelo jijuan *min* 569
+EMPRESA/en tu casa salud/matutino *32301*
+alinne *diaz guadarrama* 487
+EMPRESA/en tu casa salud/matutino *32302*
+vuelo anibert vanessa *perez jurado* 487
+EMPRESA/en tu casa salud/matutino *32303*
+francisco javier *sanchez pompa* 487
+EMPRESA/madrazo studio sc/matutino *32304*
+juan manuel *velasquez palafox* 487
+silvia *flores morales* 487
+concepcion *melchor castillo* 487
+rolando david *martinez gonzalez* 487
+ricardo luis *del angel olivares* 487
+luis javier *cruz gonzalez* 487
+EMPRESA/madrazo studio sc/matutino *32305*
+david *diaz gonzalez* 487
+fernando ricardo *trifundio cerillo* 487
+EMPRESA/cruz roja/vespertino *32306* 
+victor jesus *perez rodriguez* 033 034 
+EMPRESA/cruz roja/vespertino *32307* 
+carlos gerardo *carrillo gonzalez* 033 034 571
+EMPRESA/denatbio/vespertino *32308* 
+sendout #173 *dna #1059* 269
+sendout #173 *dna #1060* 269
+sendout #173 *dna #1061* 269
+sendout #173 *dna #1062* 269
+sendout #173 *dna #1063* 269
+sendout #173 *dna #1064* 269
+EMPRESA/denatbio/vespertino *32309* 
+jorge raul *garcia sosa* 002
+jorge adrian *garcia tapia pradis* 002
+EMPRESA/ASOCIACION COREANA DE MEXICO/vespertino *32310* 
+yoon jung *lee* 002
+soojin *jeon* 002
+hyun ok *kang* 002
+yooyoung *lee* 002
+sung eui *yoon* 002
+EMPRESA/mds/vespertino *32311* 
+vickie *hoppinggton scott* 1009
+michele *trask* 1009
+EMPRESA/aj lab/vespertino *32312* 
+carlota *zambrano solis* 002
+sergio *douglas carvacho* 0002
+renan orlando *capossi goncalvez* 002
+EMPRESA/madrazo studio sc/vespertino *32313* 
+juan chavez *morales* 487
+EMPRESA/LAB CLINICO COAPA/vespertino *32314* 
+JOSE ANGEL *GUIZAR DIAZ* 199
+CRISTIAN ALEXIS *PAVON SANCHEZ* 211
+EMPRESA/MADRAZO STUDIO SC/vespertino *32315*
+JOCELYN *ESTRELLA HERNANDEZ* 487
+EMPRESA/MEDIAC/vespertino *32316*
+SANDRA VERONICA *VELEZ CABELLO* 487
+EMPRESA/MADRAZO STUDIO SC/vespertino *32317*
+TANIA *CERVANTES FLORES* 487
+JUAN CARLOS *GONZALEZ AVILES* 487
+EMPRESA/EN TU CASA SALUD/vespertino *32318*
+ROSITA *MALIAC KAL* 487
+SYRA NICOLE *MC CARTHY* 487  
+EMPRESA/EN TU CASA SALUD/vespertino *32319*
+MARIA DEL CARMEN *OCHOA SCHULENBURG* 487
+VIRIDIANA *GARCIA SORIA* 487
+IXCHEL JAnetzy *sanchez quintero* 487
+claudia rebeca *rosas morales* 487
+EMPRESA/PAP/vespertino *32320*
+CASANDRA *GALICIA* 002
+VIRIDIANA *GONZALEZ* 002
+MARIA DE LOS ANGELES *RAMOS MARIANO* 002
+EMPRESA/DIAFER/vespertino *32321*
+VUELO SANDRA *TORRE ISAAK* 002
+EMPRESA/cilab/vespertino *32322*
+ma jose *martinez* 002
+ruben *ruiz ortega* 002
+victor hugo *requena* 003 349
+EMPRESA/en tu casa salud/vespertino *32323*
+ana valeria *fernandez y rojas* 487
+andres *castañeda silva* 487
+EMPRESA/en tu casa salud/vespertino *32324*
+VUELO KEENAN RICHTER * TREAT * 002 
+EMPRESA/en tu casa salud/vespertino *32325*
+URGENTE SARAH MARIE CAROL * YABA HABY * 002 
+URGENTE JOSS* WALESKA * 002 
+URGENTE MENELIK * PALACIOS LOPEZ * 002 
+URGENTE SANTIAGO * CARRASCO ORELLA * 002 
+URGENTE LUIS DANIEL * PIÑON GARCIA * 002 
+URGENTE IAN MATEO * CORONA SANCHEZ * 002 
+URGENTE MONICA PAOLA * JIMENEZ VIDAL * 002 
+EMPRESA/DENATBIO/vespertino *32326*
+SOFIA FERNANDA * DAMIAN MAGAÑA * 002 
+EMPRESA/CRUZ ROJA/vespertino *32327*
+CARLOS GERARDO * CARRILLO GONZALEZ * 3
+EMPRESA/MDS/vespertino *32328*
+OCTAVIO * DIAZ ARROYO * 1009 
+ANA * LANDONA * 1009 
+EMPRESA/AJ LAB/vespertino *32329*
+EDUARDO DANIEL * SANCHEZ SPINOLA * 002
+KARLA PATRICIA * ARBIZU TALAVERA * 002 
+FERNANDO * HERNANDEZ ARBIZU * 002 
+AARON ALEJANDRO * HERNANDEZ ARBIZU * 002 
+EMPRESA/CRUZ ROJA/vespertino *32330*
+CARLOS GERARDO * CARRILLO GONZALEZ * 181 191
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

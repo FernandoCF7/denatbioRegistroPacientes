@@ -1,0 +1,175 @@
+firstName*SecondName*thirdName
+EMPRESA/en tu casa salud/matutino *31911*
+BLANCA * OCEGUERA MEDINA * 487 
+MARIA FERNANDA * DE LOS SANTOS VARGAS * 487 
+GABRIEL * PALENCIA ALCERRECA * 487 
+NATALIA * LARRAÑAGA DEL SOLAR * 487 
+JUAN DAVID * ARBOLEDA PALACIO * 487 
+MARIA PILAR * ESPINOSA MARTINEZ * 487 
+PATRICK * REILLY DOWD * 487 
+JUAN JOSE * OLIVARES GARCIA * 487 
+RAYMUNDO * CHAVARRIA MARTINEZ * 487 
+JUAN PABLO * BRISEÑO VEGA * 487 
+EMPRESA/DRA PAMELA PEREZ/matutino *31912*
+VUELO ROSA VERONICA * RUIZ LOPEZ * 487 
+VUELO LUIS ALBERTO * JARAMILLO ANZUREZ * 487 
+EMPRESA/AJ LAB/matutino *31913*
+TOMAS * CAPRIATA * 002 
+VANESSA * CASTILLO HIDALGO * 002 
+EMPRESA/en tu casa salud/matutino *31914*
+rhonda * freeman elmore * 487 
+EMPRESA/en tu casa salud/matutino *31915*
+daniela * escalante nassar * 487 
+mari * sierra laris * 487 
+EMPRESA/en tu casa salud/matutino *31916*
+vuelo devon * loeffler allen * 002 
+EMPRESA/probion/matutino *31917*
+lidia * paredes jarquin * 002 
+EMPRESA/en tu casa salud/matutino *31918*
+mollie * bowness * 002 
+zuriht * serena * 002 
+charles * jenson * 002 
+laura * fitzpatrick * 002 
+EMPRESA/en tu casa salud/matutino *31919*
+daniel * olicon galindo * 487 
+cesar emilio * arjona ruiz * 487 
+paulina marin * casillas * 487 
+ jose * aguirre garcia * 487 
+oliver * guerrero avila * 487 
+loreli * fonseca lopez * 487 
+monica * villalobos garcia * 487 
+vanessa alejandra flores * cordero * 487 
+EMPRESA/en tu casa salud/matutino *31920*
+amy * mcinnes * 487 
+lori * schock * 487 
+EMPRESA/particular/matutino *31921*
+pamela blanco * garza galindo * 487 
+EMPRESA/en tu casa salud/matutino *31922*
+josephine * bourseau * 487 
+almadena * suarez renalva * 487 
+dulce * arredondo martinez * 487 
+EMPRESA/en tu casa salud/matutino *31923*
+graciela * saavedra del moral * 002 
+maria de la paz * aparicio anaya * 002 
+rolando * berme * 002 
+omar *ramirez * 002 
+constanza * hernandez * 002 
+victoria * pereira * 002 
+fernando * de aragon * 002 
+etza * arellano * 002 
+ana belen * aidana * 002 
+america * jimenez * 002 
+EMPRESA/en tu casa salud/matutino *31924*
+jose armando * tapia * 002 
+jorge adrian *  sol * 002 
+sabela * mascuñana * 002 
+roberto *  mercado * 002 
+julio * graham * 002 
+sebastian *  ladron * 002 
+rodrigo * roman * 002 
+anahi * davila * 002 
+EMPRESA/en tu casa salud/matutino *31925*
+tracy * broaddus * 002 
+megan * lynn guerrant * 002 
+shirim * loftie shahabad * 002 
+parry * theodare metz * 002 
+james william *  larmon * 002 
+devin bernard * grimes * 002 
+EMPRESA/DRA ANA CELIA MENDOZA OCAMPO/vespertino *31926*
+adriana * matamoros vazquez * 571
+EMPRESA/SALUD Y VIDA/vespertino *31927*
+katia valera * iamgo  carranza * 223
+paola * estrada warn*223
+EMPRESA/particular/vespertino *31928*
+silvia * navarro morales * 002 
+EMPRESA/en tu casa salud/vespertino *31929*
+maria jose *  villaseñor ramos * 002 
+EMPRESA/diafer/vespertino *31930*
+raul * limon garcia * 002 
+EMPRESA/EN TU CASA SALUD/vespertino *31931*
+CRISTINA * BARRES ISAC * 487 
+ANGELICA MARIA * BUENO VERTI * 487 
+LAILA DANIELA * CAMHI CUEVAS * 487 
+JORDY * MONTELLANO ARMENTA * 487
+ARMANDO * CASTILLO ALVAREZ * 487 
+RODOLFO * SOTO GUZMAN * 487 
+ROBERTO * HERNANDEZ MUÑOZ * 487 
+CRISTIAN CESAR * MARTINEZ ARMENTA * 487 
+ALEJANDRO * CASTILLO BARROS * 487
+DANIELA TERESA * ROJAS MONT * 487 
+EMPRESA/EN TU CASA SALUD/vespertino *31932*
+MARIN * GONZALO FLORES * 487 
+EMPRESA/MDS/vespertino *31933*
+ROSAURA * POSADA DOMINGUEZ * 1009
+ANTONIO * GIRENAS KVEDARAS * 1009
+EMPRESA/AJ LAB/vespertino *31934*
+CHIH-LUNG * FENG * 002 
+YEN-MING * CHEN * 002 
+EMPRESA/MKT/vespertino *31935*
+PATRICIA * TREVIÑO DURAN * 002 
+EMPRESA/EN TU CASA SALUD/vespertino *31936*
+ILSE VICTORIA *ROLDAN LOPEZ* 002
+EMPRESA/PARTICULAR/vespertino *31937*
+VUELO RICARDO ANDRES *LENGSTER ALFONSO* 487
+EMPRESA/LAMBDAPI/vespertino *31938*
+ILSE *JIMENEZ LUCAS* 002
+EMPRESA/PARTICULAR/vespertino *31939*
+VUELO ANA MARIA *FERNANDEZ DE JAUREGUI BUZO* 
+EMPRESA/PAP/vespertino *31940*
+MIGUEL ANTONIO *GRANADOS CERVERA* 002
+PRISCILA ALEJANDRA *GONZALEZ VALLES* 002
+EMPRESA/CRUZ ROJA/vespertino *31941*
+ALBERTO *BAUTISTA AVENDAÑO* 487
+CESAR *MORFIN GARCIA* 487
+LUIS JAVIER *TRUJILLO VAZQUEZ* 487
+CARLOS ALBERTO *GARZA ESCOBEDO* 487
+EMPRESA/SAFE HEALTH/vespertino *31942*
+VUELO RAFAEL *HERNANDEZ MAGALLON* 002
+VUELO HECTOR *SERVIN GARCIA* 002
+VUELO ALEJANDRA *MARIN MAGALLON* 002
+EMPRESA/mds/vespertino *31943*
+jessica *alcala martinez de escobar* 1009
+esmeralda guadalupe *padilla* 1009
+EMPRESA/florida satelite/vespertino *31944*
+alejandro ezequiel *aeinemann* 002
+elma guadalupe *canales hernandez* 002
+EMPRESA/mds/vespertino *31945*
+cynthia *aguilar* 1009
+josep *zucker orozco* 1009
+leydi isabel *salazar vasquez* 1009
+victoria *cordero mendez* 1009
+EMPRESA/aj lab/vespertino *31946*
+laura alicia *viramontes rodriguez* 002
+shunsuke *sato* 002
+moises *cuevas torres* 002
+EMPRESA/embajada de corea/vespertino *31947*
+vuelo keuntae *park* 002
+vuelo younggyun *kim* 002
+vuelo younghwi *koo* 002
+EMPRESA/seegene/vespertino *31948*
+yoonjeong *ju* 002
+EMPRESA/en tu casa salud/vespertino *31949*
+vuelo scott c *harris* 002 487
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

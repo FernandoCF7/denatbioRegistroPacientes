@@ -73,7 +73,7 @@
 72,interleucina 6 ,IL-6
 73,Detección de Parvovirus humano B19,Detección de Parvovirus humano B19
 74,Lipasa,Lipasa
-75,Thropheryma whippellii,
+75,Thropheryma whippellii,Thropheryma whippellii
 76,Amilasa,Amilasa
 77,Dehidroepiandosterona sulfatada (DHEA-S),DHEA sulfatada
 78,Perfil tiroideo II ,"Perfil tiroideo  II (Hormona Estimulante de Tiroides (TSH), T3 Captación,
@@ -101,24 +101,24 @@ Cortisol.)"
 91,Detección de treponema pallidum,
 92,Antigeno para Histoplasma,
 93,Hormona Antimulleriana ,
-94,,
-95,,
-96,,
+94,Antígeno prostático,Antígeno prostático
+95,Progesterona,Progesterona
+96,Antígeno clostridium,Antígeno clostridium
 97,detec. virus influenza A H1N1 y H3N2,Detección del virus de la influenza A H1N1 y H3N2
-98,,
-99,,
-100,,
+98,T3 libre,T3 libre
+99,T4 libre,T4 libre
+100,Deshidrogenasa lactica,Deshidrogenasa lactica
 101,detec. Malaria,Detección de Malaria 
-102,,
+102,Retracción de coagulación,Retracción de coagulación
 103,detec. borrelia burgdorferi,Detección de  Borrelia Burgdorferi
-104,,
-105,,
-106,,
+104,"Diagrama de complemento: C3, C4 y CH50","Diagrama de complemento: C3, C4 y CH50"
+105,Velocidad de sedimentación,Velocidad de sedimentación
+106,Transaminasa glutámico oxalacética (TGO),Transaminasa glutámico oxalacética (TGO)
 107,detec. enterovirus,Detección de Enterovirus
-108,,
+108,Alanina amino transferensa (TGP),Alanina amino transferensa (TGP)
 109,C_viral varicella zoster,Carga viral de Varicella zoster
-110,,
-111,,
+110,Gamma glutil transferansa (GGP),Gamma glutil transferansa (GGP)
+111,Triglicéridos,Triglicéridos
 112,,
 113,detec. varicella zoster,Detección de Varicella zoster
 114,,
@@ -582,7 +582,7 @@ Metapneumovirus,"
 568,,
 569,Cuantificación IgG IgM de SARS CoV-2,Cuantificación IgG IgM de SARS CoV-2
 570,,
-571,,
+571,"Especial, prueba patológica",
 572,,
 573,,
 574,,
