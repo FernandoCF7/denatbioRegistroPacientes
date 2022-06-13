@@ -26,7 +26,7 @@ import pdb#debug
 
 
 #-----------------------------------------------------------------------------#
-day='130522'
+day='010522'
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -480,12 +480,10 @@ for val in ECBP:
     EPCBP[val]=np.prod(ECBP[val])
 #-----------------------------------------------------------------------------#
 
-
 #-----------------------------------------------------------------------------#
 #set color set as each study
 
-#ECBNC --> Exam color by no covits
-#ECBNC=dict.fromkeys(ECBP.keys(), False)
+#ECBNC --> Exam color by no PCR covits
 ECBNC=dict()
 for idx, val in ECBP.items():
     if any(np.array(val)!=2):
@@ -503,11 +501,17 @@ for idx, val in ECBP.items():
     if any(np.array(val)==491):
         ECBABC[idx]=True
 
-#ECBABC --> Exam color by cuantitative anti body covit
+#ECBCABC --> Exam color by cuantitative anti body covit
 ECBCABC=dict()
 for idx, val in ECBP.items():
     if any(np.array(val)==569):
         ECBCABC[idx]=True
+
+#ECBSP --> Exam color by sars plus
+ECBSP=dict()
+for idx, val in ECBP.items():
+    if any(np.array(val)==1009):
+        ECBSP[idx]=True
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -641,11 +645,40 @@ for idx, val in enumerate(idx_patients):
     
     #Check if the exam is covid type
     examCovid="C"
-    if not [i for i in [2,487,491] if  i in ECBP[val]]:
+    if not [i for i in [2,487,491,492,569,1009] if  i in ECBP[val]]:
         examCovid="O"
        
     codeIntLab[val]=day+'-'+subsidiary+'-'+str(idx+1).zfill(3)+urgent+examCovid+listEnterpriseCodeByPatient[
         val]+listShiftByPatient[val]+"P"+str(EPCBP[val]).zfill(5)
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+#asociate, as dict, each patient with its corresponding enterprise
+counter = 0
+dict_pattient_enterprise = {}
+for idx, val in enumerate(idx_patients):
+    
+    if counter+1 < len(idx_enterprise):
+        if idx_enterprise[counter+1] < val:
+            counter += 1
+
+    dict_pattient_enterprise[val] =  idx_enterprise[counter]
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+#get the index's of no covit patients
+tmp = []
+for idx, val in enumerate(idx_patients):
+
+    if not [i for i in [2,487,491,492,569,1009] if  i in ECBP[val]]:
+        tmp.append(val)
+
+idx_patients_noCovits = pd.Index(data=tmp)#convert list into pd index 
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+#get the enterprise idx associated with idx_patients_noCovits
+idx_enterprise_patients_noCovits = list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_noCovits]))
 #-----------------------------------------------------------------------------#
 
 #----------------------------------------------------------------------------#
@@ -722,152 +755,188 @@ with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
                                           'format':border_format})
     #-----------------------------------------------------------------------------#
 
-#----------------------------------------------------------------------------#
-#Export to excel-->laboratorio
-df_toExcel=pd.DataFrame({'OSR':np.NaN,
-                         'COD INT':codeIntLab,
-                         'NOMBRE':csvFile['firstName'].str.strip(),
-                         'APELLIDO':csvFile['secondName'].str.strip(),
-                         'EXAMEN':examNameList,
-                         'COD':ECBP_str,
-                         'ESTATUS':np.NaN,
-                         'RESULTADO':np.NaN,
-                         'ENVIO':np.NaN,
-                         'REVISO':np.NaN,
-                         'HORA ENVIO':np.NaN
-                         })
-#----------------------------------------------------------------------------#
-
-#----------------------------------------------------------------------------#
-#set the OSR code in df_toExcel
-df_toExcel.loc[idx_enterprise,"OSR"]=csvFile["secondName"][idx_enterprise].str.strip()
-#----------------------------------------------------------------------------#
-
-#----------------------------------------------------------------------------#
-pathTosave=os.path.join("{0}","..","listadosGeneradosParaExel","{1}",
-                        "{2}_laboratorio.xlsx").format(currentPath,
-                                    yymmddPath,day,time.strftime("%H_%M_%S"))
-
-with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
-                                                       
-    #Convert the dataframe to an XlsxWriter Excel object.
-    df_toExcel.to_excel(writer, sheet_name=day, index=False)
-    
-    #Get the xlsxwriter workbook and worksheet objects.
-    workbook  = writer.book
-    worksheet = writer.sheets[day]
-    #-----------------------------------------------------------------------------#
-    
-    #-----------------------------------------------------------------------------#
-    #set formats
-    
-    #Wrap EXAMEN and PRECIO column
-    widthColumn = workbook.add_format({'text_wrap': True})
-    worksheet.set_column('E:E', 40, widthColumn)
-    worksheet.set_column('F:F', 6, widthColumn)
-    worksheet.set_column('H:H', 18, widthColumn)
-    
-    border_format=workbook.add_format({'border': 1})
-    #-----------------------------------------------------------------------------#
-    
-    #-----------------------------------------------------------------------------#
-    #Set urgents format
-    
-    #urgentes
-    urgentFormat = workbook.add_format({'align': 'left', 'valign': 'vcenter',
-                                        'bold': True, 'font_color': 'black',
-                                        'bg_color': 'orange'})
-    
-    for tmp in idx_urgentes:
-        
-        worksheet.write_string('G'+str(tmp+2)+':G'+str(tmp+2),"URGENTE",
-                              urgentFormat)
-    #-----------------------------------------------------------------------------#
-    
-    #-----------------------------------------------------------------------------#
-    #Set vuelo format
-    
-    #urgentes
-    vueloFormat = workbook.add_format({'align': 'left', 'valign': 'vcenter',
-                                        'bold': True, 'font_color': 'black',
-                                        'bg_color': '#0080FF'})
-    
-    for tmp in idx_vuelo:
-        
-        worksheet.write_string('H'+str(tmp+2)+':H'+str(tmp+2),"VUELO",
-                              vueloFormat)
-    #-----------------------------------------------------------------------------#
-    
-    #-----------------------------------------------------------------------------#
-    #Add cell color deppending of the exam
-    
-    #colors:
-    cell_format_mostaza = workbook.add_format({'bg_color': '#FF9933'})
-    cell_format_mostaza.set_text_wrap()
-    cell_format_magenta = workbook.add_format({'bg_color': 'magenta'})
-    cell_format_magenta.set_text_wrap()
-    cell_format_yellow = workbook.add_format({'bg_color': 'yellow'})
-    cell_format_yellow.set_text_wrap()
-    cell_format_green = workbook.add_format({'bg_color': 'green'})
-    cell_format_green.set_text_wrap()
-    
-    #ECBNC --> Exam color by no covits; YELLOW
-    for key in ECBNC:
-        worksheet.write_string('E'+str(key+2)+':E'+str(key+2),examNameList[key],
-                        cell_format_mostaza)
-    
-    #ECBAC --> Exam color by antigen covit
-    for key in ECBAC:
-        worksheet.write_string('E'+str(key+2)+':E'+str(key+2),examNameList[key],
-                        cell_format_yellow)
-    
-    #ECBABC --> Exam color by anti body covit
-    for key in ECBABC:
-        worksheet.write_string('E'+str(key+2)+':E'+str(key+2),examNameList[key],
-                        cell_format_magenta)
-    
-    #ECBABC --> Exam color by cuantitative anti body covit
-    for key in ECBABC:
-        worksheet.write_string('E'+str(key+2)+':E'+str(key+2),examNameList[key],
-                        cell_format_magenta)
-    #-----------------------------------------------------------------------------#
-    
-    #-----------------------------------------------------------------------------#
-    #Add border
-    numRows=len(df_toExcel)
-    
-    worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'no_blanks',
-                                          'format':border_format})
-    
-    worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'blanks',
-                                          'format':border_format})
-    #-----------------------------------------------------------------------------#
-    
-    #-----------------------------------------------------------------------------#
-    #Set format to enterprise
-    merge_format = workbook.add_format({'align': 'center', 'valign': 'vcenter',
-                                        'bold': True, 'font_color': 'white',
-                                        'bg_color': 'black'})
-    
-    for idx, val, in enumerate(idx_enterprise):
-        worksheet.merge_range('B'+str(val+2)+':K'+str(val+2),enterpriseNames[idx],
-                              merge_format)
-    #-----------------------------------------------------------------------------#
-    
-    
-
-
-
-
-
-
 
 
 
 #-----------------------------------------------------------------------------#
-    #save df_toExcel file
-    #writer.save()
-    #-----------------------------------------------------------------------------#
+def make_excel(idx_patients_, idx_enterprise_, path_=""):
+    #idx_patients_ --> pandas index, the index (in the CSV file) of patients to show
+    #idx_enterprise --> list, the index (in the CSV file) of enterprises to show
+
+    #----------------------------------------------------------------------------#
+    #merge idx_patients_ and idx_enterprise_    
+    idx = idx_patients_.tolist() + idx_enterprise_
+    
+    idx.sort()
+    #----------------------------------------------------------------------------#
+
+    #----------------------------------------------------------------------------#
+    #Export to excel-->laboratori
+    df_toExcel=pd.DataFrame({
+                             'OSR':np.NaN,
+                             'COD INT':{x:codeIntLab[x] for x in idx_patients_},
+                             'NOMBRE':csvFile['firstName'][idx].str.strip(), 
+                             'APELLIDO':csvFile['secondName'][idx].str.strip(),
+                             'EXAMEN':{x:examNameList[x] for x in idx_patients_},
+                             'COD':{x:ECBP_str[x] for x in idx_patients_},
+                             'ESTATUS':np.NaN,
+                             'RESULTADO':np.NaN,
+                             'ENVIO':np.NaN,
+                             'REVISO':np.NaN,
+                             'HORA ENVIO':np.NaN
+                             })
+    #----------------------------------------------------------------------------#
+
+    #----------------------------------------------------------------------------#
+    #set the OSR code in df_toExcel
+    df_toExcel.loc[idx_enterprise_,"OSR"]=csvFile["secondName"][idx_enterprise_].str.strip()
+    #----------------------------------------------------------------------------#
+
+    #----------------------------------------------------------------------------#
+    pathTosave=os.path.join("{0}","..","listadosGeneradosParaExel","{1}",
+                            "{2}_laboratorio{3}.xlsx").format(currentPath,
+                                        yymmddPath,day,path_)
+
+    with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
+                                                           
+        #Convert the dataframe to an XlsxWriter Excel object.
+        df_toExcel.to_excel(writer, sheet_name=day, index=False)
+        
+        #Get the xlsxwriter workbook and worksheet objects.
+        workbook  = writer.book
+        worksheet = writer.sheets[day]
+        #-----------------------------------------------------------------------------#
+        
+        #-----------------------------------------------------------------------------#
+        #set formats
+        
+        #Wrap EXAMEN and PRECIO column
+        widthColumn = workbook.add_format({'text_wrap': True})
+        worksheet.set_column('E:E', 40, widthColumn)
+        worksheet.set_column('F:F', 6, widthColumn)
+        worksheet.set_column('H:H', 18, widthColumn)
+        
+        border_format=workbook.add_format({'border': 1})
+        #-----------------------------------------------------------------------------#
+    
+        #-----------------------------------------------------------------------------#
+        #Set urgents format
+        
+        #urgentes
+        urgentFormat = workbook.add_format({'align': 'left', 'valign': 'vcenter',
+                                            'bold': True, 'font_color': 'black',
+                                            'bg_color': 'orange'})
+    
+        for tmp in list(set(idx_urgentes) & set(idx_patients_.tolist())):
+            tmp_ = idx.index(tmp)
+            worksheet.write_string('G'+str(tmp_+2)+':G'+str(tmp_+2),"URGENTE",
+                                  urgentFormat)
+        #-----------------------------------------------------------------------------#
+    
+        #-----------------------------------------------------------------------------#
+        #Set vuelo format
+        
+        #urgentes
+        vueloFormat = workbook.add_format({'align': 'left', 'valign': 'vcenter',
+                                            'bold': True, 'font_color': 'black',
+                                            'bg_color': '#0080FF'})
+        
+        for tmp in  list(set(idx_vuelo) & set(idx_patients_.tolist())):
+            tmp_ = idx.index(tmp)
+            worksheet.write_string('H'+str(tmp_+2)+':H'+str(tmp_+2),"VUELO",
+                                  vueloFormat)
+        #-----------------------------------------------------------------------------#
+    
+        #-----------------------------------------------------------------------------#
+        #Add cell color deppending of the exam
+        
+        #colors:
+        cell_format_mostaza = workbook.add_format({'bg_color': '#FF9933'})
+        cell_format_mostaza.set_text_wrap()
+        cell_format_magenta = workbook.add_format({'bg_color': 'magenta'})
+        cell_format_magenta.set_text_wrap()
+        cell_format_yellow = workbook.add_format({'bg_color': 'yellow'})
+        cell_format_yellow.set_text_wrap()
+        cell_format_green = workbook.add_format({'bg_color': 'green'})
+        cell_format_green.set_text_wrap()
+        cell_format_lime = workbook.add_format({'bg_color': 'lime'})
+        cell_format_lime.set_text_wrap()
+
+        #ECBNC --> Exam color by no covits; Mostaza
+        tmp = ECBNC.keys()
+        tmp_ = [x for x in idx_patients_ if x in tmp]
+        ECBNC_tmp = {x:ECBNC[x] for x in tmp_}
+        for key in ECBNC_tmp:
+            key_ = idx.index(key)
+            worksheet.write_string('E'+str(key_+2)+':E'+str(key_+2),examNameList[key],
+                            cell_format_mostaza)
+        
+        #ECBAC --> Exam color by antigen covit
+        tmp = ECBAC.keys()
+        tmp_ = [x for x in idx_patients_ if x in tmp]
+        ECBAC_tmp = {x:ECBAC[x] for x in tmp_}
+        for key in ECBAC_tmp:
+            key_ = idx.index(key)
+            worksheet.write_string('E'+str(key_+2)+':E'+str(key_+2),examNameList[key],
+                            cell_format_yellow)
+        
+        #ECBABC --> Exam color by anti body covit
+        tmp = ECBABC.keys()
+        tmp_ = [x for x in idx_patients_ if x in tmp]
+        ECBABC_tmp = {x:ECBABC[x] for x in tmp_}
+        for key in ECBABC_tmp:
+            key_ = idx.index(key)
+            worksheet.write_string('E'+str(key_+2)+':E'+str(key_+2),examNameList[key],
+                            cell_format_magenta)
+        
+        #ECBCABC --> Exam color by cuantitative anti body covit
+        tmp = ECBCABC.keys()
+        tmp_ = [x for x in idx_patients_ if x in tmp]
+        ECBCABC_tmp = {x:ECBCABC[x] for x in tmp_}
+        for key in ECBCABC_tmp:
+            key_ = idx.index(key)
+            worksheet.write_string('E'+str(key_+2)+':E'+str(key_+2),examNameList[key],
+                            cell_format_magenta)
+        
+        #ECBSP --> Exam color by sars plus
+        tmp = ECBSP.keys()
+        tmp_ = [x for x in idx_patients_ if x in tmp]
+        ECBSP_tmp = {x:ECBSP[x] for x in tmp_}
+        for key in ECBSP_tmp:
+            key_ = idx.index(key)
+            worksheet.write_string('E'+str(key_+2)+':E'+str(key_+2),examNameList[key],
+                            cell_format_lime)        
+        #-----------------------------------------------------------------------------#
+        
+        #-----------------------------------------------------------------------------#
+        #Add border
+        numRows=len(df_toExcel)
+        
+        worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'no_blanks',
+                                              'format':border_format})
+        
+        worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'blanks',
+                                              'format':border_format})
+        #-----------------------------------------------------------------------------#
+        
+        #-----------------------------------------------------------------------------#
+        #Set format to enterprise
+        merge_format = workbook.add_format({'align': 'center', 'valign': 'vcenter',
+                                            'bold': True, 'font_color': 'white',
+                                            'bg_color': 'black'})
+        
+        for indx_, val, in enumerate(idx_enterprise_):
+            val_ = idx.index(val)
+            worksheet.merge_range('B'+str(val_+2)+':K'+str(val_+2),enterpriseNames[indx_],
+                                  merge_format)
+        #-----------------------------------------------------------------------------#
+    
+
+make_excel(idx_patients, idx_enterprise)
+make_excel(idx_patients_noCovits, idx_enterprise_patients_noCovits, "_otros")
+
+
+
 
 
 # #----------------------------------------------------------------------------#
@@ -929,3 +998,5 @@ with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
 #                   
 #                     "APELLIDO","RESULTADO"],header=True)
 #dtype={'thirdName': 'string'}
+
+#pd.DataFrame.from_dict(codeIntLab, orient='index', columns=None)[0].loc[idx_patients_]
