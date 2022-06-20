@@ -42,7 +42,7 @@ orig_url = 'https://github.com/FernandoCF7/denatbioRegistroPacientes/blob/main/'
 
 #-----------------------------------------------------------------------------#
 #set path
-currentPath=os.path.dirname(os.path.abspath(__file__))
+currentPath = os.path.dirname(os.path.abspath(__file__))
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -52,7 +52,7 @@ month=day[2:4]
 year=day[4:6]
 yymmddPath=os.path.join('____'+year,'__'+month+year,day)
 #-----------------------------------------------------------------------------#
- 
+
 #-----------------------------------------------------------------------------#
 #read registro file
 filePath_registro=os.path.join("{0}","..","DB_ingresoPorVoz","{1}.txt").format(
@@ -101,6 +101,24 @@ codeEnterpriseFile["empresa"]=codeEnterpriseFile["empresa"].str.upper()
 codeEnterpriseFile["empresa"]=codeEnterpriseFile[
     "empresa"].str.normalize('NFKD').str.encode('ascii',
                                            errors='ignore').str.decode('utf-8')
+
+#read codeEnterprise locally file
+filePath_codeEnterprise_tmp = os.path.join("{}","..","altas","codeEnterprise.csv").format(currentPath)
+
+
+codeEnterpriseFile_locally=pd.read_csv(filePath_codeEnterprise_tmp, encoding='latin-1',
+                               keep_default_na=False)
+
+#set as upper
+codeEnterpriseFile_locally["empresa"]=codeEnterpriseFile_locally["empresa"].str.upper()
+
+#set without acents
+codeEnterpriseFile_locally["empresa"]=codeEnterpriseFile_locally[
+    "empresa"].str.normalize('NFKD').str.encode('ascii',
+                                           errors='ignore').str.decode('utf-8')
+
+#Concatenated codeEnterpriseFile and codeEnterpriseFile_locally
+codeEnterpriseFile = pd.concat([codeEnterpriseFile, codeEnterpriseFile_locally], axis=0)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -115,21 +133,45 @@ pd_listExam=(pd.read_csv(filePath_listExam, usecols=["COD INT","EXAMEN"]))
 
 #set index of pd_listExam as COD INT column
 pd_listExam.set_index("COD INT", inplace=True)
+
+
+#read listExam locally file
+filePath_listExam_tmp = os.path.join("{}","..","altas","listExam.csv").format(currentPath)
+listExam_locally = pd.read_csv(filePath_listExam_tmp, usecols=["COD INT","EXAMEN"])
+
+listExam_locally.set_index("COD INT", inplace=True)
+
+# append listExam_locally to pd_listExam
+for idx, row in listExam_locally.iterrows():
+    
+    if idx in pd_listExam.index:#update the Exam
+        pd_listExam.EXAMEN[idx] = row["EXAMEN"]
+    # else:#append examn
+    #     pd_listExam = pd.concat([pd_listExam, listExam_locally.loc[idx]], axis=0)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
 #read clavesNombresEmpresa file
 if inlineEF:
-    filePath_pd_listExam=("{0}"+"empresas/clavesNombresEmpresa.csv?raw=true").format(orig_url)
+    filePath_clavesNombresEmpresa=("{0}"+"empresas/clavesNombresEmpresa.csv?raw=true").format(orig_url)
     
 else:
-    filePath_pd_listExam=os.path.join("{0}","..","empresas",
+    filePath_clavesNombresEmpresa=os.path.join("{0}","..","empresas",
                                "clavesNombresEmpresa.csv").format(currentPath)
 
-df_enterpriseNames=pd.read_csv(filePath_pd_listExam, keep_default_na=False)
+df_enterpriseNames=pd.read_csv(filePath_clavesNombresEmpresa, keep_default_na=False)
 
 #set index of enterpriseNames as clave column
 df_enterpriseNames.set_index("clave", inplace=True)
+
+#read clavesNombresEmpresa locally file
+filePath_clavesNombresEmpresa_tmp = os.path.join("{}","..","altas","clavesNombresEmpresa.csv").format(currentPath)
+clavesNombresEmpresa_locally = pd.read_csv(filePath_clavesNombresEmpresa_tmp, encoding='latin-1', keep_default_na=False)
+
+clavesNombresEmpresa_locally.set_index("clave", inplace=True)
+
+#Concatenated df_enterpriseNames and clavesNombresEmpresa_locally
+df_enterpriseNames = pd.concat([df_enterpriseNames, clavesNombresEmpresa_locally], axis=0)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -984,19 +1026,3 @@ make_excel(idx_patients_noCovits, idx_enterprise_patients_noCovits, "_otros")
 # #pd_historicPatientDB.to_csv(historicDB_path,header=True, index=False)
 
 # #----------------------------------------------------------------------------#
-
-
-
-
-
-
-
-#if val.upper().find("EMPRESA")!=-1:
-#encoding='latin-1'
-
-#df_patientList.set_index("FOLIO INTERNO").to_csv("borra.csv",columns=["NOMBRE",
-#                   
-#                     "APELLIDO","RESULTADO"],header=True)
-#dtype={'thirdName': 'string'}
-
-#pd.DataFrame.from_dict(codeIntLab, orient='index', columns=None)[0].loc[idx_patients_]
