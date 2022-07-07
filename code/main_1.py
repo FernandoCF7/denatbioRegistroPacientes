@@ -312,6 +312,11 @@ enterprise_name))
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
+#set idx_enterprise and enterpriseNames as dict  
+enterpriseNames_asDict = dict(zip(idx_enterprise, enterpriseNames))
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
 #set the enterprise name by patient
 listEnterpriseNameByPatient=[]
 for idx, val in enumerate(idx_enterprise[:-1]):
@@ -723,6 +728,22 @@ idx_patients_noCovits = pd.Index(data=tmp)#convert list into pd index
 idx_enterprise_patients_noCovits = list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_noCovits]))
 #-----------------------------------------------------------------------------#
 
+#-----------------------------------------------------------------------------#
+#get the index's of antigen covit patients
+tmp = []
+for idx, val in enumerate(idx_patients):
+
+    if [i for i in [487] if  i in ECBP[val]]:
+        tmp.append(val)
+
+idx_patients_antigenCovit = pd.Index(data=tmp)#convert list into pd index
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+#get the enterprise idx associated with idx_patients_antigenCovit
+idx_enterprise_patients_antigenCovit = list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_antigenCovit]))
+#-----------------------------------------------------------------------------#
+
 #----------------------------------------------------------------------------#
 #Create Excel
 #----------------------------------------------------------------------------#
@@ -969,16 +990,16 @@ def make_excel(idx_patients_, idx_enterprise_, path_=""):
         
         for indx_, val, in enumerate(idx_enterprise_):
             val_ = idx.index(val)
-            worksheet.merge_range('B'+str(val_+2)+':K'+str(val_+2),enterpriseNames[indx_],
+            worksheet.merge_range('B'+str(val_+2)+':K'+str(val_+2),enterpriseNames_asDict[val],
                                   merge_format)
         #-----------------------------------------------------------------------------#
     
-
+#-----------------------------------------------------------------------------#
+#make excel
 make_excel(idx_patients, idx_enterprise)
 make_excel(idx_patients_noCovits, idx_enterprise_patients_noCovits, "_otros")
-
-
-
+make_excel(idx_patients_antigenCovit, idx_enterprise_patients_antigenCovit, "_antigenos_SarsCov2")
+#-----------------------------------------------------------------------------#
 
 
 # #----------------------------------------------------------------------------#
