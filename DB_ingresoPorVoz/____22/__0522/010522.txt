@@ -1,15 +1,15 @@
 firstName*secondName*thirdName
 empresa /en tu casa salud/ vespertino*032*
 juan*perez*487
-luis*fonsi*002
+luis*fonsi*491
 pastor*el mejor*002
-hola*mundo*487
+hola*mundo*487 002
 paciete*externo*005
 empresa /aj lab/vespertino*033*
 paciente*desconocido*487
 mi*paciente*007
 el*paciente*005
-otro*paciente*487
+otro*paciente*487 002
 paciente*favorito*002
 empresa /denatbio/vespertino*034*
 mi*paciente*002

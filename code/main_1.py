@@ -744,6 +744,27 @@ idx_patients_antigenCovit = pd.Index(data=tmp)#convert list into pd index
 idx_enterprise_patients_antigenCovit = list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_antigenCovit]))
 #-----------------------------------------------------------------------------#
 
+
+
+#-----------------------------------------------------------------------------#
+#get the index's of qualitative antybody covit patients
+tmp = []
+for idx, val in enumerate(idx_patients):
+
+    if [i for i in [491] if  i in ECBP[val]]:
+        tmp.append(val)
+
+idx_patients_antibodyCovit = pd.Index(data=tmp)#convert list into pd index
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+#get the enterprise idx associated with idx_patients_antibodyCovit
+idx_enterprise_patients_antibodyCovit = list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_antibodyCovit]))
+#-----------------------------------------------------------------------------#
+
+
+
+
 #----------------------------------------------------------------------------#
 #Create Excel
 #----------------------------------------------------------------------------#
@@ -819,7 +840,77 @@ with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
     #-----------------------------------------------------------------------------#
 
 
+#-----------------------------------------------------------------------------#
+def make_excel_antigen_antibody(idx_patients_,resultadoColumn,exam,path_):
 
+    #----------------------------------------------------------------------------#
+    #Export to excel-->antigen and antybody
+    dictForDF = {
+        'FECHA':day[0:2]+'/'+day[2:4]+'/'+day[4:6],
+        'FOLIO DE LA MUESTRA': {x:codeIntLab[x] for x in idx_patients_},
+        'PACIENTE':csvFile['firstName'][idx_patients_].str.strip()+' '+csvFile['secondName'][idx_patients_].str.strip(),
+        'EXAMEN': exam,#{x:examNameList[x] for x in idx_patients_},
+    }
+    
+    for key, value in resultadoColumn.items():
+        dictForDF[key] = value
+    
+    dictForDF['VALIDO'] = np.NaN
+    dictForDF['RECIBE RESULTADOS'] = np.NaN
+    
+    
+    df_toExcel=pd.DataFrame(dictForDF)
+    #----------------------------------------------------------------------------#
+
+    #----------------------------------------------------------------------------#
+    pathTosave=os.path.join("{0}","..","listadosGeneradosParaExel","{1}",
+                            "{2}_laboratorio{3}.xlsx").format(currentPath,
+                                        yymmddPath,day,path_)
+
+
+    with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
+
+        #Convert the dataframe to an XlsxWriter Excel object.
+        df_toExcel.to_excel(writer, sheet_name=day, index=False)
+        
+        #Get the xlsxwriter workbook and worksheet objects.
+        workbook  = writer.book
+        worksheet = writer.sheets[day]
+        #-----------------------------------------------------------------------------#
+        
+        #-----------------------------------------------------------------------------#
+        #set formats
+        
+        #Wrap EXAMEN
+        widthColumn = workbook.add_format({'text_wrap': True})
+        worksheet.set_column('B:B', 26, widthColumn)
+        worksheet.set_column('C:C', 35, widthColumn)
+        worksheet.set_column('D:D', 18, widthColumn)
+        
+        tmp = ["E","F","G","H","I","J","K","L","M","N"]
+        for x in range(0,len(resultadoColumn)):
+            worksheet.set_column('{}:{}'.format(tmp[x],tmp[x]), 10, widthColumn)
+
+        worksheet.set_column('{}:{}'.format(tmp[x+1],tmp[x+1]), 25, widthColumn)
+        worksheet.set_column('{}:{}'.format(tmp[x+2],tmp[x+2]), 25, widthColumn)
+        
+        border_format=workbook.add_format({'border': 1})
+        #-----------------------------------------------------------------------------#
+        
+        #-----------------------------------------------------------------------------#
+        #Add border
+        numRows=len(df_toExcel)
+        
+        dictt = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N"]
+        
+        
+        worksheet.conditional_format('A1:{}'.format(dictt[len(dictForDF)-1])+str(numRows+1),{'type':'no_blanks',
+                                            'format':border_format})
+        
+        worksheet.conditional_format('A1:{}'.format(dictt[len(dictForDF)-1])+str(numRows+1),{'type':'blanks',
+                                            'format':border_format})
+        #-----------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
 def make_excel(idx_patients_, idx_enterprise_, path_=""):
@@ -996,9 +1087,13 @@ def make_excel(idx_patients_, idx_enterprise_, path_=""):
     
 #-----------------------------------------------------------------------------#
 #make excel
+make_excel_antigen_antibody(idx_patients_antigenCovit,{'RESULTADO':np.NaN},"Antígeno SARS CoV-2","_antigenSARS_COV2")
+make_excel_antigen_antibody(idx_patients_antibodyCovit,{'IgG':np.NaN, 'IgM':np.NaN},"IgG IgM SARS CoV-2","_antibodySARS_COV2")
+
 make_excel(idx_patients, idx_enterprise)
 make_excel(idx_patients_noCovits, idx_enterprise_patients_noCovits, "_otros")
-make_excel(idx_patients_antigenCovit, idx_enterprise_patients_antigenCovit, "_antigenos_SarsCov2")
+
+# make_excel(idx_patients_antigenCovit, idx_enterprise_patients_antigenCovit, "_antigenSARS_COV2")
 #-----------------------------------------------------------------------------#
 
 
