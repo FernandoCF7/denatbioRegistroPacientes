@@ -847,8 +847,8 @@ def make_excel_antigen_antibody(idx_patients_,resultadoColumn,exam,path_):
     #Export to excel-->antigen and antybody
     dictForDF = {
         'FECHA':day[0:2]+'/'+day[2:4]+'/'+day[4:6],
-        'FOLIO DE LA MUESTRA': {x:codeIntLab[x] for x in idx_patients_},
-        'PACIENTE':csvFile['firstName'][idx_patients_].str.strip()+' '+csvFile['secondName'][idx_patients_].str.strip(),
+        'FOLIO': {x:codeIntCob[x] for x in idx_patients_},#codeIntLab
+        #'PACIENTE':csvFile['firstName'][idx_patients_].str.strip()+' '+csvFile['secondName'][idx_patients_].str.strip(),
         'EXAMEN': exam,#{x:examNameList[x] for x in idx_patients_},
     }
     
@@ -883,11 +883,11 @@ def make_excel_antigen_antibody(idx_patients_,resultadoColumn,exam,path_):
         
         #Wrap EXAMEN
         widthColumn = workbook.add_format({'text_wrap': True})
-        worksheet.set_column('B:B', 26, widthColumn)
-        worksheet.set_column('C:C', 35, widthColumn)
-        worksheet.set_column('D:D', 18, widthColumn)
+        worksheet.set_column('B:B', 20, widthColumn)
+        #worksheet.set_column('C:C', 35, widthColumn)
+        worksheet.set_column('C:C', 22, widthColumn)
         
-        tmp = ["E","F","G","H","I","J","K","L","M","N"]
+        tmp = ["D","E","F","G","H","I","J","K","L","M","N"]
         for x in range(0,len(resultadoColumn)):
             worksheet.set_column('{}:{}'.format(tmp[x],tmp[x]), 10, widthColumn)
 
