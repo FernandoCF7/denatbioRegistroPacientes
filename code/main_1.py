@@ -23,10 +23,16 @@ import xlsxwriter
 import sys
 from datetime import datetime
 import pdb#debug
+import unicodedata
 
 
 #-----------------------------------------------------------------------------#
 day='010522'
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+#list to generate the excel file by enterprise
+list_enterprise_forExclusiveExcel = ['/en tu casa salud/', '/aj lab/']
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -309,6 +315,49 @@ enterprise_name))
     
     #append enterprise_code
     enterpriseNames.append(df_enterpriseNames.loc[enterprise_code].item())
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+#get the enterprise names and codecs, set it in enterpriseNames, enterpriseCodecs
+enterpriseNames_forExclusiveExcel = []
+enterpriseCodecs_forExclusiveExcel = []
+for enterprise_name_ in list_enterprise_forExclusiveExcel:
+        
+    #set as upper
+    enterprise_name = enterprise_name_.upper()
+   
+    #enmascarar las Ñ´s con @@´s
+    enterprise_name = enterprise_name.replace("Ñ","@@")
+    
+    #set without acents
+    enterprise_name = unicodedata.normalize('NFKD', enterprise_name)
+    enterprise_name = enterprise_name.encode('ascii', errors='ignore').decode('utf-8')
+
+    #re-establecer las @@´s como Ñ´s
+    enterprise_name = enterprise_name.replace("@@","Ñ")
+    
+    #search enterprise_name in codeEnterpriseFile
+    logicTMP = enterprise_name == codeEnterpriseFile['empresa'].str.upper()
+    
+    #not defined enterprise mesage error
+    if not(any(logicTMP)):
+        print('''OPERACION FALLIDA\n La empresa {0} del listado list_enterprise_forExclusiveExcel no está definida en el archivo codeEnterprise.csv'''.format(enterprise_name))
+        sys.exit("")
+    
+    #get enterprise code of clavesNombresEmpresa
+    try:
+        enterprise_code = codeEnterpriseFile.clave[logicTMP==True].item()
+    except ValueError:
+        print("""OPERACION FALLIDA\nLa empresa {0} se encuentra definida más \
+de una vez de la misma manera en el archivo codeEnterprise.csv""".format(
+enterprise_name))
+        sys.exit()
+        
+    #append enterpriseCodecs_forExclusiveExcel
+    enterpriseCodecs_forExclusiveExcel.append(enterprise_code)
+    
+    #append enterpriseNames_forExclusiveExcel
+    enterpriseNames_forExclusiveExcel.append(df_enterpriseNames.loc[enterprise_code].item())
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -744,8 +793,6 @@ idx_patients_antigenCovit = pd.Index(data=tmp)#convert list into pd index
 idx_enterprise_patients_antigenCovit = list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_antigenCovit]))
 #-----------------------------------------------------------------------------#
 
-
-
 #-----------------------------------------------------------------------------#
 #get the index's of qualitative antybody covit patients
 tmp = []
@@ -762,8 +809,39 @@ idx_patients_antibodyCovit = pd.Index(data=tmp)#convert list into pd index
 idx_enterprise_patients_antibodyCovit = list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_antibodyCovit]))
 #-----------------------------------------------------------------------------#
 
+#-----------------------------------------------------------------------------#
+#get the index's of list_enterprise_forExclusiveExcel patients
+idx_patients_enterprise_forExclusiveExcel_asDict = {}
+idx_enterprise_enterprise_forExclusiveExcel_asDict = {}
+for codeEnterprise_ in enterpriseCodecs_forExclusiveExcel:
+    
+    tmp = []
+    for idx, val in enumerate(idx_patients):
 
+        if [i for i in [codeEnterprise_] if  i in listEnterpriseCodeByPatient[val]]:
+            tmp.append(val)
 
+    idx_patients_enterprise_forExclusiveExcel_asDict[codeEnterprise_] = pd.Index(data=tmp)
+
+    #get the enterprise idx associated with codeEnterprise_
+    idx_enterprise_enterprise_forExclusiveExcel_asDict [codeEnterprise_]= list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_enterprise_forExclusiveExcel_asDict[codeEnterprise_]]))
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+#get the index's of no covit patients
+tmp = []
+for idx, val in enumerate(idx_patients):
+
+    if not [i for i in [2,487,491,492,569,1009] if  i in ECBP[val]]:
+        tmp.append(val)
+
+idx_patients_noCovits = pd.Index(data=tmp)#convert list into pd index 
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+#get the enterprise idx associated with idx_patients_noCovits
+idx_enterprise_patients_noCovits = list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_noCovits]))
+#-----------------------------------------------------------------------------#
 
 #----------------------------------------------------------------------------#
 #Create Excel
@@ -1084,16 +1162,99 @@ def make_excel(idx_patients_, idx_enterprise_, path_=""):
             worksheet.merge_range('B'+str(val_+2)+':K'+str(val_+2),enterpriseNames_asDict[val],
                                   merge_format)
         #-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+def make_excel_enterprise_forExclusiveExcel(idx_patients_,path_):
+
+    #----------------------------------------------------------------------------#
+    #Export to excel-->antigen and antybody
+    dictForDF = {
+        'FECHA':day[0:2]+'/'+day[2:4]+'/'+day[4:6],
+        'FOLIO': {x:codeIntLab[x] for x in idx_patients_},
+        'PACIENTE':csvFile['firstName'][idx_patients_].str.strip()+' '+csvFile['secondName'][idx_patients_].str.strip(),
+        'EXAMEN': {x:examNameList[x] for x in idx_patients_},
+        'ESTATUS':np.NaN,
+    }
     
+    
+    df_toExcel = pd.DataFrame(dictForDF)
+    #----------------------------------------------------------------------------#
+
+    #----------------------------------------------------------------------------#
+    pathTosave=os.path.join("{0}","..","listadosGeneradosParaExel","{1}",
+                            "{2}_laboratorio{3}.xlsx").format(currentPath,
+                                        yymmddPath,day,path_)
+
+    with pd.ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
+
+        #Convert the dataframe to an XlsxWriter Excel object.
+        df_toExcel.to_excel(writer, sheet_name=day, index=False)
+        
+        #Get the xlsxwriter workbook and worksheet objects.
+        workbook  = writer.book
+        worksheet = writer.sheets[day]
+        #-----------------------------------------------------------------------------#
+        
+        #-----------------------------------------------------------------------------#
+        #set formats
+        
+        #Wrap EXAMEN
+        widthColumn = workbook.add_format({'text_wrap': True})
+        worksheet.set_column('B:B', 28, widthColumn)
+        worksheet.set_column('C:C', 30, widthColumn)
+        worksheet.set_column('D:D', 28, widthColumn)
+        worksheet.set_column('E:E', 10, widthColumn)
+        
+        border_format=workbook.add_format({'border': 1})
+        #-----------------------------------------------------------------------------#
+        
+        #-----------------------------------------------------------------------------#
+        #Set urgents format
+        
+        #urgentes
+        urgentFormat = workbook.add_format({'align': 'left', 'valign': 'vcenter',
+                                            'bold': True, 'font_color': 'black',
+                                            'bg_color': 'orange'})
+    
+        idx = idx_patients_.tolist()
+        idx.sort()
+        for tmp in list(set(idx_urgentes) & set(idx_patients_.tolist())):
+            tmp_ = idx.index(tmp)
+            worksheet.write_string('E'+str(tmp_+2)+':E'+str(tmp_+2),"URGENTE",
+                                  urgentFormat)
+        #-----------------------------------------------------------------------------#
+
+        #-----------------------------------------------------------------------------#
+        #Add border
+        numRows=len(df_toExcel)
+
+        worksheet.conditional_format('A1:E'+str(numRows+1),{'type':'no_blanks',
+                                            'format':border_format})
+        
+        worksheet.conditional_format('A1:E'+str(numRows+1),{'type':'blanks',
+                                            'format':border_format})
+        #-----------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
+
 #-----------------------------------------------------------------------------#
 #make excel
+
+#antygen and antybody
 make_excel_antigen_antibody(idx_patients_antigenCovit,{'RESULTADO':np.NaN},"Antígeno SARS CoV-2","_antigenSARS_COV2")
 make_excel_antigen_antibody(idx_patients_antibodyCovit,{'IgG':np.NaN, 'IgM':np.NaN},"IgG IgM SARS CoV-2","_antibodySARS_COV2")
 
+#laboratory
 make_excel(idx_patients, idx_enterprise)
+
+#no covits
 make_excel(idx_patients_noCovits, idx_enterprise_patients_noCovits, "_otros")
 
-# make_excel(idx_patients_antigenCovit, idx_enterprise_patients_antigenCovit, "_antigenSARS_COV2")
+#for list_enterprise_forExclusiveExcel
+for codeEnterprise_ in idx_patients_enterprise_forExclusiveExcel_asDict:
+    
+    make_excel_enterprise_forExclusiveExcel(
+        idx_patients_enterprise_forExclusiveExcel_asDict[codeEnterprise_], "_{}".format(codeEnterprise_)
+        )
 #-----------------------------------------------------------------------------#
 
 
