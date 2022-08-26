@@ -1,0 +1,26 @@
+firstName*secondName*thirdName
+empresa /en tu casa salud/ vespertino*032*
+juan*perez*487
+luis*fonsi*491
+pastor*el mejor*002
+hola*mundo*487 002
+paciete*externo*005
+empresa /aj lab/vespertino*033*
+paciente*desconocido*487
+mi*paciente*007
+el*paciente*005
+otro*paciente*487 002
+paciente*favorito*002
+empresa /en tu casa salud/ vespertino*032*
+nombre1*apellido1*002
+nombre2*apellido2*487
+urgente nombre3*apellido3*002
+empresa /denatbio/vespertino*034*
+mi*paciente*002
+el*mejor*005
+empresa /diafer/vespertino*035*
+la*cbr*487
+empresa /diafer/vespertino*036*
+urgente mi*paciente*487
+empresa /en tu casa salud/ vespertino*017*
+urgente vuelo nombre4*apellido4*487
