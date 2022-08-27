@@ -37,6 +37,8 @@ def set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF):
     global ECBNC, ECBAC, ECBABC, ECBCABC, ECBSP, enterpriseNames_asDict, idx_patients_noCovits, idx_enterprise_patients_noCovits, listEnterpriseNameByPatient, idx_patients_enterprise_forExclusiveExcel_asDict, idx_enterprise_enterprise_forExclusiveExcel_asDict
     global enterpriseNames_forExclusiveExcel, enterpriseCodecs_forExclusiveExcel
 
+    ECBP   heareeeeeeeeeeeee
+
     day_ = day
 
     #set parameters to projectmodule
