@@ -4,6 +4,7 @@ from numpy import any as np_any, prod as np_prod, array as np_array, NaN as np_N
 from re import compile as re_compile, IGNORECASE as re_IGNORECASE
 from time import strftime as time_strftime
 from unicodedata import normalize as unicodedata_normalize
+from sys import exit as sys_exit
 
 #inline excell files
 orig_url = 'https://github.com/FernandoCF7/denatbioRegistroPacientes/blob/main/'
@@ -829,6 +830,139 @@ def make_laboratory_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, E
                                   merge_format)
         #-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, currentPath, yymmddPath, day, idx_urgentes, examNameList, ECBNC, enterpriseNames_asDict, path_=""):
+    #idx_patients_ --> pandas index, the index (in the CSV file) of patients to show
+    #idx_enterprise --> list, the index (in the CSV file) of enterprises to show
+
+    #----------------------------------------------------------------------------#
+    #merge idx_patients_ and idx_enterprise_    
+    idx = idx_patients_.tolist() + idx_enterprise_
+    
+    idx.sort()
+    #----------------------------------------------------------------------------#
+
+    #----------------------------------------------------------------------------#
+    #Export to excel-->laboratori
+    df_toExcel = pd_DataFrame({
+                             'OSR':np_NaN,
+                             'COD INT':{x:codeIntLab[x] for x in idx_patients_},
+                             'NOMBRE':csvFile['firstName'][idx].str.strip(), 
+                             'APELLIDO':csvFile['secondName'][idx].str.strip(),
+                             'EXAMEN':{x:examNameList[x] for x in idx_patients_},
+                             'ESTATUS':np_NaN,
+                             'FECHA RECEPCIÓN ESTUDIO':np_NaN,
+                             'ENVIÓ':np_NaN,
+                             'REVISÓ':np_NaN,
+                             'FECHA ENVÍO':np_NaN,
+                             'HORA ENVÍO':np_NaN
+                             })
+    #----------------------------------------------------------------------------#
+
+    #----------------------------------------------------------------------------#
+    #set the OSR code in df_toExcel
+    df_toExcel.loc[idx_enterprise_,"OSR"] = csvFile["secondName"][idx_enterprise_].str.strip()
+    #----------------------------------------------------------------------------#
+
+    #----------------------------------------------------------------------------#
+    pathTosave = os_path.join("{0}","..","listadosGeneradosParaExel","{1}",
+                            "{2}{3}.xlsx").format(currentPath,
+                                        yymmddPath,day,path_)
+
+    with pd_ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
+                                                           
+        #Convert the dataframe to an XlsxWriter Excel object.
+        df_toExcel.to_excel(writer, sheet_name=day, index=False)
+        
+        #Get the xlsxwriter workbook and worksheet objects.
+        workbook  = writer.book
+        worksheet = writer.sheets[day]
+        #-----------------------------------------------------------------------------#
+        
+        #-----------------------------------------------------------------------------#
+        #set formats
+        
+        #Wrap EXAMEN and PRECIO column
+        widthColumn = workbook.add_format({'text_wrap': True})
+        worksheet.set_column('B:B', 27, widthColumn)
+        worksheet.set_column('C:C', 30, widthColumn)
+        worksheet.set_column('D:D', 30, widthColumn)
+        worksheet.set_column('E:E', 40, widthColumn)
+        worksheet.set_column('F:F', 15, widthColumn)
+        worksheet.set_column('G:G', 25, widthColumn)
+        worksheet.set_column('H:H', 25, widthColumn)
+        worksheet.set_column('I:I', 25, widthColumn)
+        worksheet.set_column('J:J', 20, widthColumn)
+        worksheet.set_column('K:K', 20, widthColumn)
+        
+        border_format = workbook.add_format({'border': 1})
+        #-----------------------------------------------------------------------------#
+    
+        #-----------------------------------------------------------------------------#
+        #Set urgents format
+        
+        #urgentes
+        urgentFormat = workbook.add_format({'align': 'left', 'valign': 'vcenter',
+                                            'bold': True, 'font_color': 'black',
+                                            'bg_color': 'orange'})
+    
+        for tmp in list(set(idx_urgentes) & set(idx_patients_.tolist())):
+            tmp_ = idx.index(tmp)
+            worksheet.write_string('F'+str(tmp_+2)+':F'+str(tmp_+2),"URGENTE",
+                                  urgentFormat)
+        #-----------------------------------------------------------------------------#
+    
+        #-----------------------------------------------------------------------------#
+        #Add cell color deppending of the exam
+        
+        #colors:
+        cell_format_mostaza = workbook.add_format({'bg_color': '#FF9933'})
+        cell_format_mostaza.set_text_wrap()
+        cell_format_magenta = workbook.add_format({'bg_color': 'magenta'})
+        cell_format_magenta.set_text_wrap()
+        cell_format_yellow = workbook.add_format({'bg_color': 'yellow'})
+        cell_format_yellow.set_text_wrap()
+        cell_format_green = workbook.add_format({'bg_color': 'green'})
+        cell_format_green.set_text_wrap()
+        cell_format_lime = workbook.add_format({'bg_color': 'lime'})
+        cell_format_lime.set_text_wrap()
+
+        #ECBNC --> Exam color by no covits; Mostaza
+        tmp = ECBNC.keys()
+        tmp_ = [x for x in idx_patients_ if x in tmp]
+        ECBNC_tmp = {x:ECBNC[x] for x in tmp_}
+        for key in ECBNC_tmp:
+            key_ = idx.index(key)
+            worksheet.write_string('E'+str(key_+2)+':E'+str(key_+2),examNameList[key],
+                            cell_format_mostaza)
+        
+        #-----------------------------------------------------------------------------#
+        #Add border
+        numRows=len(df_toExcel)
+        
+        worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'no_blanks',
+                                              'format':border_format})
+        
+        worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'blanks',
+                                              'format':border_format})
+        #-----------------------------------------------------------------------------#
+        
+        #-----------------------------------------------------------------------------#
+        #Set format to enterprise
+        merge_format = workbook.add_format({'align': 'center', 'valign': 'vcenter',
+                                            'bold': True, 'font_color': 'white',
+                                            'bg_color': 'black'})
+        
+        for indx_, val, in enumerate(idx_enterprise_):
+            val_ = idx.index(val)
+            worksheet.merge_range('B'+str(val_+2)+':K'+str(val_+2),enterpriseNames_asDict[val],
+                                  merge_format)
+        #-----------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
+
+
+
 
 #-----------------------------------------------------------------------------#
 def make_excel_antigen_antibody(idx_patients_, resultadoColumn, exam, path_, day, day_to_save, codeIntCob, yymmddPath, currentPath):

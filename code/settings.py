@@ -154,7 +154,7 @@ def join_month_parameters(dummy_counter):
         global examNameList_m, enterpriseNames_asDict_m
         global ECBNC_m, ECBAC_m, ECBABC_m, ECBCABC_m, ECBSP_m
         global codeIntCob_m, listEnterpriseNameByPatient_m
-        global day_list_m, day_list_antigenCovit_m
+        global day_list_m, day_list_antigenCovit_m, day_list_antibodyCovit_m
         global idx_patients_antigenCovit_m, idx_patients_antibodyCovit_m, idx_patients_noCovits_m
         global idx_patients_enterprise_forExclusiveExcel_asDict_m, idx_enterprise_enterprise_forExclusiveExcel_asDict_m, day_list_enterprises_excel_m
 
@@ -263,7 +263,7 @@ def laboratory_excel():
     projectmodule.make_laboratory_excel(idx_patients, idx_enterprise, codeIntLab, csvFile, ECBP_str, currentPath, yymmddPath, day_, idx_urgentes, idx_vuelo, examNameList, ECBNC, ECBAC, ECBABC, ECBCABC, ECBSP, enterpriseNames_asDict, "")
 
 def laboratoryNoCovid_excel():
-    projectmodule.make_laboratory_excel(idx_patients_noCovits, idx_enterprise_patients_noCovits, codeIntLab, csvFile, ECBP_str, currentPath, os_path.join(yymmddPath,"byExamCategory"), day_, idx_urgentes, idx_vuelo, examNameList, ECBNC, ECBAC, ECBABC, ECBCABC, ECBSP, enterpriseNames_asDict, "_NoCovid")
+    projectmodule.make_no_covid_excel(idx_patients_noCovits, idx_enterprise_patients_noCovits, codeIntLab, csvFile, currentPath, os_path.join(yymmddPath,"byExamCategory"), day_, idx_urgentes, examNameList, ECBNC, enterpriseNames_asDict, "_NoCovid")
 
 def cobranza_excel():
     projectmodule.make_excel_cobranza(idx_patients, codeIntCob, day_[0:2]+'/'+day_[2:4]+'/'+day_[4:6], csvFile, examNameList, ECBP_str, listEnterpriseNameByPatient, day_, currentPath,  yymmddPath, idx_urgentes)
@@ -290,7 +290,7 @@ def antybody_excel_m():
     projectmodule.make_excel_antigen_antibody(idx_patients_antibodyCovit_m, {'IgG':np_NaN, 'IgM':np_NaN}, "IgG IgM SARS CoV-2", "_antibodySARS_COV2", day_list_antibodyCovit_m, yymmddPath[7:-7], codeIntCob_m, os_path.join(yymmddPath[:-6],"byMonth"), currentPath)
 
 def laboratoryNoCovid_excel_m():
-    projectmodule.make_laboratory_excel(idx_patients_noCovits_m, idx_enterprise_patients_noCovits_m, codeIntLab_m, csvFile_m, ECBP_str_m, currentPath, os_path.join(yymmddPath[:-6],"byMonth","byExamCategory"), yymmddPath[7:-7], idx_urgentes_m, idx_vuelo_m, examNameList_m, ECBNC_m, ECBAC_m, ECBABC_m, ECBCABC_m, ECBSP_m, enterpriseNames_asDict_m, "_NoCovid")
+    projectmodule.make_no_covid_excel(idx_patients_noCovits_m, idx_enterprise_patients_noCovits_m, codeIntLab_m, csvFile_m, currentPath, os_path.join(yymmddPath[:-6],"byMonth","byExamCategory"), yymmddPath[7:-7], idx_urgentes_m,        examNameList_m, ECBNC_m, enterpriseNames_asDict_m, "_NoCovid")
 
 def enterprises_excel_m():
 

@@ -26,22 +26,22 @@ settings.set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF)
 #----------------------------------------------------------------------------#
 #make excel's, by day
 
-# #antygen
-# settings.antigen_excel()
+#antygen
+settings.antigen_excel()
 
-# #antybody
-# settings.antybody_excel()
+#antybody
+settings.antybody_excel()
 
-# #laboratory all
-# settings.laboratory_excel()
+#laboratory all
+settings.laboratory_excel()
 
-# #laboratory no-covids
-# settings.laboratoryNoCovid_excel()
+#laboratory no-covids
+settings.laboratoryNoCovid_excel()
 
-# #cobranza
-# settings.cobranza_excel()
+#cobranza
+settings.cobranza_excel()
 
-# #enterprises
+#enterprises
 settings.enterprises_excel()
 #-----------------------------------------------------------------------------#
 
