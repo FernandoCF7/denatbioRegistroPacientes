@@ -5,6 +5,7 @@ from re import compile as re_compile, IGNORECASE as re_IGNORECASE
 from time import strftime as time_strftime
 from unicodedata import normalize as unicodedata_normalize
 from sys import exit as sys_exit
+from copy import deepcopy as copy_deepcopy
 
 #inline excell files
 orig_url = 'https://github.com/FernandoCF7/denatbioRegistroPacientes/blob/main/'
@@ -310,8 +311,13 @@ def get_listEnterpriseCodeByPatient(idx_enterprise, enterpriseCodecs, idx_patien
         for val0 in range(val,idx_enterprise[idx+1]):
             listEnterpriseCodeByPatient.append(enterpriseCodecs[idx])
     else:
-        for val0 in range(idx_enterprise[idx+1], len_csvFile):
-            listEnterpriseCodeByPatient.append(enterpriseCodecs[idx+1])       
+        try:
+            for val0 in range(idx_enterprise[idx+1], len_csvFile):
+                listEnterpriseCodeByPatient.append(enterpriseCodecs[idx+1])
+        except:
+            if idx_enterprise:
+                for val0 in range(0, len(idx_patients)+1):
+                    listEnterpriseCodeByPatient.append(enterpriseCodecs[0])
 
     #Convert listEnterpriseNameByPatient from list to dict
     tmp = dict()
@@ -357,8 +363,17 @@ def get_listShiftByPatient(idx_enterprise, idx_patients, shift, len_csvFile):
         for val0 in range(val,idx_enterprise[idx+1]):
             listShiftByPatient.append(shift[idx])
     else:
-        for val0 in range(idx_enterprise[idx+1], len_csvFile):
-            listShiftByPatient.append(shift[idx+1])       
+
+        try:
+            for val0 in range(idx_enterprise[idx+1], len_csvFile):
+                listShiftByPatient.append(shift[idx+1])
+        except:
+            if idx_enterprise:
+                for val0 in range(0, len(idx_patients)+1):
+                    listShiftByPatient.append(shift[0])
+
+
+                
 
     #Convert listEnterpriseNameByPatient from list to dict
     tmp = dict()
@@ -510,14 +525,14 @@ def get_color_as_study(ECBP):
 
 #-----------------------------------------------------------------------------#
 #set the exams name, 
-def get_examNameList(idx_patients, csvFile, ECBP):
+def get_examNameList(idx_patients, csvFile, ECBP, format_):
 
     examNameList = dict()
 
     for val in idx_patients:#for each patien with spetial prices
         
         #ensure exams code are recored
-        try: 
+        try:
             examsName = pd_listExam.EXAMEN[ECBP[val]].tolist()
         except KeyError:
             print(CEND.format(csvFile.firstName[val],csvFile.secondName.iloc[val]))        
@@ -529,8 +544,11 @@ def get_examNameList(idx_patients, csvFile, ECBP):
                 print(CEND.format(csvFile.firstName[val], csvFile.secondName.iloc[val]))        
                 sys_exit()
 
-        tmp = "\n"
-        examNameList[val] = tmp.join(examsName)
+        if format_ == "as_str":
+            tmp = "\n"
+            examNameList[val] = tmp.join(examsName)
+        elif format_ == "as_list":
+            examNameList[val] = examsName
     
     return examNameList
 #-----------------------------------------------------------------------------#
@@ -832,37 +850,88 @@ def make_laboratory_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, E
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, currentPath, yymmddPath, day, idx_urgentes, examNameList, ECBNC, enterpriseNames_asDict, path_=""):
+def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, currentPath, yymmddPath, day, idx_urgentes, examNameList_nested, enterpriseNames_asDict, path_=""):
+
     #idx_patients_ --> pandas index, the index (in the CSV file) of patients to show
     #idx_enterprise --> list, the index (in the CSV file) of enterprises to show
 
+    idx_patients_ = idx_patients_.tolist()
+
     #----------------------------------------------------------------------------#
     #merge idx_patients_ and idx_enterprise_    
-    idx = idx_patients_.tolist() + idx_enterprise_
+    idx = idx_patients_ + idx_enterprise_
     
     idx.sort()
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
-    #Export to excel-->laboratori
-    df_toExcel = pd_DataFrame({
-                             'OSR':np_NaN,
-                             'COD INT':{x:codeIntLab[x] for x in idx_patients_},
-                             'NOMBRE':csvFile['firstName'][idx].str.strip(), 
-                             'APELLIDO':csvFile['secondName'][idx].str.strip(),
-                             'EXAMEN':{x:examNameList[x] for x in idx_patients_},
-                             'ESTATUS':np_NaN,
-                             'FECHA RECEPCIÓN ESTUDIO':np_NaN,
-                             'ENVIÓ':np_NaN,
-                             'REVISÓ':np_NaN,
-                             'FECHA ENVÍO':np_NaN,
-                             'HORA ENVÍO':np_NaN
-                             })
-    #----------------------------------------------------------------------------#
+    #set correlation pd index and idx
+    excelIdx_pdIndx = {val:idx_ for idx_, val in enumerate(idx)}
+    pdIndx_for_examList = [val for key, val in excelIdx_pdIndx.items() if key in idx_patients_]
+    
+    
+    #update excelIdx_pdIndx considering there patients that have more than one exam
+    ECBP_noCovids = {x:y for x,y in examNameList_nested.items() if x in idx_patients_}
+    excelIdxExams_pdIndx = {}
+    for key, value in ECBP_noCovids.items():
+        
+        if len(value) > 1:# --> more than one exam
+            
+            for key_, val_ in excelIdx_pdIndx.items():
+                if key_ > key: excelIdx_pdIndx[key_] += (len(value)-1)
 
+            excelIdxExams_pdIndx[key] = [excelIdx_pdIndx[key]+index_ for index_, value_ in enumerate(value)]
+        else:
+            excelIdxExams_pdIndx[key] = [excelIdx_pdIndx[key]]
+    
     #----------------------------------------------------------------------------#
-    #set the OSR code in df_toExcel
-    df_toExcel.loc[idx_enterprise_,"OSR"] = csvFile["secondName"][idx_enterprise_].str.strip()
+    
+    #----------------------------------------------------------------------------#
+    #Export to excel-->laboratori
+    end_index = excelIdx_pdIndx.get(idx[-1])+1 if idx else 0
+    df_toExcel = pd_DataFrame(
+        {
+            'OSR':np_NaN,
+            'COD INT':np_NaN,
+            'NOMBRE':np_NaN,
+            'APELLIDO':np_NaN,
+            'EXAMEN':np_NaN,
+            'ESTATUS':np_NaN,
+            'FECHA RECEPCIÓN ESTUDIO':np_NaN,
+            'ENVIÓ':np_NaN,
+            'REVISÓ':np_NaN,
+            'FECHA ENVÍO':np_NaN,
+            'HORA ENVÍO':np_NaN
+        }
+        , index = range(0, end_index)
+    )
+    #----------------------------------------------------------------------------#
+    
+
+    #set valus at df_toExcel
+    
+    #OSR
+    df_toExcel.loc[[excelIdx_pdIndx[tmp] for tmp in idx_enterprise_], ["OSR"]] = [csvFile["secondName"][[tmp]].str.strip() for tmp in idx_enterprise_]
+
+    #COD INT
+    df_toExcel.loc[[excelIdx_pdIndx[tmp] for tmp in idx_patients_],"COD INT"] = [codeIntLab[tmp] for tmp in idx_patients_]
+    
+    #NOMBRE
+    df_toExcel.loc[[excelIdx_pdIndx[tmp] for tmp in idx_patients_], ["NOMBRE"]] = [csvFile["firstName"][[tmp]].str.strip() for tmp in idx_patients_]
+
+    #APELLIDO
+    df_toExcel.loc[[excelIdx_pdIndx[tmp] for tmp in idx_patients_], ["APELLIDO"]] = [csvFile["secondName"][[tmp]].str.strip() for tmp in idx_patients_]
+
+    # #EXAMEN
+    tmp_ = []
+    for tmp in idx_patients_:
+        tmp_.extend(examNameList_nested[tmp])
+    
+    tmp_0 = []
+    for tmp in idx_patients_:
+        tmp_0.extend(excelIdxExams_pdIndx[tmp])
+
+    df_toExcel.loc[tmp_0, "EXAMEN"] = tmp_
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
@@ -907,36 +976,13 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
                                             'bold': True, 'font_color': 'black',
                                             'bg_color': 'orange'})
     
-        for tmp in list(set(idx_urgentes) & set(idx_patients_.tolist())):
-            tmp_ = idx.index(tmp)
+        for tmp in list(set(idx_urgentes) & set(idx_patients_)):
+            # tmp_ = idx.index(tmp)
+            tmp_ = excelIdx_pdIndx[tmp] 
             worksheet.write_string('F'+str(tmp_+2)+':F'+str(tmp_+2),"URGENTE",
                                   urgentFormat)
         #-----------------------------------------------------------------------------#
     
-        #-----------------------------------------------------------------------------#
-        #Add cell color deppending of the exam
-        
-        #colors:
-        cell_format_mostaza = workbook.add_format({'bg_color': '#FF9933'})
-        cell_format_mostaza.set_text_wrap()
-        cell_format_magenta = workbook.add_format({'bg_color': 'magenta'})
-        cell_format_magenta.set_text_wrap()
-        cell_format_yellow = workbook.add_format({'bg_color': 'yellow'})
-        cell_format_yellow.set_text_wrap()
-        cell_format_green = workbook.add_format({'bg_color': 'green'})
-        cell_format_green.set_text_wrap()
-        cell_format_lime = workbook.add_format({'bg_color': 'lime'})
-        cell_format_lime.set_text_wrap()
-
-        #ECBNC --> Exam color by no covits; Mostaza
-        tmp = ECBNC.keys()
-        tmp_ = [x for x in idx_patients_ if x in tmp]
-        ECBNC_tmp = {x:ECBNC[x] for x in tmp_}
-        for key in ECBNC_tmp:
-            key_ = idx.index(key)
-            worksheet.write_string('E'+str(key_+2)+':E'+str(key_+2),examNameList[key],
-                            cell_format_mostaza)
-        
         #-----------------------------------------------------------------------------#
         #Add border
         numRows=len(df_toExcel)
@@ -955,10 +1001,10 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
                                             'bg_color': 'black'})
         
         for indx_, val, in enumerate(idx_enterprise_):
-            val_ = idx.index(val)
-            worksheet.merge_range('B'+str(val_+2)+':K'+str(val_+2),enterpriseNames_asDict[val],
+            worksheet.merge_range('B'+str(excelIdx_pdIndx[val]+2)+':K'+str(excelIdx_pdIndx[val]+2),enterpriseNames_asDict[val],
                                   merge_format)
         #-----------------------------------------------------------------------------#
+
 #-----------------------------------------------------------------------------#
 
 

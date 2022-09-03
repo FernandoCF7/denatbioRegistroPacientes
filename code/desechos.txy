@@ -235,3 +235,53 @@
 # settings.enterpriseNames_asDict, settings.idx_patients_noCovits, settings.idx_enterprise_patients_noCovits,
 # settings.listEnterpriseNameByPatient, settings.idx_patients_enterprise_forExclusiveExcel_asDict,
 # settings.idx_enterprise_enterprise_forExclusiveExcel_asDict
+
+
+
+
+idx_patients_considering_exams = copy_deepcopy(idx_patients_)
+    idx_enterprise_considering_exams = copy_deepcopy(idx_enterprise_)
+
+
+
+# # idx_patients_considering_exams.extend( [key+tmp for tmp in range(1, len(value))] )
+
+            # for idx_, value_ in enumerate(idx_patients_):
+            #     if value_ > key: idx_patients_considering_exams[idx_] += len(value)-1
+
+            # for idx_, value_ in enumerate(idx_enterprise_):
+            #     if value_ > key: idx_enterprise_considering_exams[idx_] += len(value)-1            
+    
+    
+    # idx_patients_considering_exams.sort()
+
+
+    #----------------------------------------------------------------------------#
+    #merge idx_patients_ and idx_enterprise_    
+    idx_tmp = idx_patients_considering_exams + idx_enterprise_considering_exams
+    
+    idx_tmp.sort()
+    #----------------------------------------------------------------------------#
+
+
+    print(idx)
+    print(idx[-1])
+    print(excelIdx_pdIndx)
+
+
+
+
+
+#-----------------------------------------------------------------------------#
+        #Add cell color deppending of the exam
+        
+        #colors:
+        cell_format_mostaza = workbook.add_format({'bg_color': '#FF9933'})
+        cell_format_mostaza.set_text_wrap()
+
+        #ECBP_noCovids --> Exam color no covits; Mostaza
+        ECBP_noCovids
+        for key in ECBP_noCovids:
+            worksheet.write_string('E'+str(excelIdx_pdIndx[key]+2)+':E'+str(excelIdx_pdIndx[key]+2),examNameList[key],
+                            cell_format_mostaza)
+        #-----------------------------------------------------------------------------#

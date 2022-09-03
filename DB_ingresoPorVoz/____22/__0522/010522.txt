@@ -5,7 +5,7 @@ urgente pac2 hoja1*day1 salud2*002
 pac3 hoja1*day1 salud3*002
 empresa /aj lab/ vespertino*011*
 pac4 hoja2*day1 AJ1*002
-pac5 hoja3*day1 AJ2*005
+urgente pac5 hoja3*day1 AJ2*002
 urgente pac6 hoja2*day1 AJ3*487
 empresa /en tu casa salud/ vespertino*012*
 pac7 hoja3*day1 salud4*002
