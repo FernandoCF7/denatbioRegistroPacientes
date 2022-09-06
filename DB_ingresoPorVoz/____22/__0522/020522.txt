@@ -1,7 +1,7 @@
 firstName*secondName*thirdName
 empresa /en tu casa salud/ vespertino*200*
 pac10 otro examen1 hoja1*day2 salud7*218
- pac11 hoja1*day2 salud8*002
+ pac11 hoja1*day2 salud8*
 empresa /aj lab/ vespertino*201*
  otro exam 2 urg (2 exams) pac12 hoja2*day2 AJ4*115 116 009 005
 pac13 otro exam 3 (2 examns )hoja2*day2 AJ5*005 009

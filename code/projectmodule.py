@@ -1,6 +1,6 @@
 from pandas import read_csv as pd_read_csv, concat as pd_concat, isnull as pd_isnull, Index as pd_Index, DataFrame as pd_DataFrame, ExcelWriter as pd_ExcelWriter, Series as pd_Series
 from os import path as os_path
-from numpy import any as np_any, prod as np_prod, array as np_array, NaN as np_NaN, argwhere as np_argwhere
+from numpy import any as np_any, prod as np_prod, array as np_array, NaN as np_NaN, argwhere as np_argwhere, where as np_where
 from re import compile as re_compile, IGNORECASE as re_IGNORECASE
 from time import strftime as time_strftime
 from unicodedata import normalize as unicodedata_normalize
@@ -39,6 +39,12 @@ def get_csvFile(currentPath, yymmddPath):
     #set as upper
     csvFile["firstName"]=csvFile["firstName"].str.upper()
     csvFile["secondName"]=csvFile["secondName"].str.upper()
+
+    #quit blank's begin and end
+    csvFile["firstName"] = csvFile["firstName"].str.strip()
+    csvFile["secondName"] = csvFile["secondName"].str.strip()
+    csvFile["thirdName"] = csvFile["thirdName"].str.strip()
+    
 
     #enmascarar las Ñ´s con @@´s
     for idx, val in enumerate(csvFile["firstName"]):
@@ -138,11 +144,16 @@ def get_idx_enterprise(csvFile_firstName):
 #-----------------------------------------------------------------------------#
 #check fill values in all patients entries
 def checkFilledfiels(columnIdx, csvFile, idx_patients):
-    if np_any( pd_isnull(csvFile.iloc[idx_patients,columnIdx]) ):
-        tmp=np_where(pd_isnull(csvFile.iloc[idx_patients,columnIdx]))
+    
+    if np_any(pd_isnull(csvFile.iloc[idx_patients,columnIdx])) or np_any(csvFile.iloc[idx_patients,columnIdx]==""):
+        
+        tmp = np_where(pd_isnull(csvFile.iloc[idx_patients,columnIdx]))
+        
+        if not(np_any(tmp)):
+            tmp = np_where(csvFile.iloc[idx_patients,columnIdx]=="")
+
         infoPatients = csvFile.iloc[idx_patients[tmp],:]
-        sys_exit("""Registro no valido para el (los) paciente(s):\n 
-{0}""".format(infoPatients))
+        sys_exit("""Registro no valido para el (los) paciente(s):\n {0}""".format(infoPatients))
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -856,6 +867,8 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     #idx_enterprise --> list, the index (in the CSV file) of enterprises to show
 
     idx_patients_ = idx_patients_.tolist()
+    idx_patients_.sort()
+    idx_enterprise_.sort()
 
     #----------------------------------------------------------------------------#
     #merge idx_patients_ and idx_enterprise_    
@@ -884,11 +897,12 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         else:
             excelIdxExams_pdIndx[key] = [excelIdx_pdIndx[key]]
     
+    
     #----------------------------------------------------------------------------#
     
     #----------------------------------------------------------------------------#
     #Export to excel-->laboratori
-    end_index = excelIdx_pdIndx.get(idx[-1])+1 if idx else 0
+    end_index = max(excelIdxExams_pdIndx.get(idx_patients_[-1]))+1 if idx else 0
     df_toExcel = pd_DataFrame(
         {
             'OSR':np_NaN,
@@ -907,9 +921,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     )
     #----------------------------------------------------------------------------#
     
-
     #set valus at df_toExcel
-    
     #OSR
     df_toExcel.loc[[excelIdx_pdIndx[tmp] for tmp in idx_enterprise_], ["OSR"]] = [csvFile["secondName"][[tmp]].str.strip() for tmp in idx_enterprise_]
 
@@ -930,7 +942,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     tmp_0 = []
     for tmp in idx_patients_:
         tmp_0.extend(excelIdxExams_pdIndx[tmp])
-
+    
     df_toExcel.loc[tmp_0, "EXAMEN"] = tmp_
     #----------------------------------------------------------------------------#
 
