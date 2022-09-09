@@ -394,7 +394,6 @@ def get_listShiftByPatient(idx_enterprise, idx_patients, shift, len_csvFile):
     return tmp
 #-----------------------------------------------------------------------------#
 
-
 #-----------------------------------------------------------------------------#
 #search for urgents examns
 def get_idx_urgentes(idx_patients, csvFile):
@@ -610,12 +609,15 @@ def get_dict_pattient_enterprise(idx_patients, idx_enterprise):
 #get the index's of no covit patients
 def get_idx_noCovits(idx_patients, ECBP, dict_pattient_enterprise):
 
+    covid_exam_codecs = [2,487,491,492,569,1009]
     tmp = []
 
-    for idx, val in enumerate(idx_patients):
-
-        if not [i for i in [2,487,491,492,569,1009] if  i in ECBP[val]]:
-            tmp.append(val)
+    for val in idx_patients:
+        
+        for i_ in ECBP[val]:
+            if i_ not in covid_exam_codecs:
+                tmp.append(val)
+                break
 
     idx_patients_noCovits = pd_Index(data=tmp)#convert list into pd index
 
@@ -631,7 +633,7 @@ def get_idx_antigenCovit(idx_patients, ECBP, dict_pattient_enterprise):
     
     tmp = []
 
-    for idx, val in enumerate(idx_patients):
+    for val in idx_patients:
 
         if [i for i in [487] if  i in ECBP[val]]:
             tmp.append(val)
@@ -650,7 +652,7 @@ def get_idx_antibodyCovit(idx_patients, ECBP, dict_pattient_enterprise):
     
     tmp = []
     
-    for idx, val in enumerate(idx_patients):
+    for val in idx_patients:
 
         if [i for i in [491] if  i in ECBP[val]]:
             tmp.append(val)
@@ -673,7 +675,7 @@ def get_idx_enterpriseExclusive(enterpriseCodecs_forExclusiveExcel, idx_patients
     for codeEnterprise_ in enterpriseCodecs_forExclusiveExcel:
         
         tmp = []
-        for idx, val in enumerate(idx_patients):
+        for val in idx_patients:
 
             if [i for i in [codeEnterprise_] if  i in listEnterpriseCodeByPatient[val]]:
                 tmp.append(val)
@@ -684,6 +686,14 @@ def get_idx_enterpriseExclusive(enterpriseCodecs_forExclusiveExcel, idx_patients
         idx_enterprise_enterprise_forExclusiveExcel_asDict [codeEnterprise_]= list(set([dict_pattient_enterprise[tmp] for tmp in idx_patients_enterprise_forExclusiveExcel_asDict[codeEnterprise_]]))
     
     return idx_patients_enterprise_forExclusiveExcel_asDict, idx_enterprise_enterprise_forExclusiveExcel_asDict
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+def delete_multiple_element(list_object, indices):
+    indices = sorted(indices, reverse=True)
+    for idx in indices:
+        if idx < len(list_object):
+            list_object.pop(idx)
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -861,7 +871,7 @@ def make_laboratory_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, E
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, currentPath, yymmddPath, day, idx_urgentes, examNameList_nested, enterpriseNames_asDict, path_=""):
+def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, currentPath, yymmddPath, day, idx_urgentes, examNameList_nested, ECBP, enterpriseNames_asDict, path_=""):
 
     #idx_patients_ --> pandas index, the index (in the CSV file) of patients to show
     #idx_enterprise --> list, the index (in the CSV file) of enterprises to show
@@ -872,19 +882,30 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
 
     #----------------------------------------------------------------------------#
     #merge idx_patients_ and idx_enterprise_    
-    idx = idx_patients_ + idx_enterprise_
+    idx_patients_and_enterprise = idx_patients_ + idx_enterprise_
     
-    idx.sort()
+    idx_patients_and_enterprise.sort()
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
-    #set correlation pd index and idx
-    excelIdx_pdIndx = {val:idx_ for idx_, val in enumerate(idx)}
+    #set correlation pd index and idx_patients_and_enterprise
+    excelIdx_pdIndx = {val:idx_ for idx_, val in enumerate(idx_patients_and_enterprise)}
     pdIndx_for_examList = [val for key, val in excelIdx_pdIndx.items() if key in idx_patients_]
-    
     
     #update excelIdx_pdIndx considering there patients that have more than one exam
     ECBP_noCovids = {x:y for x,y in examNameList_nested.items() if x in idx_patients_}
+    
+    #quit the covid part (if have) to ECBP_noCovids
+    for key in ECBP_noCovids:
+        idx_to_quit = []
+        for idx, tmp in enumerate(ECBP[key]):    
+            if tmp in [2,487,491,492,569,1009]: idx_to_quit.append(idx)
+        
+        if idx_to_quit:
+            tmp = ECBP_noCovids[key]
+            delete_multiple_element(tmp, idx_to_quit)
+            ECBP_noCovids[key] = tmp
+    
     excelIdxExams_pdIndx = {}
     for key, value in ECBP_noCovids.items():
         
@@ -902,7 +923,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     
     #----------------------------------------------------------------------------#
     #Export to excel-->laboratori
-    end_index = max(excelIdxExams_pdIndx.get(idx_patients_[-1]))+1 if idx else 0
+    end_index = max(excelIdxExams_pdIndx.get(idx_patients_[-1]))+1 if idx_patients_and_enterprise else 0
     df_toExcel = pd_DataFrame(
         {
             'OSR':np_NaN,
@@ -911,11 +932,11 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
             'APELLIDO':np_NaN,
             'EXAMEN':np_NaN,
             'ESTATUS':np_NaN,
-            'FECHA RECEPCIÓN ESTUDIO':np_NaN,
+            'FECHA RECEPCIÓN RESULTADO':np_NaN,
             'ENVIÓ':np_NaN,
             'REVISÓ':np_NaN,
-            'FECHA ENVÍO':np_NaN,
-            'HORA ENVÍO':np_NaN
+            'FECHA DE ENVÍO':np_NaN,
+            'HORA DE ENVÍO':np_NaN
         }
         , index = range(0, end_index)
     )
@@ -937,7 +958,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     # #EXAMEN
     tmp_ = []
     for tmp in idx_patients_:
-        tmp_.extend(examNameList_nested[tmp])
+        tmp_.extend(ECBP_noCovids[tmp])
     
     tmp_0 = []
     for tmp in idx_patients_:
@@ -971,7 +992,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         worksheet.set_column('D:D', 30, widthColumn)
         worksheet.set_column('E:E', 40, widthColumn)
         worksheet.set_column('F:F', 15, widthColumn)
-        worksheet.set_column('G:G', 25, widthColumn)
+        worksheet.set_column('G:G', 28, widthColumn)
         worksheet.set_column('H:H', 25, widthColumn)
         worksheet.set_column('I:I', 25, widthColumn)
         worksheet.set_column('J:J', 20, widthColumn)
@@ -1016,11 +1037,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
             worksheet.merge_range('B'+str(excelIdx_pdIndx[val]+2)+':K'+str(excelIdx_pdIndx[val]+2),enterpriseNames_asDict[val],
                                   merge_format)
         #-----------------------------------------------------------------------------#
-
 #-----------------------------------------------------------------------------#
-
-
-
 
 #-----------------------------------------------------------------------------#
 def make_excel_antigen_antibody(idx_patients_, resultadoColumn, exam, path_, day, day_to_save, codeIntCob, yymmddPath, currentPath):

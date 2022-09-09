@@ -1,13 +1,13 @@
 firstName*secondName*thirdName
 empresa /en tu casa salud/ vespertino*010*
-pac1 hoja1*day1 salud1*002
-urgente pac2 hoja1*day1 salud2*002
-pac3 hoja1*day1 salud3*002
+pac1 sars hoja1*day1 salud1*002
+urgente sars y otro pac2 hoja1*day1 salud2*005 002 006 487
+pac3 otro hoja1*day1 salud3*005
 empresa /aj lab/ vespertino*011*
-pac4 hoja2*day1 AJ1*002
-urgente pac5 hoja3*day1 AJ2*002
-urgente pac6 hoja2*day1 AJ3*487
+pac4 sars hoja2*day1 AJ1*002
+urgente pac5 sars hoja3*day1 AJ2*487 002
+urgente pac6 antigeno hoja2*day1 AJ3*487
 empresa /en tu casa salud/ vespertino*012*
-pac7 hoja3*day1 salud4*002
-pac8 hoja3*day1 salud5*487
-pac9 hoja3*day1 salud6*002
+pac7 sars hoja3*day1 salud4*002
+pac8 antigeno hoja3*day1 salud5*002
+pac9 sars hoja3*day1 salud6*002

@@ -154,7 +154,7 @@ def join_month_parameters(dummy_counter):
         #_m --> mounth
         global idx_patients_m, idx_enterprise_m, idx_enterprise_patients_noCovits_m
         global codeIntLab_m, csvFile_m, ECBP_str_m, idx_urgentes_m, idx_vuelo_m
-        global examNameList_m, examNameList_nested_m, enterpriseNames_asDict_m
+        global examNameList_m, examNameList_nested_m, ECBP_m, enterpriseNames_asDict_m
         global ECBNC_m, ECBAC_m, ECBABC_m, ECBCABC_m, ECBSP_m
         global codeIntCob_m, listEnterpriseNameByPatient_m
         global day_list_m, day_list_antigenCovit_m, day_list_antibodyCovit_m
@@ -174,6 +174,7 @@ def join_month_parameters(dummy_counter):
         idx_vuelo_m = []
         examNameList_m = {}
         examNameList_nested_m = {}
+        ECBP_m = {}
         ECBNC_m = {}
         ECBAC_m = {}
         ECBABC_m = {}
@@ -233,6 +234,9 @@ def join_month_parameters(dummy_counter):
     for key, value in examNameList_nested.items():
         examNameList_nested_m[key+dummy_counter] = value
 
+    for key, value in ECBP.items():
+        ECBP_m[key+dummy_counter] = value
+
     for key, value in ECBNC.items():
         ECBNC_m[key+dummy_counter] = value
     
@@ -270,7 +274,7 @@ def laboratory_excel():
     projectmodule.make_laboratory_excel(idx_patients, idx_enterprise, codeIntLab, csvFile, ECBP_str, currentPath, yymmddPath, day_, idx_urgentes, idx_vuelo, examNameList, ECBNC, ECBAC, ECBABC, ECBCABC, ECBSP, enterpriseNames_asDict, "")
 
 def laboratoryNoCovid_excel():
-    projectmodule.make_no_covid_excel(idx_patients_noCovits, idx_enterprise_patients_noCovits, codeIntLab, csvFile, currentPath, os_path.join(yymmddPath,"byExamCategory"), day_, idx_urgentes, examNameList_nested, enterpriseNames_asDict, "_NoCovid")
+    projectmodule.make_no_covid_excel(idx_patients_noCovits, idx_enterprise_patients_noCovits, codeIntLab, csvFile, currentPath, os_path.join(yymmddPath,"byExamCategory"), day_, idx_urgentes, examNameList_nested, ECBP, enterpriseNames_asDict, "_NoCovid")
 
 def cobranza_excel():
     projectmodule.make_excel_cobranza(idx_patients, codeIntCob, day_[0:2]+'/'+day_[2:4]+'/'+day_[4:6], csvFile, examNameList, ECBP_str, listEnterpriseNameByPatient, day_, currentPath,  yymmddPath, idx_urgentes)
@@ -297,8 +301,8 @@ def antybody_excel_m():
     projectmodule.make_excel_antigen_antibody(idx_patients_antibodyCovit_m, {'IgG':np_NaN, 'IgM':np_NaN}, "IgG IgM SARS CoV-2", "_antibodySARS_COV2", day_list_antibodyCovit_m, yymmddPath[7:-7], codeIntCob_m, os_path.join(yymmddPath[:-6],"byMonth"), currentPath)
 
 def laboratoryNoCovid_excel_m():
-    projectmodule.make_no_covid_excel(idx_patients_noCovits_m, idx_enterprise_patients_noCovits_m, codeIntLab_m, csvFile_m, currentPath, os_path.join(yymmddPath[:-6],"byMonth","byExamCategory"), yymmddPath[7:-7], idx_urgentes_m, examNameList_nested_m, enterpriseNames_asDict_m, "_NoCovid")
-
+    projectmodule.make_no_covid_excel(idx_patients_noCovits_m, idx_enterprise_patients_noCovits_m, codeIntLab_m, csvFile_m, currentPath, os_path.join(yymmddPath[:-6],"byMonth","byExamCategory"), yymmddPath[7:-7], idx_urgentes_m, examNameList_nested_m, ECBP_m, enterpriseNames_asDict_m, "_NoCovid")
+    
 def enterprises_excel_m():
 
     for codeEnterprise_ in idx_patients_enterprise_forExclusiveExcel_asDict_m:
@@ -308,55 +312,7 @@ def enterprises_excel_m():
             day_list_enterprises_excel_m[codeEnterprise_], yymmddPath[7:-7], codeIntLab_m, csvFile_m, examNameList_m, currentPath, os_path.join(yymmddPath[:-6],"byMonth"),
             idx_urgentes_m)
 
-    # currentPath --> currentPath
-    # yymmddPath --> os_path.join(yymmddPath,"byExamCategory")
-    # day_ --> yymmddPath[7:-7]
-    # day_list_antibodyCovit_m
+    
 
 
 
-# # #----------------------------------------------------------------------------#
-# # #Update the historic DB
-
-# # #set the path
-# # historicDB_path=os_path.join("{0}","..","DB_historico",
-# #                              "borra.csv").format(currentPath)
-
-# # #make, if not exist, the csv file as empty 
-# # if os_path.isfile(historicDB_path)==False:
-# #     df_patientList.to_csv(historicDB_path, columns=["FOLIO INTERNO","NOMBRE",
-# #                                                 "APELLIDO","RESULTADO"],
-# #                       header=True, index=False)
-
-# # #read the csv file
-# # pd_historicPatientDB=pd.read_csv(historicDB_path, index_col="FOLIO INTERNO")
-
-# # tmp=pd_historicPatientDB.index.isin(df_patientList["FOLIO INTERNO"].tolist())
-# # tmp2=df_patientList["FOLIO INTERNO"].isin(pd_historicPatientDB.index)
-
-
-# # pd_historicPatientDB.loc[tmp]=np_array(
-# #     df_patientList.loc[tmp2,["NOMBRE","APELLIDO","RESULTADO"]])
-
-
-
-# # #append into pd_historicPatientDB
-# # A=df_patientList.loc[~tmp2,"FOLIO INTERNO"].values
-
-# # #pd_historicPatientDB.loc[ A.tolist() ]=df_patientList.loc[~tmp2,["NOMBRE","APELLIDO","RESULTADO"]].values[0]
-
-# # for tmp in A:
-# #     pd_historicPatientDB.loc[ tmp ]=["a","b","d"]
-
-
-
-# # #df_patientList.loc[~tmp2].to_string(
-# # #    index=False, header=False, columns=["NOMBRE","APELLIDO","RESULTADO"])
-# # #df_patientList.loc[~tmp2,["NOMBRE","APELLIDO","RESULTADO"]].to_list()
-
-
-
-
-# # #pd_historicPatientDB.to_csv(historicDB_path,header=True, index=False)
-
-# # #----------------------------------------------------------------------------#
