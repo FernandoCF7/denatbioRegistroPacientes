@@ -143,7 +143,7 @@ def get_idx_enterprise(csvFile_firstName):
 
 #-----------------------------------------------------------------------------#
 #check fill values in all patients entries
-def checkFilledfiels(columnIdx, csvFile, idx_patients):
+def checkFilledfiels(columnIdx, csvFile, idx_patients, day):
     
     if np_any(pd_isnull(csvFile.iloc[idx_patients,columnIdx])) or np_any(csvFile.iloc[idx_patients,columnIdx]==""):
         
@@ -153,12 +153,12 @@ def checkFilledfiels(columnIdx, csvFile, idx_patients):
             tmp = np_where(csvFile.iloc[idx_patients,columnIdx]=="")
 
         infoPatients = csvFile.iloc[idx_patients[tmp],:]
-        sys_exit("""Registro no valido para el (los) paciente(s):\n {0}""".format(infoPatients))
+        sys_exit("""Registro no valido (fecha: {}) para el (los) paciente(s):\n {}""".format(day, infoPatients))
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
 #get enterprise names and codecs
-def get_enterpriseNames(OSR, csvFile, idx_enterprise):
+def get_enterpriseNames(OSR, csvFile, idx_enterprise, day):
     #idx_enterprise --> array, index of enterprice at CSV file
     
     patern = re_compile(r'/.*?/')
@@ -176,17 +176,16 @@ def get_enterpriseNames(OSR, csvFile, idx_enterprise):
         
         #not defined enterprise mesage error
         if not(any(logicTMP)):
-            print('''OPERACION FALLIDA\nEmpresa no definida: {0} en el archivo \
-    codeEnterprise.csv; folio OSR: {1}'''.format(enterprise_name,OSR[val]))
+            print('''OPERACION FALLIDA (fecha: {})\nEmpresa no definida: {} en el archivo \
+    codeEnterprise.csv; folio OSR: {}'''.format(day, enterprise_name,OSR[val]))
             sys_exit("")
         
         #get enterprise code of clavesNombresEmpresa
         try:
             enterprise_code = codeEnterpriseFile.clave[logicTMP==True].item()
         except ValueError:
-            print("""OPERACION FALLIDA\nLa empresa {0} se encuentra definida más \
-    de una vez de la misma manera en el archivo codeEnterprise.csv""".format(
-    enterprise_name))
+            print("""OPERACION FALLIDA (fecha: {})\nLa empresa {} se encuentra definida más \
+    de una vez de la misma manera en el archivo codeEnterprise.csv""".format(day, enterprise_name))
             sys_exit()
             
         #append enterpriseCodecs
@@ -200,7 +199,7 @@ def get_enterpriseNames(OSR, csvFile, idx_enterprise):
 
 #-----------------------------------------------------------------------------#
 #get the enterprise names and codecs forExclusiveExcel
-def get_enterpriseNames_exclusiveExcel(exel_enterprises):
+def get_enterpriseNames_exclusiveExcel(exel_enterprises, day):
     
     enterpriseNames_forExclusiveExcel = []
     enterpriseCodecs_forExclusiveExcel = []
@@ -225,16 +224,15 @@ def get_enterpriseNames_exclusiveExcel(exel_enterprises):
         
         #not defined enterprise mesage error
         if not(any(logicTMP)):
-            print('''OPERACION FALLIDA\n La empresa {0} del listado list_enterprise_forExclusiveExcel no está definida en el archivo codeEnterprise.csv'''.format(enterprise_name))
+            print('''OPERACION FALLIDA (fecha: {})\n La empresa {} del listado list_enterprise_forExclusiveExcel no está definida en el archivo codeEnterprise.csv'''.format(day, enterprise_name))
             sys_exit("")
         
         #get enterprise code of clavesNombresEmpresa
         try:
             enterprise_code = codeEnterpriseFile.clave[logicTMP==True].item()
         except ValueError:
-            print("""OPERACION FALLIDA\nLa empresa {0} se encuentra definida más \
-    de una vez de la misma manera en el archivo codeEnterprise.csv""".format(
-    enterprise_name))
+            print("""OPERACION FALLIDA(fecha: {})\nLa empresa {} se encuentra definida más \
+    de una vez de la misma manera en el archivo codeEnterprise.csv""".format(day, enterprise_name))
             sys_exit()
             
         #append enterpriseCodecs_forExclusiveExcel
@@ -340,7 +338,7 @@ def get_listEnterpriseCodeByPatient(idx_enterprise, enterpriseCodecs, idx_patien
 
 #-----------------------------------------------------------------------------#
 #get shift (turno)
-def get_shift(idx_enterprise, csvFile, OSR):
+def get_shift(idx_enterprise, csvFile, OSR, day):
 
     shift = []
 
@@ -356,7 +354,7 @@ def get_shift(idx_enterprise, csvFile, OSR):
             tmp="M"
         
         #not assigned shift
-        if not tmp: sys_exit(NAS.format(OSR[val]))
+        if not tmp: sys_exit(NAS.format(day, OSR[val]))
         
         #append in shift dict
         shift.append(tmp)
@@ -535,7 +533,7 @@ def get_color_as_study(ECBP):
 
 #-----------------------------------------------------------------------------#
 #set the exams name, 
-def get_examNameList(idx_patients, csvFile, ECBP, format_):
+def get_examNameList(idx_patients, csvFile, ECBP, format_, day):
 
     examNameList = dict()
 
@@ -545,13 +543,13 @@ def get_examNameList(idx_patients, csvFile, ECBP, format_):
         try:
             examsName = pd_listExam.EXAMEN[ECBP[val]].tolist()
         except KeyError:
-            print(CEND.format(csvFile.firstName[val],csvFile.secondName.iloc[val]))        
+            print(CEND.format(day, csvFile.firstName[val], csvFile.secondName.iloc[val]))        
             sys_exit()
         
         #ensure exams name are recored
         for tmp in examsName:
             if type(tmp) == float:#(nan is float)exam name is empty at the excel file
-                print(CEND.format(csvFile.firstName[val], csvFile.secondName.iloc[val]))        
+                print(CEND.format(day, csvFile.firstName[val], csvFile.secondName.iloc[val]))        
                 sys_exit()
 
         if format_ == "as_str":
@@ -1277,9 +1275,9 @@ de pacientes (.txt), o modifique el permiso asignado a dicha empresa en el \
 archivo listadoPermisosCostosEspecialesEmpresas.csv"""
 
 #Code of exam not defined
-CEND='''OPERACION FALLIDA:\nCódigo de examen no definido; paciente: {0} {1}'''
+CEND='''OPERACION FALLIDA (fecha: {}):\nCódigo de examen no definido; paciente: {} {}'''
 
 #Not assigned shift
-NAS="""OPERACION FALLIDA\nTurno no asignado a la OSR {0}; asigne turno \
+NAS="""OPERACION FALLIDA (fecha: {})\nTurno no asignado a la OSR {}; asigne turno \
 MATUTINO/VESPERTINO"""
 #-----------------------------------------------------------------------------#

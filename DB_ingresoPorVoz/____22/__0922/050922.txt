@@ -1,4 +1,173 @@
 firstName*SecondName*thirdName
 EMPRESA/en tu casa salud/MATUTINO*037618
+lloret *girones gonzalez* 487
+EMPRESA/olarte y akle/MATUTINO*037619
+andres *maza alamillo* 029
+EMPRESA/en tu casa salud/MATUTINO*037620
+elisa *santana rios* 487
+alonso *rodriguez* 487
+EMPRESA/particular/MATUTINO*037621
+daniel *gorostieta de la cruz* 487 002
+EMPRESA/en tu casa salud/MATUTINO*037622
+allison *lopez fuentes* 487
+maria de la luz *fuentes montoya* 487
+EMPRESA/coss/MATUTINO*037623
+vuelo yiheng *liu* 002
+EMPRESA/LAURA PORTILLO/MATUTINO*037624
+LUCERO *TOMASITA VILLA* 571
+EMPRESA/MKT/MATUTINO*037625
+LESLYE CASANDRA *FERNANDEZ BOUQUET* 002
+EMPRESA/PARTICULAR/MATUTINO*037626
+RUTH MARISOL *ARENAS CORTES* 002
+EMPRESA/SOPRIMASA/MATUTINO*037627
+PATRICIA *ROMERO CERVANTES* 223
+JOSELIM  *ARTEAGA CASTILLO* 211
+NANCY *ROSALES NAJERA* 211
+EMPRESA/SURROGACY MEXICO/MATUTINO*037628
+ARIADNA ISABEL *SALAZAR GARCIA* 002
+EMPRESA/SURROGACY MEXICO/MATUTINO*037629 
+urgente LILIANA RUBI *VILLEGAS CAMPOS* 135 133 146 005 036 031 049 066 055 147 025 068 026 148 150 125 032 009 142 141 117 121 132 193 593
+urgente EVA LUNA *MARQUEZ YARRITO* 026 148 150
+EMPRESA/PARTICULAR/VESPERTINO*037630 
+GLORIA *HERRERA ARVIZU* 002
+EMPRESA/SURROGACY MEXICO/MATUTINO*037631 
+ZIR *COHEN* 487
+KOBI *CHAI* 487
+EMPRESA/SURROGACY MEXICO/MATUTINO*037632 
+EVA LUNA *MARQUEZ YARRITO* 487
+EMPRESA/EN TU CASA SALUD/MATUTINO*037633 
+JESSICA *VALDES VALDES* 487
+REBECA *DUVIGNAU VALDEZ* 487
+EMPRESA/PARTICULAR/MATUTINO*037634
+VUELO YE *ZUPING* 002
+EMPRESA/LAMBDAPI/MATUTINO*037635
+BERENICE *RIOS RUIZ* 223
+EMPRESA/particular/vespertino*037636
+vuelo jarod isaias *ruiz garcia de leon* 002
+EMPRESA/olarte y akle/vespertino*037637
+urgente johanna elias *slim* 149 157 139
+EMPRESA/bagc/vespertino*037638
+alfonzo rafael *hernandez* 211
+maria gabriela *rivero* 193
+pedro *martinez melchor* 479
+EMPRESA/pap/vespertino*037639
+mauricio * perez akaki * 002 
+corinna * canale pedrazzi * 002 
+EMPRESA/diagnostico molecular/vespertino*037640
+nelley * ramirez chanana * 487 002
+julia * ramirez chanana * 487 
+tatiana * ramirez chanana * 487 492
+EMPRESA/dra pamela perez/vespertino*037641
+atilia guillermina * sanchez gutierrez * 002 
+EMPRESA/particular/vespertino*037642
+vuelo artsem * antanouski * 002 
+EMPRESA/diagnostico molecular/vespertino*037643
+daniela * enriquez ancira * 002 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

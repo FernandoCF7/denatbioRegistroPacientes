@@ -4,12 +4,12 @@ import imp
 imp.reload(settings)
 
 #-----------------------------------------------------------------------------#
-day = '020522'
+day = '300922'
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
 #list to generate the excel file by enterprise
-exel_enterprises = ['/en tu casa salud/']
+exel_enterprises = ['/olarte y akle/']
 
 #set subsidiary
 subsidiary = '01'#hermita
@@ -23,8 +23,8 @@ inlineEF = True
 settings.set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF)
 #-----------------------------------------------------------------------------#
 
-#----------------------------------------------------------------------------#
-#make excel's, by day
+# #----------------------------------------------------------------------------#
+# #make excel's, by day
 
 # #antygen
 # settings.antigen_excel()
@@ -43,10 +43,10 @@ settings.set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF)
 
 # #enterprises
 # settings.enterprises_excel()
-#-----------------------------------------------------------------------------#
+# #-----------------------------------------------------------------------------#
 
-#-----------------------------------------------------------------------------#
-#make excel's, by month
+# #-----------------------------------------------------------------------------#
+# #make excel's, by month
 
 dummy_counter = 0
 for day_tmp in range( 1, int(day[0:2])+1 ):
@@ -55,22 +55,22 @@ for day_tmp in range( 1, int(day[0:2])+1 ):
     settings.join_month_parameters(dummy_counter)
     dummy_counter += max( [max(settings.idx_enterprise), max(settings.idx_patients)] ) + 1
 
-# #laboratory all
-settings.laboratory_excel_m()
+# # #laboratory all
+# settings.laboratory_excel_m()
 
-# #cobranza
-settings.cobranza_excel_m()
+# # #cobranza
+# settings.cobranza_excel_m()
 
-#antygen
-settings.antigen_excel_m()
+# #antygen
+# settings.antigen_excel_m()
 
-#antybody
-settings.antybody_excel_m()
+# #antybody
+# settings.antybody_excel_m()
 
-#laboratory no-covids
-settings.laboratoryNoCovid_excel_m()
+# #laboratory no-covids
+# settings.laboratoryNoCovid_excel_m()
 
-#enterprises
+# #enterprises
 settings.enterprises_excel_m()
 #-----------------------------------------------------------------------------#
 

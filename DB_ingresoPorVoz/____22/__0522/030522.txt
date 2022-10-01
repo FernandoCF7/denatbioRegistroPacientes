@@ -1,26 +1,279 @@
-firstName*secondName*thirdName
-empresa /en tu casa salud/ vespertino*032*
-juan*perez*487
-luis*fonsi*491
-pastor*el mejor*002
-hola*mundo*487 002
-paciete*externo*005
-empresa /aj lab/vespertino*033*
-paciente*desconocido*487
-mi*paciente*007
-el*paciente*005
-otro*paciente*487 002
-paciente*favorito*002
-empresa /en tu casa salud/ vespertino*032*
-nombre1*apellido1*002
-nombre2*apellido2*487
-urgente nombre3*apellido3*002
-empresa /denatbio/vespertino*034*
-mi*paciente*002
-el*mejor*005
-empresa /diafer/vespertino*035*
-la*cbr*487
-empresa /diafer/vespertino*036*
-urgente mi*paciente*487
-empresa /en tu casa salud/ vespertino*017*
-urgente vuelo nombre4*apellido4*487
+firstName*SecondName*thirdName
+EMPRESA/en tu casa salud/matutino *31856*
+manuel *garcia hernandez* 487
+francisco javier *gonzalez roman* 487
+patricio *pereda* 487
+sergio *briseño alvarez del castillo* 487
+enrique *rodriguez anzures* 487
+jesus alejandro *arriaga diaz* 487
+guillermo *mendiola mejia* 487
+eduardo *perez ita* 487
+orlando *solis ruiz* 487
+alfredo jacobo *de la torre* 487
+EMPRESA/en tu casa salud/matutino *31857*
+adolfo fructuoso *garcia mendez* 487
+EMPRESA/en tu casa salud/matutino *31858*
+vuelo mariana *prada heredia* 487
+vuelo pedro alonso *solis camara diaz* 487
+EMPRESA/en tu casa salud/matutino *31859*
+pablo isaac *mendoza rojas* 487
+lucio *reyes garcia* 487
+inosencio *marquez calderas* 487
+enrique *sanchez gonzalez* 487
+daniel *lopez salazar* 487
+rene *maguellar arenas* 487
+francisco javier *fernandez aranda* 487
+alejandro *arredondo velazquez* 487
+javier *sanchez carrera* 487
+rodrigo miguel *lopez garcia* 487
+EMPRESA/en tu casa salud/matutino *31860*
+ELIZABETH selene *guardado ortega* 487
+cinthya berenice *zarate carrandi* 487
+juan estevan *ramirez calva* 487
+david *carretero cruz* 487
+EMPRESA/en tu casa salud/matutino *31861*
+ANDREA *SOLER GUITIAN* 487
+PERLA *CASTAÑON FLORES* 487
+MARIANA *SANTIAGO PEREZ GOMEZ* 487
+SILVIA *GUTIERREZ BALLESTEROS* 487
+EVA *GONZALEZ TREJO* 487
+MELODY ROSSE *RIVAS LAURA* 487
+DULCE MAGDALENA *GUTIERREZ ORTIZ* 487
+ROBERTO *ALVAREZ ALMARAZ* 487
+ANA BERTHA *MARTINEZ SANCHEZ* 487
+ALMA JESSICA *FLORES BERNAL* 487
+EMPRESA/aj lab/matutino *31862*
+jocius *pierre* 002
+EMPRESA/mds/matutino *31863*
+maria elizabeth *diaz soto* 1009
+EMPRESA/en tu casa salud/matutino *31864*
+vuelo alan jay *davidson* 002 487
+vuelo anastacia marie *cheatham* 002 487
+EMPRESA/en tu casa salud/matutino *31865*
+jorge *bujosevich trejo* 487
+maria florencia *rodriguez merlevede* 487
+EMPRESA/en tu casa salud/matutino *31866*
+filiberto *leon contreras* 487
+daniel *ledesma contreras* 487
+ricardo jon *garcia cortez* 487
+ernesto francisco *hernandez garci* 487
+EMPRESA/denatbio/matutino *31867*
+jesica paola *mandujano ceron* 026
+sara gloria *sarmientos perez* 026
+mariana *ortega ledesma* 026
+EMPRESA/en tu casa salud/matutino *31868*
+ricardo *amador uribe* 487
+ileen *ramirez aceres* 487
+david *marin garcia* 487
+rodrigo *fernandez uribe* 487
+EMPRESA/en tu casa salud/matutino *31869*
+vuelo robert *william* 002
+vuelo michaela eileen *johnson* 002
+vuelo john francis *lowe* 002
+vuelo james jachlan *brown* 002
+vuelo tomas damian *noakes* 002
+EMPRESA/en tu casa salud/matutino *31870*
+kaminiak *phillip* 487
+EMPRESA/en tu casa salud/matutino *31871*
+chris russell *palladino* 487
+martin *jalfen* 487
+EMPRESA/en tu casa salud/matutino *31872*
+alonso *sanchez de la vega* 487
+EMPRESA/coss/matutino *31873*
+vuelo jian *wu* 002
+EMPRESA/surrogacy/matutino *31874*
+lina yuriko *londoño gomez* 607 005 026 571
+EMPRESA/en tu casa salud/matutino *31875*
+maria fernanda *salazar sanchez* 487
+EMPRESA/en tu casa salud/matutino *31876*
+angel *susarrey guzman* 487
+ana clara *sanchez garcia* 487
+yull alejandro *gonzalez alejandre* 487
+juan enrique *reynoso mercado* 487
+marco antonio *villavicencio* 487
+elsa *chabero garcia* 487
+fernando *moreno ledezma* 487
+EMPRESA/senosiain/matutino *31877*
+alin amanda *montoya hernandez* 002
+EMPRESA/hgk/matutino *31878*
+urgente vuelo jiesheng *gong* 002
+urgente vuelo xuerong *liang* 002
+EMPRESA/asociacion coreana de mexico/matutino *31879*
+vuelo woo jin *lee* 002
+vuelo kyungwon *seo* 002
+vuelo doowon *lee* 002
+EMPRESA/asociacion coreana de mexico/matutino *31880*
+vuelo hyungsub *shin* 002
+EMPRESA/asociacion coreana de mexico/matutino *31881*
+vuelo suk hun *park* 002
+EMPRESA/asociacion coreana de mexico/matutino *31882*
+vuelo mariana angelica *son* 002
+vuelo jeong ok *son* 002
+vuelo sun jin *an* 002
+EMPRESA/asociacion coreana de mexico/matutino *31883*
+vuelo soojung *heo* 002
+EMPRESA/asociacion coreana de mexico/matutino *31884*
+vuelo kilhwa *jung* 002
+EMPRESA/asociacion coreana de mexico/matutino *31885*
+vuelo jongcheow *choi* 002
+EMPRESA/EN TU CASA SALUD/matutino *31886*
+VUELO JOSHUA CHARLES *PARKER* 002
+VUELO ADAM DAVID *PEACOCCK MATULONIS* 002
+JACKSON *REID KELLY* 002
+EDUARDO FRANCISCO *VILDASOL* 002
+CHRISTINE *HERNANDEZ STRUKEL* 002
+EMPRESA/EN TU CASA SALUD/matutino *31887*
+MACELA *DIJAIRCI VENEGAS* 487
+EMPRESA/EN TU CASA SALUD/matutino *31888*
+kari ann *lakomki* 002
+hong dyne *ej* 002
+lucas vinivius *pug liessa araujo* 002
+julieta viridiana *villalobos de lira* 002
+EMPRESA/EN TU CASA SALUD/matutino *31889*
+cuahutemoc *torres quiroz* 487
+trinidad *vidal escalona* 487
+carlos alejandro *amador wong* 487
+sophia *stieglitz mori* 487
+hugo emmanuel *guerrero camara* 487
+juan carlos *gutierrez galindo* 487
+elire adriana *alamilla perez* 487
+guadalupe *palacios ochoa* 487
+inari coral *resendiz sanchez* 487
+marta *moreno martinez* 487
+EMPRESA/probion/matutino *31890*
+gustavo *muñoz* 002
+EMPRESA/karina vazquez/matutino *31891*
+valentin *castelon alegria* 002
+patricia *hernandez aguirre de magaña* 002
+EMPRESA/lab nezahualcoyotl/vespertino *31892*
+felipe *gonzalez vista* 002
+EMPRESA/aj lab/vespertino *31893*
+edna lilia *corona ramirez* 002
+fausto alejandro *tellez gaiño* 002
+milagros *perez castro* 002
+yuliya *danylko kruk* 002
+maria manuela *cudalb* 002
+lara mariela *alessi* 002
+kunal *sharma* 002
+ryosuke *kimura* 002
+yu hong *lai* 002
+EMPRESA/mds/vespertino *31894*
+carmen *vazquez m* 1009
+efren *salas* 1009
+EMPRESA/nucleo diagnostico/vespertino *31895*
+jose arnulfo *aranda llamas* 479
+EMILIANO *RIVERA LAZCARRO* 479
+FERNANDO *PAIZ MERCADO* 003 193
+SERGIO SAUL *VALENZUELA MARTINEZ* 083
+DIANA ROMELIA *AGUIRRE MARTINEZ* 011 013
+VICTOR *GUERRERO CAMPOS* 227
+MIGUEL ANGEL *JARAMILLO LOPEZ* 227
+CLAUDIA ESMERALDA *CALVILLO PEREZ* 227
+EMPRESA/EN TU CASA SALUD/vespertino *31896*
+GUSTAVO ENRIQUE *JIMENEZ PEGUEROS* 487
+LUIS EDUARDO *AMBRIS MARTINEZ* 487
+EMPRESA/EN TU CASA SALUD/vespertino *31897*
+GINA PAOLA *CAZARAN BOHORQUEZ* 002
+EMPRESA/EN TU CASA SALUD/vespertino *31898*
+MARTIN FABINA *SOLANO NORIA* 487
+ANGEL *SALGADO MORALES* 487
+JOSE FRANCISCO *MARTIN RUELAS* 487
+MARIO ALBERTO *CRUZ TELLEZ* 487
+FERNANDO *MENDOZA PACHECO* 487
+CRISTINA *CAMACHO ALLENDE* 487
+LEONARDO *OLVERA LEON* 487
+FRANCISCO *CHAVEZ REYES* 487
+IRENE MARIBEL *RAMIREZ RODRIGUEZ* 487
+ALAN ENRIQUE *GARCIA GONZALEZ* 487
+EMPRESA/EN TU CASA SALUD/vespertino *31899*
+oscar *monte de honor ramirez* 487
+eric benigno *cabañas ramirez* 487
+SUSANA *MENDIOLA MEJIA* 487
+ANAYELI *ALDECO FLORES* 487
+EMPRESA/EN TU CASA SALUD/vespertino *31900* 
+GALO ROBERTO *OLIVAREZ TEJO* 487
+EMPRESA/CILAB/vespertino *31901* 
+GLORIA * HERNANDEZ TORIBIO * 002 
+EMPRESA/pap/vespertino *31902* 
+raul * bailleres gual * 002 
+EMPRESA/en tu casa salud/vespertino *31903* 
+alex * prager * 002 
+kristin * porter * 002 
+EMPRESA/cruz roja/vespertino *31904* 
+patricia * iglesias correa * 487 
+julieta * barrera gama * 487 
+karine beatrice * vigne diez * 487 
+manuel * cangas * 487 
+alvaro * cangas vigne * 487 
+manuel * cangas vigne * 487 
+EMPRESA/florida satelite/vespertino *31905* 
+nicolas * nommick * 002 
+EMPRESA/san patricio/vespertino *31906* 
+michel *soto  hernandez * 002 
+jose eduardo *  diaz bonilla * 002 
+juan antonio *  chontal arias * 002 
+jesus guadalupe  * guzman garcia * 002 
+EMPRESA/mds/vespertino *31907* 
+juan manuel * jr yepez * 1009 
+ricardo * maya rincon * 1009 
+changsu * lee * 1009 
+kuraki * yamanura * 1009 
+rosa maria * hernandez * 1009 
+arianna rebeca * gil alcala * 1009
+maria de los angeles * cruz castelan * 1009 
+EMPRESA/aj lab/vespertino *31908* 
+maria lilia * rangel cortes * 002 
+caine wen * lau * 002 
+EMPRESA/mds/vespertino *31909* 
+leticia * meneses rodriguez * 1009 
+linda consepcion * pineda quijada * 1009 
+EMPRESA/en tu casa salud/vespertino *31910* 
+vuelo gloria elaine * newell de onofrietti * 002 
+vuelo antonio * yturbe bernal * 002 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

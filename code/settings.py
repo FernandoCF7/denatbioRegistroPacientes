@@ -64,16 +64,16 @@ def set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF):
 
     #-----------------------------------------------------------------------------#
     #check fill values in all patients entries
-    projectmodule.checkFilledfiels(0, csvFile, idx_patients)
-    projectmodule.checkFilledfiels(1, csvFile, idx_patients)
-    projectmodule.checkFilledfiels(2, csvFile, idx_patients)
+    projectmodule.checkFilledfiels(0, csvFile, idx_patients, day)
+    projectmodule.checkFilledfiels(1, csvFile, idx_patients, day)
+    projectmodule.checkFilledfiels(2, csvFile, idx_patients, day)
     #-----------------------------------------------------------------------------#
 
     #get enterprise names and codecs
-    enterpriseNames, enterpriseCodecs = projectmodule.get_enterpriseNames(OSR, csvFile, idx_enterprise)
+    enterpriseNames, enterpriseCodecs = projectmodule.get_enterpriseNames(OSR, csvFile, idx_enterprise, day)
 
     #get the enterprise names and codecs forExclusiveExcel
-    enterpriseNames_forExclusiveExcel, enterpriseCodecs_forExclusiveExcel = projectmodule.get_enterpriseNames_exclusiveExcel(exel_enterprises)
+    enterpriseNames_forExclusiveExcel, enterpriseCodecs_forExclusiveExcel = projectmodule.get_enterpriseNames_exclusiveExcel(exel_enterprises, day)
 
     #set idx_enterprise and enterpriseNames as dict
     enterpriseNames_asDict = dict(zip(idx_enterprise, enterpriseNames))
@@ -85,7 +85,7 @@ def set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF):
     listEnterpriseCodeByPatient = projectmodule.get_listEnterpriseCodeByPatient(idx_enterprise, enterpriseCodecs, idx_patients, len(csvFile))
 
     #get shift (turno)
-    shift = projectmodule.get_shift(idx_enterprise, csvFile, OSR)
+    shift = projectmodule.get_shift(idx_enterprise, csvFile, OSR, day)
 
     #set the enterprise code by patient
     listShiftByPatient = projectmodule.get_listShiftByPatient(idx_enterprise, idx_patients, shift, len(csvFile))
@@ -122,10 +122,10 @@ def set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF):
     #-----------------------------------------------------------------------------#
 
     #set the exams name
-    examNameList = projectmodule.get_examNameList(idx_patients, csvFile, ECBP, "as_str")
+    examNameList = projectmodule.get_examNameList(idx_patients, csvFile, ECBP, "as_str", day)
 
     #set the exams name nested list
-    examNameList_nested = projectmodule.get_examNameList(idx_patients, csvFile, ECBP, "as_list")
+    examNameList_nested = projectmodule.get_examNameList(idx_patients, csvFile, ECBP, "as_list", day)
 
     #make inter code
     codeIntLab, codeIntCob = projectmodule.get_codeInt_Lab_Cob(idx_patients, idx_urgentes, day, subsidiary, ECBP, listEnterpriseCodeByPatient, listShiftByPatient, EPCBP)
@@ -302,7 +302,7 @@ def antybody_excel_m():
 
 def laboratoryNoCovid_excel_m():
     projectmodule.make_no_covid_excel(idx_patients_noCovits_m, idx_enterprise_patients_noCovits_m, codeIntLab_m, csvFile_m, currentPath, os_path.join(yymmddPath[:-6],"byMonth","byExamCategory"), yymmddPath[7:-7], idx_urgentes_m, examNameList_nested_m, ECBP_m, enterpriseNames_asDict_m, "_NoCovid")
-    
+
 def enterprises_excel_m():
 
     for codeEnterprise_ in idx_patients_enterprise_forExclusiveExcel_asDict_m:
