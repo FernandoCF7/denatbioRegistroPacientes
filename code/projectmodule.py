@@ -607,7 +607,8 @@ def get_dict_pattient_enterprise(idx_patients, idx_enterprise):
 #get the index's of no covit patients
 def get_idx_noCovits(idx_patients, ECBP, dict_pattient_enterprise):
 
-    covid_exam_codecs = [2,487,491,492,569,1009]
+    # covid_exam_codecs = [2,487,491,492,569,1009]
+    covid_exam_codecs = []#this part was "seteada" to include all studies (eaven covid) at no covid list
     tmp = []
 
     for val in idx_patients:
@@ -869,7 +870,7 @@ def make_laboratory_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, E
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, currentPath, yymmddPath, day, idx_urgentes, examNameList_nested, ECBP, enterpriseNames_asDict, path_=""):
+def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, currentPath, yymmddPath, day, idx_urgentes, idx_vuelo, examNameList_nested, ECBP, enterpriseNames_asDict, path_=""):
 
     #idx_patients_ --> pandas index, the index (in the CSV file) of patients to show
     #idx_enterprise --> list, the index (in the CSV file) of enterprises to show
@@ -897,7 +898,8 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     for key in ECBP_noCovids:
         idx_to_quit = []
         for idx, tmp in enumerate(ECBP[key]):    
-            if tmp in [2,487,491,492,569,1009]: idx_to_quit.append(idx)
+            # if tmp in [2,487,491,492,569,1009]: idx_to_quit.append(idx)#this line was "seteada" to integrate all studies (eaven covid studies) at no covid list
+            if tmp in []: idx_to_quit.append(idx)
         
         if idx_to_quit:
             tmp = ECBP_noCovids[key]
@@ -1000,7 +1002,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         #-----------------------------------------------------------------------------#
     
         #-----------------------------------------------------------------------------#
-        #Set urgents format
+        #Set urgents and vuelo format
         
         #urgentes
         urgentFormat = workbook.add_format({'align': 'left', 'valign': 'vcenter',
@@ -1010,8 +1012,17 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         for tmp in list(set(idx_urgentes) & set(idx_patients_)):
             # tmp_ = idx.index(tmp)
             tmp_ = excelIdx_pdIndx[tmp] 
-            worksheet.write_string('F'+str(tmp_+2)+':F'+str(tmp_+2),"URGENTE",
-                                  urgentFormat)
+            worksheet.write_string('F'+str(tmp_+2)+':F'+str(tmp_+2),"URGENTE", urgentFormat)
+        
+        #vuelo
+        vueloFormat = workbook.add_format({'align': 'left', 'valign': 'vcenter',
+                                            'bold': True, 'font_color': 'black',
+                                            'bg_color': 'blue'})
+        
+        for tmp in list(set(idx_vuelo) & set(idx_patients_)):
+            # tmp_ = idx.index(tmp)
+            tmp_ = excelIdx_pdIndx[tmp] 
+            worksheet.write_string('G'+str(tmp_+2)+':G'+str(tmp_+2),"VUELO", vueloFormat)
         #-----------------------------------------------------------------------------#
     
         #-----------------------------------------------------------------------------#
