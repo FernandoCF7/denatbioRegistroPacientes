@@ -889,25 +889,30 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     #----------------------------------------------------------------------------#
     #set correlation pd index and idx_patients_and_enterprise
     excelIdx_pdIndx = {val:idx_ for idx_, val in enumerate(idx_patients_and_enterprise)}
-    pdIndx_for_examList = [val for key, val in excelIdx_pdIndx.items() if key in idx_patients_]
+    
     
     #update excelIdx_pdIndx considering there patients that have more than one exam
-    ECBP_noCovids = {x:y for x,y in examNameList_nested.items() if x in idx_patients_}
+    examNameList_nested_without_covid = {x:y for x,y in examNameList_nested.items() if x in idx_patients_}
+    ECBP_without_covid = copy_deepcopy(ECBP)
     
-    #quit the covid part (if have) to ECBP_noCovids
-    for key in ECBP_noCovids:
+    #quit the covid part (if have) to examNameList_nested_without_covid
+    for key in examNameList_nested_without_covid:
         idx_to_quit = []
         for idx, tmp in enumerate(ECBP[key]):    
             # if tmp in [2,487,491,492,569,1009]: idx_to_quit.append(idx)#this line was "seteada" to integrate all studies (eaven covid studies) at no covid list
             if tmp in []: idx_to_quit.append(idx)
         
         if idx_to_quit:
-            tmp = ECBP_noCovids[key]
+            tmp = examNameList_nested_without_covid[key]
             delete_multiple_element(tmp, idx_to_quit)
-            ECBP_noCovids[key] = tmp
+            examNameList_nested_without_covid[key] = tmp
+
+            tmp = ECBP_without_covid[key]
+            delete_multiple_element(tmp, idx_to_quit)
+            ECBP_without_covid[key] = tmp
     
     excelIdxExams_pdIndx = {}
-    for key, value in ECBP_noCovids.items():
+    for key, value in examNameList_nested_without_covid.items():
         
         if len(value) > 1:# --> more than one exam
             
@@ -926,17 +931,19 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     end_index = max(excelIdxExams_pdIndx.get(idx_patients_[-1]))+1 if idx_patients_and_enterprise else 0
     df_toExcel = pd_DataFrame(
         {
-            'OSR':np_NaN,
-            'COD INT':np_NaN,
-            'NOMBRE':np_NaN,
-            'APELLIDO':np_NaN,
-            'EXAMEN':np_NaN,
-            'ESTATUS':np_NaN,
-            'FECHA RECEPCIÓN RESULTADO':np_NaN,
-            'ENVIÓ':np_NaN,
-            'REVISÓ':np_NaN,
-            'FECHA DE ENVÍO':np_NaN,
-            'HORA DE ENVÍO':np_NaN
+            'OSR':np_NaN,#A
+            'COD INT':np_NaN,#B
+            'NOMBRE':np_NaN,#C
+            'APELLIDO':np_NaN,#D
+            'EXAMEN\nNOMBRE':np_NaN,#E
+            'EXAMEN\nCOD':np_NaN,#F
+            'ESTATUS':np_NaN,#G
+            'RESULTADO\nSARS CoV2':np_NaN,#H
+            'FECHA RECEPCIÓN \n RESULTADO':np_NaN,#I
+            'ENVIÓ':np_NaN,#J
+            'REVISÓ':np_NaN,#K
+            'FECHA DE ENVÍO':np_NaN,#L
+            'HORA DE ENVÍO':np_NaN#M
         }
         , index = range(0, end_index)
     )
@@ -955,16 +962,27 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     #APELLIDO
     df_toExcel.loc[[excelIdx_pdIndx[tmp] for tmp in idx_patients_], ["APELLIDO"]] = [csvFile["secondName"][[tmp]].str.strip() for tmp in idx_patients_]
 
-    # #EXAMEN
+    #EXAMEN NOMBRE
     tmp_ = []
     for tmp in idx_patients_:
-        tmp_.extend(ECBP_noCovids[tmp])
+        tmp_.extend(examNameList_nested_without_covid[tmp])
     
     tmp_0 = []
     for tmp in idx_patients_:
         tmp_0.extend(excelIdxExams_pdIndx[tmp])
     
-    df_toExcel.loc[tmp_0, "EXAMEN"] = tmp_
+    df_toExcel.loc[tmp_0, "EXAMEN\nNOMBRE"] = tmp_
+
+    #EXAMEN COD
+    tmp_ = []
+    for tmp in idx_patients_:
+        tmp_.extend(ECBP_without_covid[tmp])
+    
+    tmp_0 = []
+    for tmp in idx_patients_:
+        tmp_0.extend(excelIdxExams_pdIndx[tmp])
+    
+    df_toExcel.loc[tmp_0, "EXAMEN\nCOD"] = tmp_
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
@@ -975,13 +993,32 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     with pd_ExcelWriter(pathTosave, engine='xlsxwriter') as writer:
                                                            
         #Convert the dataframe to an XlsxWriter Excel object.
-        df_toExcel.to_excel(writer, sheet_name=day, index=False)
+        df_toExcel.to_excel(writer, sheet_name=day, index=False, startrow=1, header=False)
         
         #Get the xlsxwriter workbook and worksheet objects.
         workbook  = writer.book
         worksheet = writer.sheets[day]
         #-----------------------------------------------------------------------------#
         
+        #-----------------------------------------------------------------------------#
+        #set header
+        
+        #header format
+        header_format = workbook.add_format(
+            {
+                'bold': True,
+                'text_wrap': True,
+                'valign': 'top',
+                'fg_color': '#D7E4BC',
+                'border': 1,
+                'align':'center'
+            })
+
+        #write the column headers with the defined format
+        for idx_, value_ in enumerate(df_toExcel.columns.values):
+            worksheet.write(0, idx_, value_, header_format)
+        #-----------------------------------------------------------------------------#
+
         #-----------------------------------------------------------------------------#
         #set formats
         
@@ -991,12 +1028,14 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         worksheet.set_column('C:C', 30, widthColumn)
         worksheet.set_column('D:D', 30, widthColumn)
         worksheet.set_column('E:E', 40, widthColumn)
-        worksheet.set_column('F:F', 15, widthColumn)
-        worksheet.set_column('G:G', 28, widthColumn)
-        worksheet.set_column('H:H', 25, widthColumn)
-        worksheet.set_column('I:I', 25, widthColumn)
-        worksheet.set_column('J:J', 20, widthColumn)
-        worksheet.set_column('K:K', 20, widthColumn)
+        worksheet.set_column('F:F', 10, widthColumn)
+        worksheet.set_column('G:G', 15, widthColumn)
+        worksheet.set_column('H:H', 12, widthColumn)
+        worksheet.set_column('I:I', 18, widthColumn)
+        worksheet.set_column('J:J', 18, widthColumn)
+        worksheet.set_column('K:K', 18, widthColumn)
+        worksheet.set_column('L:L', 16, widthColumn)
+        worksheet.set_column('M:M', 16, widthColumn)
         
         border_format = workbook.add_format({'border': 1})
         #-----------------------------------------------------------------------------#
@@ -1012,7 +1051,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         for tmp in list(set(idx_urgentes) & set(idx_patients_)):
             # tmp_ = idx.index(tmp)
             tmp_ = excelIdx_pdIndx[tmp] 
-            worksheet.write_string('F'+str(tmp_+2)+':F'+str(tmp_+2),"URGENTE", urgentFormat)
+            worksheet.write_string('G'+str(tmp_+2)+':G'+str(tmp_+2),"URGENTE", urgentFormat)
         
         #vuelo
         vueloFormat = workbook.add_format({'align': 'left', 'valign': 'vcenter',
@@ -1022,17 +1061,17 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         for tmp in list(set(idx_vuelo) & set(idx_patients_)):
             # tmp_ = idx.index(tmp)
             tmp_ = excelIdx_pdIndx[tmp] 
-            worksheet.write_string('G'+str(tmp_+2)+':G'+str(tmp_+2),"VUELO", vueloFormat)
+            worksheet.write_string('H'+str(tmp_+2)+':H'+str(tmp_+2),"VUELO", vueloFormat)
         #-----------------------------------------------------------------------------#
     
         #-----------------------------------------------------------------------------#
         #Add border
         numRows=len(df_toExcel)
         
-        worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'no_blanks',
+        worksheet.conditional_format('A1:M'+str(numRows+1),{'type':'no_blanks',
                                               'format':border_format})
         
-        worksheet.conditional_format('A1:K'+str(numRows+1),{'type':'blanks',
+        worksheet.conditional_format('A1:M'+str(numRows+1),{'type':'blanks',
                                               'format':border_format})
         #-----------------------------------------------------------------------------#
         
@@ -1043,7 +1082,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
                                             'bg_color': 'black'})
         
         for indx_, val, in enumerate(idx_enterprise_):
-            worksheet.merge_range('B'+str(excelIdx_pdIndx[val]+2)+':K'+str(excelIdx_pdIndx[val]+2),enterpriseNames_asDict[val],
+            worksheet.merge_range('B'+str(excelIdx_pdIndx[val]+2)+':M'+str(excelIdx_pdIndx[val]+2),enterpriseNames_asDict[val],
                                   merge_format)
         #-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
