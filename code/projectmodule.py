@@ -137,6 +137,45 @@ def set_df_enterpriseNames(currentPath, inlineEF):
     df_enterpriseNames = pd_concat([df_enterpriseNames, clavesNombresEmpresa_locally], axis=0)
 #-----------------------------------------------------------------------------#
 
+
+
+#-----------------------------------------------------------------------------#
+#read pd_listSurrogate file
+def set_pd_listSurrogate(currentPath, inlineEF):
+    
+    global pd_listSurrogate
+
+    if inlineEF:
+        filePath_list = ("{0}"+"surrogate/surrogateList.csv?raw=true").format(orig_url)
+    else:
+        filePath_list = os_path.join("{0}","..","surrogate",
+                                    "surrogateList.csv").format(currentPath)
+
+    pd_listSurrogate = (pd_read_csv(filePath_list, usecols=["CODE","SURROGATE"]))
+
+    #set index of pd_listSurrogate as CODE column
+    pd_listSurrogate.set_index("CODE", inplace=True)
+
+
+    #read pd_listSurrogate locally file
+    filePath_list_tmp = os_path.join("{}","..","altas","surrogateList.csv").format(currentPath)
+    listExam_locally = pd_read_csv(filePath_list_tmp, usecols=["CODE","SURROGATE"])
+
+    listExam_locally.set_index("CODE", inplace=True)
+
+    # append listExam_locally to pd_listSurrogate
+    for idx, row in listExam_locally.iterrows():
+        
+        if idx in pd_listSurrogate.index:#update the surrogate
+            pd_listSurrogate.SURROGATE[idx] = row["SURROGATE"]
+        # else:#append examn
+        #     pd_listExam = pd_concat([pd_listExam, listExam_locally.loc[idx]], axis=0)
+    
+    print(pd_listSurrogate)
+#-----------------------------------------------------------------------------#
+
+
+
 #-----------------------------------------------------------------------------#
 #search for enterprise; extract index of the enterprises
 def get_idx_enterprise(csvFile_firstName):
@@ -461,9 +500,31 @@ def get_ECBP(idx_patients, csvFile):
 
     for val in idx_patients:#for each patien
         
-        exams = csvFile.thirdName[val]#get the string examCodecs
-        exams = list(map(int, exams.split()))#Split the string and put it in a list
-        ECBP[val] = exams
+        #get the string examCodecs
+        exams = csvFile.thirdName[val]
+        
+        #Split the string considering " "
+        exams = exams.split()
+
+        #asociate each exam by their surrogant
+        tmp_ = {}
+        for exam in exams:
+            tmp = exam.split("_")
+            code = int(tmp[0])
+            try:
+                surrogate = tmp[1].upper()
+            except:
+                surrogate = "DENATBIO"
+        
+            #validate surrogate is registered
+            if surrogate != "DENATBIO":
+                if surrogate not in ["DENATBIO", "BAGC", "ALISON"]:#actualizaaaaaa, tambien leer y pasar a mayusculas
+                    print("{}".format("ERROR: el subrrogador NOMBRE , paciente no exite"))
+                    sys_exit()
+            
+            tmp_[code] = surrogate
+        
+        ECBP[val] = tmp_
     
     return ECBP
 #-----------------------------------------------------------------------------#
@@ -487,9 +548,11 @@ def get_ECBP_str(ECBP):
     
     ECBP_str = dict()
     
-    for val in ECBP.items():
-        tmp = list(map(str,val[1]))
-        ECBP_str[val[0]]="\n".join(tmp)
+    for key, value in ECBP.items():
+
+        tmp = list(map(str, value.keys()))
+        
+        ECBP_str[key]="\n".join(tmp)
     
     return ECBP_str
 #-----------------------------------------------------------------------------#
@@ -500,8 +563,9 @@ def get_EPCBP(ECBP):
  
     EPCBP = dict()
  
-    for val in ECBP:
-        EPCBP[val] = np_prod(ECBP[val])
+    for key, value in ECBP.items():
+        
+        EPCBP[key] = np_prod(list(value.keys()))
     
     return EPCBP
 #-----------------------------------------------------------------------------#
@@ -513,31 +577,31 @@ def get_color_as_study(ECBP):
     #ECBNC --> Exam color by no PCR covits
     ECBNC = dict()
     for idx, val in ECBP.items():
-        if any(np_array(val)!=2):
+        if any(np_array(list(val.keys()))!=2):
             ECBNC[idx]=True
 
     #ECBAC --> Exam color by antigen covit
     ECBAC = dict()
     for idx, val in ECBP.items():
-        if any(np_array(val)==487):
+        if any(np_array(list(val.keys()))==487):
             ECBAC[idx]=True
 
     #ECBABC --> Exam color by anti body covit
     ECBABC = dict()
     for idx, val in ECBP.items():
-        if any(np_array(val)==491):
+        if any(np_array(list(val.keys()))==491):
             ECBABC[idx]=True
 
     #ECBCABC --> Exam color by cuantitative anti body covit
     ECBCABC = dict()
     for idx, val in ECBP.items():
-        if any(np_array(val)==569):
+        if any(np_array(list(val.keys()))==569):
             ECBCABC[idx]=True
 
     #ECBSP --> Exam color by sars plus
     ECBSP = dict()
     for idx, val in ECBP.items():
-        if any(np_array(val)==1009):
+        if any(np_array(list(val.keys()))==1009):
             ECBSP[idx]=True
         
     return ECBNC, ECBAC, ECBABC, ECBCABC, ECBSP
@@ -553,7 +617,7 @@ def get_examNameList(idx_patients, csvFile, ECBP, format_, day):
         
         #ensure exams code are recored
         try:
-            examsName = pd_listExam.EXAMEN[ECBP[val]].tolist()
+            examsName = pd_listExam.EXAMEN[list((ECBP[val]).keys())].tolist()
         except KeyError:
             print(CEND.format(day, csvFile.firstName[val], csvFile.secondName.iloc[val]))        
             sys_exit()
@@ -588,7 +652,7 @@ def get_codeInt_Lab_Cob(idx_patients, idx_urgentes, day, subsidiary, ECBP, listE
         
         #Check if the exam is covid type
         examCovid = "C"
-        if not [i for i in [2,487,491,492,569,1009] if  i in ECBP[val]]:
+        if not [i for i in [2,487,491,492,569,1009] if  i in list((ECBP[val]).keys())]:
             examCovid = "O"
         
         codeIntLab[val] = day+'-'+subsidiary+'-'+str(idx+1).zfill(3)+urgent+examCovid+listEnterpriseCodeByPatient[
@@ -625,7 +689,7 @@ def get_idx_noCovits(idx_patients, ECBP, dict_pattient_enterprise):
 
     for val in idx_patients:
         
-        for i_ in ECBP[val]:
+        for i_ in list((ECBP[val]).keys()):
             if i_ not in covid_exam_codecs:
                 tmp.append(val)
                 break
@@ -646,7 +710,7 @@ def get_idx_antigenCovit(idx_patients, ECBP, dict_pattient_enterprise):
 
     for val in idx_patients:
 
-        if [i for i in [487] if  i in ECBP[val]]:
+        if [i for i in [487] if  i in list((ECBP[val]).keys())]:
             tmp.append(val)
 
     idx_patients_antigenCovit = pd_Index(data=tmp)#convert list into pd index
@@ -665,7 +729,7 @@ def get_idx_antibodyCovit(idx_patients, ECBP, dict_pattient_enterprise):
     
     for val in idx_patients:
 
-        if [i for i in [491] if  i in ECBP[val]]:
+        if [i for i in [491] if  i in list((ECBP[val]).keys())]:
             tmp.append(val)
 
     idx_patients_antibodyCovit = pd_Index(data=tmp)#convert list into pd index
@@ -909,9 +973,12 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     #quit the covid part (if have) to examNameList_nested_without_covid
     for key in examNameList_nested_without_covid:
         idx_to_quit = []
-        for idx, tmp in enumerate(ECBP[key]):    
+        key_to_quit = []
+        for idx, tmp in enumerate(list((ECBP[key]).keys())):    
             # if tmp in [2,487,491,492,569,1009]: idx_to_quit.append(idx)#this line was "seteada" to integrate all studies (eaven covid studies) at no covid list
-            if tmp in []: idx_to_quit.append(idx)
+            if tmp in []:
+                idx_to_quit.append(idx)
+                key_to_quit.append(tmp)
         
         if idx_to_quit:
             tmp = examNameList_nested_without_covid[key]
@@ -919,7 +986,10 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
             examNameList_nested_without_covid[key] = tmp
 
             tmp = ECBP_without_covid[key]
-            delete_multiple_element(tmp, idx_to_quit)
+            for key_ in key_to_quit:
+                del tmp[key_]
+            
+            #delete_multiple_element(tmp, idx_to_quit)
             ECBP_without_covid[key] = tmp
     
     excelIdxExams_pdIndx = {}
@@ -990,13 +1060,20 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     #EXAMEN COD
     tmp_ = []
     for tmp in idx_patients_:
-        tmp_.extend(ECBP_without_covid[tmp])
+        tmp_.extend(list((ECBP_without_covid[tmp]).keys()))
     
     tmp_0 = []
     for tmp in idx_patients_:
         tmp_0.extend([tmp_1+4 for tmp_1 in excelIdxExams_pdIndx[tmp]])
     
     df_toExcel.loc[tmp_0, "EXAMEN\nCOD"] = tmp_
+
+    #processed by (subrrogate)
+    tmp_ = []
+    for tmp in idx_patients_:
+        tmp_.extend(list((ECBP_without_covid[tmp]).values()))
+    
+    df_toExcel.loc[tmp_0, "ENTREGA\nRESULTADO"] = tmp_
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#

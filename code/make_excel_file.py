@@ -4,12 +4,12 @@ import imp
 imp.reload(settings)
 
 #-----------------------------------------------------------------------------#
-day = '311022'
+day = '241122'
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
 #list to generate the excel file by enterprise
-exel_enterprises = ['/en tu casa salud/']
+exel_enterprises = ['/en tu casa salud/','/particular/']#_allarrived_
 
 #set subsidiary
 subsidiary = '01'#hermita
@@ -27,7 +27,7 @@ settings.set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF)
 #make excel's, by day
 
 #antygen
-settings.antigen_excel()
+# settings.antigen_excel()
 
 #antybody
 # settings.antybody_excel()
@@ -39,7 +39,7 @@ settings.antigen_excel()
 settings.laboratoryNoCovid_excel()
 
 # #cobranza
-settings.cobranza_excel()
+# settings.cobranza_excel()
 
 #enterprises
 # settings.enterprises_excel()
