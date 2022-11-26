@@ -29,6 +29,9 @@ def set_projectmodule_parameters(currentPath, inlineEF):
     #read pd_listExam file
     set_pd_listExam(currentPath, inlineEF)
 
+    #read pd_listSurrogate file
+    set_pd_listSurrogate(currentPath, inlineEF)
+
     #read clavesNombresEmpresa file
     set_df_enterpriseNames(currentPath, inlineEF)
 
@@ -103,7 +106,6 @@ def set_pd_listExam(currentPath, inlineEF):
 
     # append listExam_locally to pd_listExam
     for idx, row in listExam_locally.iterrows():
-        
         if idx in pd_listExam.index:#update the Exam
             pd_listExam.EXAMEN[idx] = row["EXAMEN"]
         # else:#append examn
@@ -137,8 +139,6 @@ def set_df_enterpriseNames(currentPath, inlineEF):
     df_enterpriseNames = pd_concat([df_enterpriseNames, clavesNombresEmpresa_locally], axis=0)
 #-----------------------------------------------------------------------------#
 
-
-
 #-----------------------------------------------------------------------------#
 #read pd_listSurrogate file
 def set_pd_listSurrogate(currentPath, inlineEF):
@@ -151,27 +151,32 @@ def set_pd_listSurrogate(currentPath, inlineEF):
         filePath_list = os_path.join("{0}","..","surrogate",
                                     "surrogateList.csv").format(currentPath)
 
-    pd_listSurrogate = (pd_read_csv(filePath_list, usecols=["CODE","SURROGATE"]))
+    pd_listSurrogate = (pd_read_csv(filePath_list, usecols=["CODIGO","NOMBRE"]))
 
     #set index of pd_listSurrogate as CODE column
-    pd_listSurrogate.set_index("CODE", inplace=True)
+    pd_listSurrogate.set_index("CODIGO", inplace=True)
 
 
     #read pd_listSurrogate locally file
     filePath_list_tmp = os_path.join("{}","..","altas","surrogateList.csv").format(currentPath)
-    listExam_locally = pd_read_csv(filePath_list_tmp, usecols=["CODE","SURROGATE"])
+    list_locally = pd_read_csv(filePath_list_tmp, usecols=["CODIGO","NOMBRE"])
 
-    listExam_locally.set_index("CODE", inplace=True)
+    list_locally.set_index("CODIGO", inplace=True)
 
-    # append listExam_locally to pd_listSurrogate
-    for idx, row in listExam_locally.iterrows():
-        
-        if idx in pd_listSurrogate.index:#update the surrogate
-            pd_listSurrogate.SURROGATE[idx] = row["SURROGATE"]
-        # else:#append examn
-        #     pd_listExam = pd_concat([pd_listExam, listExam_locally.loc[idx]], axis=0)
     
-    print(pd_listSurrogate)
+    #check no repeated surrogate of list_locally
+    for idx, row in list_locally.iterrows():
+        
+        #repeated code 
+        if idx in pd_listSurrogate.index:
+            sys_exit("ERROR: EL código {} del subrrogante {} (archivo: altas/surrogate/surrogateList.csv) ya es utilizado en el listado de subrrogantes del sistema; asocie un código distinto".format(idx, row.NOMBRE))
+        
+        #repeated NAME
+        if row.NOMBRE in list(pd_listSurrogate.NOMBRE):
+            sys_exit("ERROR: EL subrrogante {} con código {} (archivo: altas/surrogate/surrogateList.csv) ya está en el listado de subrrogantes del sistema".format(row.NOMBRE, idx))
+
+    #append
+    pd_listSurrogate = pd_concat([pd_listSurrogate, list_locally]) 
 #-----------------------------------------------------------------------------#
 
 
@@ -497,6 +502,7 @@ def update_csvFile_firstName_vuelo(idx_vuelo, csvFile):
 def get_ECBP(idx_patients, csvFile):
 
     ECBP = dict()#ECBP-->ExamCodeByPatien
+    listSurrogate_code = list(pd_listSurrogate.index)
 
     for val in idx_patients:#for each patien
         
@@ -510,23 +516,34 @@ def get_ECBP(idx_patients, csvFile):
         tmp_ = {}
         for exam in exams:
             tmp = exam.split("_")
-            code = int(tmp[0])
+            exam_code = int(tmp[0])
             try:
-                surrogate = tmp[1].upper()
+                surrogate_code = tmp[1]
             except:
-                surrogate = "DENATBIO"
-        
-            #validate surrogate is registered
-            if surrogate != "DENATBIO":
-                if surrogate not in ["DENATBIO", "BAGC", "ALISON"]:#actualizaaaaaa, tambien leer y pasar a mayusculas
-                    print("{}".format("ERROR: el subrrogador NOMBRE , paciente no exite"))
+                surrogate_code = 1
+
+            if type(surrogate_code) == str:
+                try:
+                    surrogate_code = int(surrogate_code)
+                except:
+                    print("ERROR: el código de subrrogante '{}', del examen con código {} del paciente {} {} debe ser un número".format(surrogate_code, exam_code, csvFile.firstName[val], csvFile.secondName[val]))
+                    sys_exit()
+
+            #validate if surrogate_code is registered
+            if surrogate_code != 1:
+               
+                if surrogate_code not in listSurrogate_code:
+                    
+                    print("ERROR: el código de subrrogante '{}', del examen con código {} del paciente {} {} no existe".format(surrogate_code, exam_code, csvFile.firstName[val], csvFile.secondName[val]))
                     sys_exit()
             
-            tmp_[code] = surrogate
+            tmp_[exam_code] = pd_listSurrogate.loc[surrogate_code]["NOMBRE"].upper()
         
         ECBP[val] = tmp_
     
     return ECBP
+
+    
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
@@ -1021,12 +1038,13 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
             'ESTATUS':np_NaN,#G --> 6
             'RESULTADO\nSARS CoV2':np_NaN,#H --> 7
             'FECHA: RECEPCIÓN\nRESULTADO':np_NaN,#I --> 8
-            'ENTREGA\nRESULTADO':np_NaN,#J --> 9
-            'RECIBE\nRESULTADO':np_NaN,#k --> 10
-            'ENVIÓ':np_NaN,#L --> 11
-            'REVISÓ':np_NaN,#M --> 12
-            'FECHA DE ENVÍO':np_NaN,#N --> 13
-            'HORA DE ENVÍO':np_NaN# --> 14
+            'PROCESÓ':np_NaN,#J --> 9
+            'ENTREGA\nRESULTADO':np_NaN,#K --> 10
+            'RECIBE\nRESULTADO':np_NaN,#L --> 11
+            'ENVIÓ':np_NaN,#M --> 12
+            'REVISÓ':np_NaN,#N --> 13
+            'FECHA DE ENVÍO':np_NaN,# --> 14
+            'HORA DE ENVÍO':np_NaN# --> 15
         }
         , index = range(0, end_index)
     )
@@ -1073,7 +1091,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     for tmp in idx_patients_:
         tmp_.extend(list((ECBP_without_covid[tmp]).values()))
     
-    df_toExcel.loc[tmp_0, "ENTREGA\nRESULTADO"] = tmp_
+    df_toExcel.loc[tmp_0, "PROCESÓ"] = tmp_
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
@@ -1137,8 +1155,9 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         worksheet.set_column(10,10, 18, widthColumn)# --> K
         worksheet.set_column(11,11, 18, widthColumn)# --> L
         worksheet.set_column(12,12, 18, widthColumn)# --> M
-        worksheet.set_column(13,13, 16, widthColumn)# --> N
+        worksheet.set_column(13,13, 18, widthColumn)# --> N
         worksheet.set_column(14,14, 16, widthColumn)# --> 
+        worksheet.set_column(15,15, 16, widthColumn)# --> 
         
         border_format = workbook.add_format({'border': 1})
         #-----------------------------------------------------------------------------#
@@ -1171,10 +1190,10 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         #Add border
         numRows=len(df_toExcel)
         
-        #14 is the "O" column
-        worksheet.conditional_format(4,0,numRows, 14,{'type':'no_blanks', 'format':border_format})
+        #15 is the "P" column
+        worksheet.conditional_format(4,0,numRows, 15,{'type':'no_blanks', 'format':border_format})
         
-        worksheet.conditional_format(4,0,numRows, 14,{'type':'blanks', 'format':border_format})
+        worksheet.conditional_format(4,0,numRows, 15,{'type':'blanks', 'format':border_format})
         #-----------------------------------------------------------------------------#
         
         #-----------------------------------------------------------------------------#
@@ -1185,7 +1204,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         
         for val in idx_enterprise_:
             #14 is the "O" column
-            worksheet.merge_range(excelIdx_pdIndx[val]+1+4, 1, excelIdx_pdIndx[val]+1+4, 14, enterpriseNames_asDict[val], merge_format)
+            worksheet.merge_range(excelIdx_pdIndx[val]+1+4, 1, excelIdx_pdIndx[val]+1+4, 15, enterpriseNames_asDict[val], merge_format)
         #-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
 
