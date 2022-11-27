@@ -19,7 +19,7 @@
 18,Química Sanguínea 14 elementos,Quimica sanguinea de 14 elementos
 19,Detección del virus de Hepatitis C ,Detección del virus de Hepatitis C 
 20,Química Sanguínea 24 elementos,Quimica sanguinea de 24 elementos
-21,Química Sanguínea 33 elementos,Quimica sanguinea de 32 elementos 
+21,Química Sanguínea 33 elementos,Quimica sanguinea de 33 elementos 
 22,Química Sanguínea 48 elementos ,Quimica sanguinea de 48 elementos 
 23,Genotipificacion del virus de Hepatitis C,Genotipificación del virus de Hepatitis C
 24,Glucosa,Glucosa
@@ -119,7 +119,7 @@ Cortisol.)"
 109,C_viral varicella zoster,Carga viral de Varicella zoster
 110,Gamma glutil transferansa (GGP),Gamma glutil transferansa (GGP)
 111,Triglicéridos,Triglicéridos
-112,Fracción Beta de HGC Sérica,
+112,Fracción Beta de HGC (prueba de embarazo cuantitativa),
 113,detec. varicella zoster,Detección de Varicella zoster
 114,Antigeno de la Superficie de Hepatitis B (HBSAg),
 115,Detección de Anticuerpos IgG e IgM ANTI-Toxoplasma gondii,
@@ -213,7 +213,7 @@ Metapneumovirus,"
 199,Detec. chlamydia trachomatis y Neisseria gonorrhoeae,Detección de Chlamydia trachomatis y Neisseria gonorrhoeae
 200,Quimica Sanguinea de 4 elementos ,
 201,Deteccion de Dengue,
-202,Anticuerpos Anti-VIH,
+202,Detección Ac. Anti-VIH,
 203,Quimica Sanguinea de 5 elementos ,
 204,Deteccion de Ac. IgM Anti-Citomegalovirus,
 205,Deteccion de Ureaplasma parvum por PCR,
@@ -223,8 +223,8 @@ Metapneumovirus,"
 209,Antigeno E de Hepatitis B ,
 210,Anticuerpo contra el Antigeno E de Hepatitis B,
 211,Tipifi. VPH 28,Tipificación del Virus de Papiloma Humano (28 genotipos) 
-212,Anti-Core de Hepatitis B,
-213,Biomarcadores en Cancer de pulmon de Celulas no pequeñas,
+212,,
+213,,
 214,Deteccion de Ac. IgG e IgM Anti-Chlamydia trachomatis,
 215,Ácido Folico,
 216,Vitamina B12,
@@ -254,36 +254,36 @@ Metapneumovirus,"
 240,Procalcitonina,
 241,Detec mutación gen JAK2,Detección de la mutación del gen JAK2
 242,Creatinina en orina,
-243,Dehidroepiandrosterona total (DHEA),
+243,DHEA Total,Dehidroepiandrosterona
 244,Androstenediona,
-245,,
-246,,
-247,,
-248,,
-249,,
-250,,
+245,Catecolaminas,
+246,Renina,
+247,Acido vanilmandelico ,
+248,Ac. IgG Helicobacter pylori,
+249,Colesterol,
+250,Estrogenos totales,
 251,Cuanti. mutación gen JAK2,Cuantificación de la mutación del gen JAK2
-252,,
-253,,
-254,,
-255,,
-256,,
+252,Ac IgM para Helicobacter pylori,
+253,Quimica sanguinea 18 elementos,
+254,Vitamina D 25 HIDROXI,
+255,"Perfil de prevencion mujer (marcador CA 125, marcador CA 15-3 y CEA)",
+256,Determinacion de HGC cualitativa en suero/plasma/orina,
 257,Determi. Antígeno Leucocitario Humano B27,Determinación del Antígeno Leucocitario Humano B27
-258,,
-259,,
-260,,
-261,,
-262,,
+258,Alfafetoproteina,
+259,CA 19-9,
+260,CA 125 (Marcador tumoral ovárico),
+261,CA 15-3 (Marcador tumoral mama),
+262,Ag. Carcinoembrionario (CEA),
 263,Determi. Antígeno Leucocitario Humano  B51,Determinación del Antígeno Leucocitario Humano  B51
-264,,
-265,,
-266,,
-267,,
-268,,
+264,Proteina PAPP-A,
+265,B-HGC Libre,
+266,Eosinofilos en moco nasal,
+267,Ag. de Virus de Hepatitis B (VHB),
+268,Proteinas totales en orina ,
 269,"Tipifi. sistema HLA I (A,B,C ) / II (DR,DQ) ","Tipificación del sistema HLA I (A,B,C ) / II (DR,DQ) "
-270,,
+270,Perfil de Litiasis,
 271,"Tipifi. sistema HLA I (A,B,C) ","Tipificación del sistema HLA I (A,B,C) "
-272,,
+272,Cancer de mama triple negativo (CMTN),
 273,,
 274,,
 275,,
