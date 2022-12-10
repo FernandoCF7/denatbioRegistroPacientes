@@ -176,7 +176,7 @@ def set_pd_listSurrogate(currentPath, inlineEF):
             sys_exit("ERROR: EL subrrogante {} con código {} (archivo: altas/surrogate/surrogateList.csv) ya está en el listado de subrrogantes del sistema".format(row.NOMBRE, idx))
 
     #append
-    pd_listSurrogate = pd_concat([pd_listSurrogate, list_locally]) 
+    pd_listSurrogate = pd_concat([pd_listSurrogate, list_locally])
 #-----------------------------------------------------------------------------#
 
 
@@ -537,7 +537,8 @@ def get_ECBP(idx_patients, csvFile):
                     print("ERROR: el código de subrrogante '{}', del examen con código {} del paciente {} {} no existe".format(surrogate_code, exam_code, csvFile.firstName[val], csvFile.secondName[val]))
                     sys_exit()
             
-            tmp_[exam_code] = pd_listSurrogate.loc[surrogate_code]["NOMBRE"].upper()
+            subrrogate_name = "" if surrogate_code == 1 else pd_listSurrogate.loc[surrogate_code]["NOMBRE"].upper()
+            tmp_[exam_code] = subrrogate_name
         
         ECBP[val] = tmp_
     
@@ -1038,13 +1039,13 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
             'ESTATUS':np_NaN,#G --> 6
             'RESULTADO\nSARS CoV2':np_NaN,#H --> 7
             'FECHA: RECEPCIÓN\nRESULTADO':np_NaN,#I --> 8
-            'PROCESÓ':np_NaN,#J --> 9
-            'ENTREGA\nRESULTADO':np_NaN,#K --> 10
-            'RECIBE\nRESULTADO':np_NaN,#L --> 11
-            'ENVIÓ':np_NaN,#M --> 12
-            'REVISÓ':np_NaN,#N --> 13
-            'FECHA DE ENVÍO':np_NaN,# --> 14
-            'HORA DE ENVÍO':np_NaN# --> 15
+            
+            'ENTREGA\nRESULTADO':np_NaN,#J --> 9
+            'RECIBE\nRESULTADO':np_NaN,#K --> 10
+            'ENVIÓ':np_NaN,#L --> 11
+            'REVISÓ':np_NaN,#M --> 12
+            'FECHA DE ENVÍO':np_NaN,# --> 13
+            'HORA DE ENVÍO':np_NaN# --> 14
         }
         , index = range(0, end_index)
     )
@@ -1091,7 +1092,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     for tmp in idx_patients_:
         tmp_.extend(list((ECBP_without_covid[tmp]).values()))
     
-    df_toExcel.loc[tmp_0, "PROCESÓ"] = tmp_
+    df_toExcel.loc[tmp_0, "ENTREGA\nRESULTADO"] = tmp_
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
@@ -1151,13 +1152,14 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         worksheet.set_column(6,6, 15, widthColumn)# --> G
         worksheet.set_column(7,7, 12, widthColumn)# --> H
         worksheet.set_column(8,8, 24, widthColumn)# --> I
+        
+        
         worksheet.set_column(9,9, 18, widthColumn)# --> J
         worksheet.set_column(10,10, 18, widthColumn)# --> K
         worksheet.set_column(11,11, 18, widthColumn)# --> L
         worksheet.set_column(12,12, 18, widthColumn)# --> M
-        worksheet.set_column(13,13, 18, widthColumn)# --> N
+        worksheet.set_column(13,13, 16, widthColumn)# --> 
         worksheet.set_column(14,14, 16, widthColumn)# --> 
-        worksheet.set_column(15,15, 16, widthColumn)# --> 
         
         border_format = workbook.add_format({'border': 1})
         #-----------------------------------------------------------------------------#
@@ -1191,9 +1193,9 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         numRows=len(df_toExcel)
         
         #15 is the "P" column
-        worksheet.conditional_format(4,0,numRows, 15,{'type':'no_blanks', 'format':border_format})
+        worksheet.conditional_format(4,0,numRows, 14,{'type':'no_blanks', 'format':border_format})
         
-        worksheet.conditional_format(4,0,numRows, 15,{'type':'blanks', 'format':border_format})
+        worksheet.conditional_format(4,0,numRows, 14,{'type':'blanks', 'format':border_format})
         #-----------------------------------------------------------------------------#
         
         #-----------------------------------------------------------------------------#
@@ -1204,7 +1206,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
         
         for val in idx_enterprise_:
             #14 is the "O" column
-            worksheet.merge_range(excelIdx_pdIndx[val]+1+4, 1, excelIdx_pdIndx[val]+1+4, 15, enterpriseNames_asDict[val], merge_format)
+            worksheet.merge_range(excelIdx_pdIndx[val]+1+4, 1, excelIdx_pdIndx[val]+1+4, 14, enterpriseNames_asDict[val], merge_format)
         #-----------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------#
 
