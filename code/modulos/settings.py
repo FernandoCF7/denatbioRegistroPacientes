@@ -15,12 +15,13 @@ This is a temporary script file.
 """
 
 from os import path as os_path
-from sys import exit as sys_exit
+from sys import exit as sys_exit, path as sys_path
 from numpy import NaN as np_NaN
-import projectmodule
 from pandas import Index as pd_Index, concat as pd_concat, DataFrame as pd_DataFrame
 
 
+sys_path.append("./modulos")
+import projectmodule
 import imp
 imp.reload(projectmodule)
 

@@ -44,7 +44,7 @@ def set_projectmodule_parameters(currentPath, inlineEF):
 #read registro file
 def get_csvFile(currentPath, yymmddPath):
     
-    filePath_registro = os_path.join("{0}","..","DB_ingresoPorVoz","{1}.txt").format(
+    filePath_registro = os_path.join("{0}","..","..","DB_ingresoPorVoz","{1}.txt").format(
         currentPath,yymmddPath)
 
     csvFile = (pd_read_csv(filePath_registro,sep='*', dtype={2: str}))
@@ -99,7 +99,7 @@ def set_pd_listExam(currentPath, inlineEF):
 
 
     #read listExam locally file
-    filePath_listExam_tmp = os_path.join("{}","..","altas","listExam.csv").format(currentPath)
+    filePath_listExam_tmp = os_path.join("{}","..","..","altas","listExam.csv").format(currentPath)
     listExam_locally = pd_read_csv(filePath_listExam_tmp, usecols=["COD INT","EXAMEN"])
 
     listExam_locally.set_index("COD INT", inplace=True)
@@ -130,7 +130,7 @@ def set_df_enterpriseNames(currentPath, inlineEF):
     df_enterpriseNames.set_index("clave", inplace=True)
 
     #read clavesNombresEmpresa locally file
-    filePath_clavesNombresEmpresa_tmp = os_path.join("{}","..","altas","clavesNombresEmpresa.csv").format(currentPath)
+    filePath_clavesNombresEmpresa_tmp = os_path.join("{}","..","..","altas","clavesNombresEmpresa.csv").format(currentPath)
     clavesNombresEmpresa_locally = pd_read_csv(filePath_clavesNombresEmpresa_tmp, encoding='latin-1', keep_default_na=False)
 
     clavesNombresEmpresa_locally.set_index("clave", inplace=True)
@@ -158,7 +158,7 @@ def set_pd_listSurrogate(currentPath, inlineEF):
 
 
     #read pd_listSurrogate locally file
-    filePath_list_tmp = os_path.join("{}","..","altas","surrogateList.csv").format(currentPath)
+    filePath_list_tmp = os_path.join("{}","..","..","altas","surrogateList.csv").format(currentPath)
     list_locally = pd_read_csv(filePath_list_tmp, usecols=["CODIGO","NOMBRE"])
 
     list_locally.set_index("CODIGO", inplace=True)
@@ -326,7 +326,7 @@ def set_codeEnterpriseFile(currentPath, inlineEF):
                                             errors='ignore').str.decode('utf-8')
 
     #read codeEnterprise locally file
-    filePath_codeEnterprise_tmp = os_path.join("{}","..","altas","codeEnterprise.csv").format(currentPath)
+    filePath_codeEnterprise_tmp = os_path.join("{}","..","..","altas","codeEnterprise.csv").format(currentPath)
 
 
     codeEnterpriseFile_locally = pd_read_csv(filePath_codeEnterprise_tmp, encoding='latin-1',
@@ -824,7 +824,7 @@ def make_laboratory_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, E
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
-    pathTosave = os_path.join("{0}","..","listadosGeneradosParaExel","{1}",
+    pathTosave = os_path.join("{0}","..","..","listadosGeneradosParaExel","{1}",
                             "{2}{3}.xlsx").format(currentPath,
                                         yymmddPath,day,path_)
 
@@ -1096,7 +1096,7 @@ def make_no_covid_excel(idx_patients_, idx_enterprise_, codeIntLab, csvFile, cur
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
-    pathTosave = os_path.join("{0}","..","listadosGeneradosParaExel","{1}",
+    pathTosave = os_path.join("{0}","..","..","listadosGeneradosParaExel","{1}",
                             "{2}{3}.xlsx").format(currentPath,
                                         yymmddPath,day,path_)
 
@@ -1233,7 +1233,7 @@ def make_excel_antigen_antibody(idx_patients_, resultadoColumn, exam, path_, day
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
-    pathTosave = os_path.join("{0}","..","listadosGeneradosParaExel","{1}",
+    pathTosave = os_path.join("{0}","..","..","listadosGeneradosParaExel","{1}",
                             "byExamCategory","{2}_{3}.xlsx").format(currentPath,
                                         yymmddPath,day_to_save,path_)
 
@@ -1299,7 +1299,7 @@ def make_excel_enterprise_forExclusiveExcel(idx_patients_, path_, day, day_to_sa
     #----------------------------------------------------------------------------#
 
     #----------------------------------------------------------------------------#
-    pathTosave = os_path.join("{0}","..","listadosGeneradosParaExel","{1}","byEnterprise",
+    pathTosave = os_path.join("{0}","..","..","listadosGeneradosParaExel","{1}","byEnterprise",
                             "{2}{3}.xlsx").format(currentPath,
                                         yymmddPath,day_to_save,path_)
 
@@ -1372,7 +1372,7 @@ def make_excel_cobranza(idx_patients_, codeIntCob, day, csvFile, examNameList, E
 
 
     #----------------------------------------------------------------------------#
-    pathTosave=os_path.join("{0}","..","listadosGeneradosParaExel",
+    pathTosave=os_path.join("{0}","..","..","listadosGeneradosParaExel",
                             "{1}","{2}_cobranza.xlsx").format(currentPath,
                                     yymmddPath,day_to_save)
 

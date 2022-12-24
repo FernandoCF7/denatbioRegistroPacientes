@@ -1,5 +1,7 @@
-import settings
+from sys import path as sys_path
+sys_path.append("./modulos")
 
+import settings
 import imp
 imp.reload(settings)
 
