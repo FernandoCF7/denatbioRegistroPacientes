@@ -14,8 +14,9 @@ from sys import path as sys_path
 # print(blah.foo())
 
 import githubimport
-from FernandoCF7.denatbioRegistroPacientes import settings
+from FernandoCF7 import deletemodule
 
+deletemodule.holaMundo()
 
 from sys import exit as sys_exit
 sys_exit("prrs")
