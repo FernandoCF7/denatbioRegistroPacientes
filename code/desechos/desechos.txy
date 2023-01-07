@@ -285,3 +285,12 @@ idx_patients_considering_exams = copy_deepcopy(idx_patients_)
             worksheet.write_string('E'+str(excelIdx_pdIndx[key]+2)+':E'+str(excelIdx_pdIndx[key]+2),examNameList[key],
                             cell_format_mostaza)
         #-----------------------------------------------------------------------------#
+
+
+
+#sys_path.append("./modulos")
+#import settings
+# import imp
+# imp.reload(settings)
+
+#print(sys_path) /usr/local/lib/python3.10/site-packages

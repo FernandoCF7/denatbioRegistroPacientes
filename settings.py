@@ -20,10 +20,8 @@ from numpy import NaN as np_NaN
 from pandas import Index as pd_Index, concat as pd_concat, DataFrame as pd_DataFrame
 
 
-sys_path.append("./modulos")
-import projectmodule
-import imp
-imp.reload(projectmodule)
+import gim
+from FernandoCF7.denatbioRegistroPacientes import projectmodule
 
 #-----------------------------------------------------------------------------#
 #local variables

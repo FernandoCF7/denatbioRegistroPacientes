@@ -1,17 +1,5 @@
-from sys import path as sys_path
-
-#sys_path.append("./modulos")
-#import settings
-# import imp
-# imp.reload(settings)
-
-
-sys_path.append("./../borra")
-import mimodulo
-mimodulo.holaMundo()
-
-from sys import exit as sys_exit
-sys_exit("prrs")
+import gim
+from FernandoCF7.denatbioRegistroPacientes import settings
 
 #-----------------------------------------------------------------------------#
 day = '181222'
@@ -19,7 +7,7 @@ day = '181222'
 
 #-----------------------------------------------------------------------------#
 #list to generate the excel file by enterprise
-exel_enterprises = ['/en tu casa salud/','/particular/']#_allarrived_
+exel_enterprises = ['/particular/']#_allarrived_
 
 #set subsidiary
 subsidiary = '01'#hermita
