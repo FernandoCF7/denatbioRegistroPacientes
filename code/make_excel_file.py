@@ -8,7 +8,6 @@
 
 import gim
 from FernandoCF7.denatbioRegistroPacientes import settings
-print(dir(settings))
 
 from sys import exit as sys_exit
 sys_exit("---")
