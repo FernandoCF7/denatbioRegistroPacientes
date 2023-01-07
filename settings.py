@@ -20,8 +20,12 @@ from numpy import NaN as np_NaN
 from pandas import Index as pd_Index, concat as pd_concat, DataFrame as pd_DataFrame
 
 
-import gim
-from FernandoCF7.denatbioRegistroPacientes import projectmodule
+def hola():
+    print("hola mundo")
+sys_exit("---")
+
+#import gim
+#from FernandoCF7.denatbioRegistroPacientes import projectmodule
 
 #-----------------------------------------------------------------------------#
 #local variables

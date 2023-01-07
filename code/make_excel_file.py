@@ -1,13 +1,20 @@
 import gim
 from FernandoCF7.denatbioRegistroPacientes import settings
 
+
+
+
 #-----------------------------------------------------------------------------#
 day = '181222'
 #-----------------------------------------------------------------------------#
 
+
+
 #-----------------------------------------------------------------------------#
 #list to generate the excel file by enterprise
 exel_enterprises = ['/particular/']#_allarrived_
+
+
 
 #set subsidiary
 subsidiary = '01'#hermita
@@ -16,10 +23,16 @@ subsidiary = '01'#hermita
 inlineEF = True
 #-----------------------------------------------------------------------------#
 
+print(settings.currentPath)
+from sys import exit as sys_exit
+sys_exit("---")
+
 #-----------------------------------------------------------------------------#
 #set parameters to settings.py
 settings.set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF)
 #-----------------------------------------------------------------------------#
+
+
 
 #----------------------------------------------------------------------------#
 #make excel's, by day
