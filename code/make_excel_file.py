@@ -1,9 +1,24 @@
 from sys import path as sys_path
-sys_path.append("./modulos")
+#sys_path.append("./modulos")
+#sys_path.append("https://github.com/FernandoCF7/denatbioRegistroPacientes/blob/main/code/modulos")
+# from github_com.FernandoCF7 import denatbioRegistroPacientes.code.modulos.settings
 
-import settings
-import imp
-imp.reload(settings)
+
+#import settings
+# import imp
+# imp.reload(settings)
+
+
+
+# from MineRobber9000.test_modules import blah
+# print(blah.foo())
+
+import githubimport
+from FernandoCF7.denatbioRegistroPacientes import settings
+
+
+from sys import exit as sys_exit
+sys_exit("prrs")
 
 #-----------------------------------------------------------------------------#
 day = '181222'
