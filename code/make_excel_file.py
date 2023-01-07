@@ -1,7 +1,9 @@
 import gim
 from FernandoCF7.denatbioRegistroPacientes import settings
 
-
+settings.hola()
+# from sys import exit as sys_exit
+# sys_exit("---")
 
 
 #-----------------------------------------------------------------------------#
@@ -23,9 +25,7 @@ subsidiary = '01'#hermita
 inlineEF = True
 #-----------------------------------------------------------------------------#
 
-print(settings.currentPath)
-from sys import exit as sys_exit
-sys_exit("---")
+
 
 #-----------------------------------------------------------------------------#
 #set parameters to settings.py
