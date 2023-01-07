@@ -14,10 +14,10 @@ Spyder Editor
 This is a temporary script file.
 """
 
-from os import path as os_path
-from sys import exit as sys_exit, path as sys_path
-from numpy import NaN as np_NaN
-from pandas import Index as pd_Index, concat as pd_concat, DataFrame as pd_DataFrame
+# from os import path as os_path
+# from sys import exit as sys_exit, path as sys_path
+# from numpy import NaN as np_NaN
+# from pandas import Index as pd_Index, concat as pd_concat, DataFrame as pd_DataFrame
 
 
 def hola():

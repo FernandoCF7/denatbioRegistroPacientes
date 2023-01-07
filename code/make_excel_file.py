@@ -1,11 +1,14 @@
-#import gim
-#from FernandoCF7.denatbioRegistroPacientes import settings
 
-from sys import path as sys_path
-sys_path.append("./../")
-import settings
+
+# from sys import path as sys_path
+# sys_path.append("./../")
+# import settings
+# print(dir(settings))
+
+
+import gim
+from FernandoCF7.denatbioRegistroPacientes import settings
 print(dir(settings))
-settings.hola()
 
 from sys import exit as sys_exit
 sys_exit("---")
