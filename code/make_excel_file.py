@@ -9,9 +9,6 @@
 import gim
 from FernandoCF7.denatbioRegistroPacientes import settings
 
-from sys import exit as sys_exit
-sys_exit("---")
-
 
 #-----------------------------------------------------------------------------#
 day = '181222'
@@ -39,6 +36,8 @@ inlineEF = True
 settings.set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF)
 #-----------------------------------------------------------------------------#
 
+from sys import exit as sys_exit
+sys_exit("---")
 
 
 #----------------------------------------------------------------------------#
