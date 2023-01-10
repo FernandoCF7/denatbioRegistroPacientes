@@ -1,9 +1,10 @@
-
-
 # from sys import path as sys_path
 # sys_path.append("./../")
 # import settings
-# print(dir(settings))
+
+# import imp
+# imp.reload(settings)
+
 
 
 import gim
@@ -11,7 +12,7 @@ from FernandoCF7.denatbioRegistroPacientes import settings
 
 
 #-----------------------------------------------------------------------------#
-day = '181222'
+day = '080123'
 #-----------------------------------------------------------------------------#
 
 
@@ -29,15 +30,10 @@ subsidiary = '01'#hermita
 inlineEF = True
 #-----------------------------------------------------------------------------#
 
-
-
 #-----------------------------------------------------------------------------#
 #set parameters to settings.py
 settings.set_daily_parameters(day, exel_enterprises, subsidiary, inlineEF)
 #-----------------------------------------------------------------------------#
-
-from sys import exit as sys_exit
-sys_exit("---")
 
 
 #----------------------------------------------------------------------------#
