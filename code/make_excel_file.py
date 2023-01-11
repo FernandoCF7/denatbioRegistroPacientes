@@ -1,3 +1,5 @@
+from sys import exit as sys_exit
+
 # from sys import path as sys_path
 # sys_path.append("./../")
 # import settings
@@ -7,9 +9,10 @@
 
 
 
-import gim
+import gime
 from FernandoCF7.denatbioRegistroPacientes import settings
 
+sys_exit("ddd")
 
 #-----------------------------------------------------------------------------#
 day = '080123'
@@ -29,6 +32,9 @@ subsidiary = '01'#hermita
 #inline excell files
 inlineEF = True
 #-----------------------------------------------------------------------------#
+
+from sys import exit
+exit("dd")
 
 #-----------------------------------------------------------------------------#
 #set parameters to settings.py
